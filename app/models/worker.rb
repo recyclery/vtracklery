@@ -5,7 +5,8 @@ class Worker < ActiveRecord::Base
 
   validates_presence_of :name
 
-  MISSING_IMAGE = "/images/default_avatars/vimg01.png"
+  #MISSING_IMAGE = "/images/default_avatars/vimg01.png"
+  MISSING_IMAGE = "/assets/default_avatars/vimg01.png"
   STATUS = ["Volunteer", "Member", "Paid Staff"] 
 
   delegate :name, to: :status, prefix: true

@@ -1,8 +1,21 @@
 Vtrack::Application.routes.draw do
+
+  root 'shop#index'
+
+  get "shop/index"
+  get "shop/directions"
+  get "shop/sign_in"
+  get "shop/sign_out"
+
+  resources :workers do
+    collection do
+      get 'upload_image', to: 'upload_image', as: 'worker_upload_image'
+      get 'upload_form', to: 'upload_form', as: 'upload_form'
+      get 'image_chooser'
+      get 'cheese_chooser'
+    end
+  end
   resources :work_times
-
-  resources :workers
-
   resources :events
 
   # The priority is based upon order of creation: first created -> highest priority.

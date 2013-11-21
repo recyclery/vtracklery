@@ -1,0 +1,84 @@
+<table id="main"><tr><td>
+<div class="home">
+  <div id="search_bar" style="height: 20px; padding: 5px;">
+    <div style="display: table-cell;">
+      <a id="v_prev" href="#"><</a>
+    </div>
+    <div style="display: table-cell;">
+  <% form_tag(:controller => 'shop', :method => :get) do %>
+    <%= text_field_tag :search, params[:search], :size => 18 %>
+    <%= submit_tag 'search', :name => nil %>
+  <% end -%>
+    </div>
+    <div style="display: table-cell;">
+      <a id="v_next" href="#">></a>
+    </div>
+  </div>
+
+  <table style="border-spacing: 20px;">
+    <tr><td valign="top">
+<% unless @v_col1.nil? %>
+<%   for person in @v_col1 -%>
+      <div class="athome">
+        <div class="vperson"><img src="<%= person.image_path %>" /></div>
+        <div class="vname">
+          <a href="/workers/<%= person.id %>"><%= person.name %></a>
+          <span class="vno"><%= person.id %></span>
+        </div>
+      </div>
+<%   end -%>
+<% end -%>
+    </td>
+    <td valign="top">
+<% unless @v_col2.nil? %>
+<%   for person in @v_col2 -%>
+    <div class="athome">
+      <div class="vperson"><img src="<%= person.image_path %>" /></div>
+        <div class="vname">
+        <a href="/workers/<%= person.id %>"><%= person.name %></a>
+        <span class="vno"><%= person.id %></span>
+        </div>
+      </div>
+<%   end -%>
+<% end -%>
+    </td></tr>
+  </table>
+</div>
+
+</td><td>
+<div class="shop">
+
+<% id = 0 -%>
+<% for person in @shop_people -%>
+<div class="atshop" style="position: relative; left: <%= rand(@max_left) %>px; top: <%= rand(@max_top) - id * 140 %>px;">
+  <div class="vperson"><img src="<%= person.image_path %>" /></div>
+  <div class="vname">
+    <a href="/workers/<%= person.id %>"><%= person.name %></a>
+    <span class="vno"><%= person.id %></span>
+  </div>
+</div>
+<% id += 1 -%>
+<% end -%>
+
+</div>
+</td></tr>
+</table>
+
+<div id="header" style="text-align: left; display: table;">
+  <div style="display: table-cell; height: 121px; width: 159px;">
+    <div style="vertical-align: top; width: 159px; height: 121px; background-color: white; padding: 20px 20px 0px 20px; ">
+      <img src="<%= @logo %>" />
+    </div>
+  </div>
+  <div style="display:table-cell; vertical-align: top; width: 80px;">
+    <div style="vertical-align: top; width: 80px; height: 121px; background-color: white; padding: 20px 20px 0px 20px; ">
+    <%= link_to "Sign Up!", :controller => :workers, :action => :new %>
+    <br />
+    <br />
+    <br />
+    <%= link_to "Help?", :controller => :shop, :action => :directions %>
+    </div>
+  </div>
+  <div style="display:table-cell; padding: 0px 0px 0px 10px; vertical-align: top;"><center><div id="dialog"></div></center>
+  </div>
+</div>

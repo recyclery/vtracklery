@@ -2,12 +2,14 @@ class WorkersController < ApplicationController
   before_action :set_worker, only: [:show, :edit, :update, :destroy]
 
   # GET /workers
+  # GET /workers.xml
   # GET /workers.json
   def index
     @workers = Worker.all
   end
 
   # GET /workers/1
+  # GET /workers/1.xml
   # GET /workers/1.json
   def show
   end

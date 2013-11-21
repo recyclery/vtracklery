@@ -2,12 +2,14 @@ class WorkTimesController < ApplicationController
   before_action :set_work_time, only: [:show, :edit, :update, :destroy]
 
   # GET /work_times
+  # GET /work_times.xml
   # GET /work_times.json
   def index
     @work_times = WorkTime.all
   end
 
   # GET /work_times/1
+  # GET /work_times/1.xml
   # GET /work_times/1.json
   def show
   end

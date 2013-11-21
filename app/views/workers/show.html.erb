@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @worker.name %>
+</p>
+
+<p>
+  <strong>Image:</strong>
+  <%= @worker.image %>
+</p>
+
+<p>
+  <strong>In shop:</strong>
+  <%= @worker.in_shop %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @worker.email %>
+</p>
+
+<p>
+  <strong>Phone:</strong>
+  <%= @worker.phone %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @worker.status %>
+</p>
+
+<p>
+  <strong>Work status:</strong>
+  <%= @worker.work_status %>
+</p>
+
+<p>
+  <strong>Public email:</strong>
+  <%= @worker.public_email %>
+</p>
+
+<%= link_to 'Edit', edit_worker_path(@worker) %> |
+<%= link_to 'Back', workers_path %>

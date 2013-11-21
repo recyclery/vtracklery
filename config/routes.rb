@@ -1,4 +1,6 @@
 Vtrack::Application.routes.draw do
+  resources :workers
+
   resources :events
 
   # The priority is based upon order of creation: first created -> highest priority.

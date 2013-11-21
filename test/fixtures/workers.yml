@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  image: MyString
+  in_shop: false
+  email: MyString
+  phone: MyString
+  status_id: 
+  work_status_id: 
+  public_email: false
+
+two:
+  name: MyString
+  image: MyString
+  in_shop: false
+  email: MyString
+  phone: MyString
+  status_id: 
+  work_status_id: 
+  public_email: false

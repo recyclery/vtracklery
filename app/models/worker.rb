@@ -8,6 +8,15 @@ class Worker < ActiveRecord::Base
   MISSING_IMAGE = "/images/default_avatars/vimg01.png"
   STATUS = ["Volunteer", "Member", "Paid Staff"] 
 
+  delegate :name, to: :status, prefix: true
+  def status_name=(val)
+    self.status.name = val
+  end
+  delegate :name, to: :work_status, prefix: true
+  def work_status_name=(val)
+    self.work_status.name = val
+  end
+
   # If the image name has no directory marks, assume its from the default
   def image_path
     path = (image =~ /\w+\/\w+/ ? image : "/images/default_avatars/#{image}")

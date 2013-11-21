@@ -20,16 +20,16 @@
     <%= f.datetime_select :end_at %>
   </div>
   <div class="field">
-    <%= f.label :worker %><br>
-    <%= f.text_field :worker %>
+    <%= f.label :worker_id %><br>
+    <%= f.collection_select :worker_id, Worker.all, :id, :name %>
   </div>
   <div class="field">
-    <%= f.label :status %><br>
-    <%= f.text_field :status %>
+    <%= f.label :status_id %><br>
+    <%= f.collection_select :status_id, Status.all, :id, :name %>
   </div>
   <div class="field">
-    <%= f.label :work_status %><br>
-    <%= f.text_field :work_status %>
+    <%= f.label :work_status_id %><br>
+    <%= f.collection_select :work_status_id, WorkStatus.all, :id, :name %>
   </div>
   <div class="actions">
     <%= f.submit %>

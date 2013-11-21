@@ -12,17 +12,17 @@
 
 <p>
   <strong>Worker:</strong>
-  <%= @work_time.worker %>
+  <%= link_to @work_time.worker_name, @work_time.worker %>
 </p>
 
 <p>
   <strong>Status:</strong>
-  <%= @work_time.status %>
+  <%= @work_time.status_name %>
 </p>
 
 <p>
   <strong>Work status:</strong>
-  <%= @work_time.work_status %>
+  <%= @work_time.work_status_name %>
 </p>
 
 <%= link_to 'Edit', edit_work_time_path(@work_time) %> |

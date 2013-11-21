@@ -19,9 +19,9 @@
       <tr>
         <td><%= work_time.start_at %></td>
         <td><%= work_time.end_at %></td>
-        <td><%= work_time.worker %></td>
-        <td><%= work_time.status %></td>
-        <td><%= work_time.work_status %></td>
+        <td><%= work_time.worker_name %></td>
+        <td><%= work_time.status_name %></td>
+        <td><%= work_time.work_status_name %></td>
         <td><%= link_to 'Show', work_time %></td>
         <td><%= link_to 'Edit', edit_work_time_path(work_time) %></td>
         <td><%= link_to 'Destroy', work_time, method: :delete, data: { confirm: 'Are you sure?' } %></td>

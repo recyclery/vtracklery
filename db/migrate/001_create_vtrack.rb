@@ -1,4 +1,4 @@
-class CreateEvents < ActiveRecord::Migration
+class CreateVtrack < ActiveRecord::Migration
   def change
     create_table :events do |t|
       t.string :name
@@ -31,9 +31,9 @@ class CreateEvents < ActiveRecord::Migration
       t.boolean :in_shop
       t.string :email
       t.string :phone
-      t.references :status, index: true
-      t.references :work_status, index: true
-      t.boolean :public_email
+      t.references :status, index: true,      default: 1
+      t.references :work_status, index: true, default: 1
+      t.boolean :public_email,   default: false
 
       t.timestamps
     end

@@ -1,3 +1,45 @@
-// Place all the styles related to the Workers controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+body {
+  background: #d9c789;
+}
+
+.prev_image img {
+  width: 100px;
+}
+.next_image img {
+  width: 100px;
+}
+a.img_nav { color: #000; }
+a.img_nav:visited { color: #666; }
+a.img_nav:hover { color: #000; background-color: transparent; }
+
+div#image_selector {
+  text-align: center; 
+  width: 500px;
+}
+td#avatar {
+  width: 400px;
+  height: 250px;
+}  
+
+.home { 
+  border: 2px solid #0090DF;
+  background-color: #68BFEF;
+  width: 300px; 
+  height: 500px;
+  margin: 10px; 
+}
+.athome {
+  width: 100px;
+  height: 140px; 
+}
+.vperson img {
+  width: 100px;
+  height: 100px;
+}
+.vname {
+  text-align: center;
+  width: 100px;
+}
+.vno {
+  visibility: hidden;
+}

@@ -50,3 +50,5 @@ gem 'runt'
 # gem "rtex"
 # gem 'image_science' # used attachment_fu plugin
 # gem 'fastercsv'
+
+gem 'rails_config'

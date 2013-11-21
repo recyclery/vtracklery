@@ -15,6 +15,12 @@
 /log/*.log
 /tmp
 
+# Rails_config settings
 config/settings.local.yml
 config/settings/*.local.yml
 config/environments/*.local.yml
+
+# XML database backups
+db/xml/*.xml
+db/xml/backup/*.xml
+

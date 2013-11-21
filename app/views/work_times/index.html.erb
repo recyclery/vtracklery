@@ -1,0 +1,35 @@
+<h1>Listing work_times</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Start at</th>
+      <th>End at</th>
+      <th>Worker</th>
+      <th>Status</th>
+      <th>Work status</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @work_times.each do |work_time| %>
+      <tr>
+        <td><%= work_time.start_at %></td>
+        <td><%= work_time.end_at %></td>
+        <td><%= work_time.worker %></td>
+        <td><%= work_time.status %></td>
+        <td><%= work_time.work_status %></td>
+        <td><%= link_to 'Show', work_time %></td>
+        <td><%= link_to 'Edit', edit_work_time_path(work_time) %></td>
+        <td><%= link_to 'Destroy', work_time, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Work time', new_work_time_path %>

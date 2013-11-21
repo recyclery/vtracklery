@@ -1,4 +1,6 @@
 Vtrack::Application.routes.draw do
+  resources :work_times
+
   resources :workers
 
   resources :events

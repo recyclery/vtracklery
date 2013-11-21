@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  start_at: 2013-11-21 08:21:40
+  end_at: 2013-11-21 08:21:40
+  worker_id: 
+  status_id: 
+  work_status_id: 
+
+two:
+  start_at: 2013-11-21 08:21:40
+  end_at: 2013-11-21 08:21:40
+  worker_id: 
+  status_id: 
+  work_status_id: 

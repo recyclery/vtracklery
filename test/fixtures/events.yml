@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  first_at: 2013-11-21 08:15:32
+  last_at: 2013-11-21 08:15:32
+  wday: 1
+  s_hr: 1
+  s_min: 1
+  e_hr: 1
+  e_min: 1
+
+two:
+  name: MyString
+  first_at: 2013-11-21 08:15:32
+  last_at: 2013-11-21 08:15:32
+  wday: 1
+  s_hr: 1
+  s_min: 1
+  e_hr: 1
+  e_min: 1

@@ -25,7 +25,7 @@ class Worker < ActiveRecord::Base
     if image.nil?
       return MISSING_IMAGE
     else
-      return File.exist?("public/#{path}") ? path : MISSING_IMAGE
+      return File.exist?("public/system/#{path}") ? path : MISSING_IMAGE
     end
   end
 

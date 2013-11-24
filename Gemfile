@@ -52,3 +52,6 @@ gem 'runt'
 # gem 'fastercsv'
 
 gem 'rails_config'
+
+# Image storage
+gem 'carrierwave'

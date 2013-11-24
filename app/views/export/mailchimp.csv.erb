@@ -1,0 +1,5 @@
+<% for worker in @workers -%>
+<%   unless worker.email.empty? -%>
+<%= worker.name %>, <%= worker.email %>
+<%   end -%>
+<% end -%>

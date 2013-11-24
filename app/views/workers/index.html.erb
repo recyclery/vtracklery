@@ -3,14 +3,14 @@
 <table>
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Image</th>
-      <th>In shop</th>
-      <th>Email</th>
-      <th>Phone</th>
-      <th>Status</th>
-      <th>Work status</th>
-      <th>Public email</th>
+      <th><%= t('common.name') %></th>
+      <th><%= t('common.image') %></th>
+      <th><%= t('common.in_shop') %></th>
+      <th><%= t('common.email') %></th>
+      <th><%= t('common.phone') %></th>
+      <th><%= t('common.status') %></th>
+      <th><%= t('common.work_status') %></th>
+      <th><%= t('common.public_email') %></th>
       <th></th>
       <th></th>
       <th></th>
@@ -28,9 +28,9 @@
         <td><%= worker.status_name %></td>
         <td><%= worker.work_status_name %></td>
         <td><%= worker.public_email %></td>
-        <td><%= link_to 'Show', worker %></td>
-        <td><%= link_to 'Edit', edit_worker_path(worker) %></td>
-        <td><%= link_to 'Destroy', worker, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to t("links.show"), worker %></td>
+        <td><%= link_to t("links.edit"), edit_worker_path(worker) %></td>
+        <td><%= link_to t("links.destroy"), worker, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

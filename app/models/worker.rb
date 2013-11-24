@@ -101,7 +101,7 @@ class Worker < ActiveRecord::Base
 
   def last_visit_text
     if not has_hours?
-      "Has not volunteered yet"
+      I18n.t "Has not volunteered yet"
     elsif is_in_shop? 
       "Currently in shop"
     else

@@ -12,35 +12,35 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %><br>
+    <%= f.label :name, t("common.name") %><br>
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :image %><br>
+    <%= f.label :image, t("common.image") %><br>
     <%= f.text_field :image %>
   </div>
   <div class="field">
-    <%= f.label :in_shop %><br>
+    <%= f.label :in_shop, t("common.in_shop") %><br>
     <%= f.check_box :in_shop %>
   </div>
   <div class="field">
-    <%= f.label :email %><br>
+    <%= f.label :email, t("common.email") %><br>
     <%= f.text_field :email %>
   </div>
   <div class="field">
-    <%= f.label :phone %><br>
+    <%= f.label :phone, t("common.phone") %><br>
     <%= f.text_field :phone %>
   </div>
   <div class="field">
-    <%= f.label :status_id %><br>
+    <%= f.label :status_id, t("common.status") %><br>
     <%= f.collection_select :status_id, Status.all, :id, :name %>
   </div>
   <div class="field">
-    <%= f.label :work_status_id %><br>
+    <%= f.label :work_status_id, t("common.work_status") %><br>
     <%= f.collection_select :work_status_id, WorkStatus.all, :id, :name %>
   </div>
   <div class="field">
-    <%= f.label :public_email %><br>
+    <%= f.label :public_email, t("common.public_email") %><br>
     <%= f.check_box :public_email %>
   </div>
   <div class="actions">

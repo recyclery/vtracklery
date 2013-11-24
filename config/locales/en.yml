@@ -21,3 +21,22 @@
 
 en:
   hello: "Hello world"
+  common:
+    name: "Name"
+    image: "Image"
+    in_shop: "In shop"
+    email: "Email"
+    phone: "Phone"
+    status: "Status"
+    work_status: "Work status"
+    public_email: "Public email"
+    "Has not volunteered yet": "Has not volunteered yet"
+  links:
+    show: "Show"
+    edit: "Edit"
+    back: "Back"
+    destroy: "Destroy"
+    signup: "Sign up!"
+    help: "Help?"
+    shop:
+      back: "Back to the shop"

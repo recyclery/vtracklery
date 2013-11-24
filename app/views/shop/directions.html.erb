@@ -1,10 +1,10 @@
-<%= link_to "Back to the shop", :controller => :shop %> 
+<%= link_to t("links.shop.back"), :controller => :shop %> 
 <div id="directions" style="width: 400px;">
 <p>Help us keep track of how many hours we've put in together!</p>
 
 <h4>Sure, how do I help?</h4>
 
-<p>Once you've created an avatar (<%= link_to "Sign Up!", :controller => :workers, :action => :new %>), you can sign into the shop by using the computer mouse to click and drag your 
+<p>Once you've created an avatar (<%= link_to t("links.signup"), :controller => :workers, :action => :new %>), you can sign into the shop by using the computer mouse to click and drag your 
 <span style="background-color: white;">picture</span> from the 
 <span style="background-color: #EFBF68;">box on the left</span> to the 
 <span style="background-color: #693100; color: white;">box on the right.</span> </p>
@@ -28,4 +28,4 @@ Try shifting around avatars that are in piles.
 As long as you don't move them to the opposite box, you won't make a mess of anything. 
 </p>
 </div>
-<%= link_to "Back to the shop", :controller => :shop %>
+<%= link_to t("links.shop.back"), :controller => :shop %>

@@ -1,5 +1,18 @@
 Vtrack::Application.routes.draw do
 
+  get "report/active"
+  get "report/admin"
+  get "report/calendar"
+  get "report/contact"
+  get "report/event"
+  get "report/index"
+  get "report/month"
+  get "report/monthly"
+  get "report/volunteer"
+  get "report/week"
+  get "report/weekly"
+  get "report/year"
+  get "report/yearly"
   root 'shop#index'
 
   get "shop/index"

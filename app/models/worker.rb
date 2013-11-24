@@ -6,7 +6,8 @@ class Worker < ActiveRecord::Base
   validates_presence_of :name
 
   #MISSING_IMAGE = "/images/default_avatars/vimg01.png"
-  MISSING_IMAGE = "/assets/default_avatars/vimg01.png"
+  MISSING_IMAGE_PATH = "app/assets/images/default_avatars/vimg01.png"
+  MISSING_IMAGE_URL = "/assets/default_avatars/vimg01.png"
   STATUS = ["Volunteer", "Member", "Paid Staff"] 
 
   delegate :name, to: :status, prefix: true
@@ -18,15 +19,27 @@ class Worker < ActiveRecord::Base
     self.work_status.name = val
   end
 
-  # If the image name has no directory marks, assume its from the default
-  def image_path
-    path = (image =~ /\w+\/\w+/ ? image : "/images/default_avatars/#{image}")
-    
-    if image.nil?
-      return MISSING_IMAGE
+  def image_url
+    if image.nil? then return MISSING_IMAGE_URL
+    elsif image =~ /\w+\/\w+/ then
+      return image_exists? ? "/system#{image}" : MISSING_IMAGE_URL
     else
-      return File.exist?("public/system/#{path}") ? path : MISSING_IMAGE
+      return image_exists? ? "/assets/default_avatars/#{image}" : MISSING_IMAGE_URL
     end
+  end
+
+  def image_path
+    if image.nil? then return MISSING_IMAGE_PATH
+    elsif image =~ /\w+\/\w+/
+      File.join("public", "system", image.split("/"))
+    else
+      # If the image name has no directory marks, assume its from the default
+      File.join("app", "assets", "images", "default_avatars", image)
+    end
+  end
+
+  def image_exists?
+    File.exists?(image_path)
   end
 
   def previous

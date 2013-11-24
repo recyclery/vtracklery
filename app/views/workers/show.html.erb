@@ -1,13 +1,11 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
+<h1>
   <%= @worker.name %>
-</p>
+</h1>
 
 <p>
-  <strong>Image:</strong>
-  <%= @worker.image %>
+  <img src='<%= @worker.image_url %>' />
 </p>
 
 <p>

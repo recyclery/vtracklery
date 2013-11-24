@@ -21,7 +21,7 @@
     <% @workers.each do |worker| %>
       <tr>
         <td><%= worker.name %></td>
-        <td><%= worker.image %></td>
+        <td><img src='<%= worker.image_url %>' /></td>
         <td><%= worker.in_shop %></td>
         <td><%= worker.email %></td>
         <td><%= worker.phone %></td>

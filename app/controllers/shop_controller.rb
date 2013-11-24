@@ -1,7 +1,7 @@
 class ShopController < ApplicationController
   LOGO_PATH = File.join("public","images","logo.gif")
   LOGO_URL = "/images/logo.gif"
-  DEFAULT_LOGO_URL = "/images/default_logo.png"
+  DEFAULT_LOGO_URL = "/assets/default_logo.png"
 
   def index
     @max_top = 280

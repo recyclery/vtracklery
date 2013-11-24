@@ -20,16 +20,17 @@ class Worker < ActiveRecord::Base
   end
 
   def image_url
-    if image.nil? then return MISSING_IMAGE_URL
+    if image.nil? then return Settings.avatars.missing_url
     elsif image =~ /\w+\/\w+/ then
-      return image_exists? ? "/system#{image}" : MISSING_IMAGE_URL
-    else
-      return image_exists? ? "/assets/default_avatars/#{image}" : MISSING_IMAGE_URL
+      return image_exists? ? "/system#{image}" : Settings.avatars.missing_url
+    elsif image_exists? then return "/assets/default_avatars/#{image}"
+    else return Settings.avatars.missing_url
     end
   end
 
   def image_path
-    if image.nil? then return MISSING_IMAGE_PATH
+    if image.nil?
+      return File.join(Settings.avatars.missing_path.split('/'))
     elsif image =~ /\w+\/\w+/
       File.join("public", "system", image.split("/"))
     else

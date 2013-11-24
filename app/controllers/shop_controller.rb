@@ -1,12 +1,8 @@
 class ShopController < ApplicationController
-  LOGO_PATH = File.join("public","images","logo.gif")
-  LOGO_URL = "/images/logo.gif"
-  DEFAULT_LOGO_URL = "/assets/default_logo.png"
-
   def index
     @max_top = 280
     @max_left = 500
-    @logo = File.exist?(LOGO_PATH) ? LOGO_URL : DEFAULT_LOGO_URL
+    @logo = logo_exists? ? logo_url : Settings.logo.default_url
 
     @workers = Worker.find(:all)
 
@@ -97,5 +93,23 @@ class ShopController < ApplicationController
 
   def directions
 
+  end
+
+  private
+  def logo_path
+    Dir.glob(File.join(Settings.logo.default_dir.split("/"),
+                       Settings.logo.filename)).first
+  end
+
+  def logo_url
+    if logo_path.nil? then Settings.logo.default_url
+    else "/assets/#{Settings.logo.filename}"
+    end
+  end
+
+  def logo_exists?
+    if logo_path.nil? then return nil
+    else return File.exist?(logo_path)
+    end
   end
 end

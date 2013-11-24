@@ -1,2 +1,13 @@
 app:
   url: http://localhost:3000
+
+avatars:
+  dir: 
+  missing_path: "app/assets/images/default_avatars/vimg01.png"
+  missing_url: "/assets/default_avatars/vimg01.png"
+
+logo:
+  default_url: "/assets/default_logo.png"
+  default_dir: "/app/assets/images"
+  filename: "logo.png"
+

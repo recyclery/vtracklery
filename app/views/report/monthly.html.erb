@@ -1,2 +1,9 @@
-<h1>Report#monthly</h1>
-<p>Find me in app/views/report/monthly.html.erb</p>
+<h1>Monthly Reports</h1>
+<div><%= link_to "This month's calendar", current_month_calendar_path %></div>
+<div><%= link_to "This month's report", current_month_report_path %></div>
+
+<% (@month - 1).step(1, -1) do |month| -%>
+<br />
+<div><%= link_to "Calendar for #{DateTime::MONTHNAMES[month]}", calendar_path(@year, month) %></div>
+<div><%= link_to "Report for #{DateTime::MONTHNAMES[month]}", month_report_path(@year, month) %></div>
+<% end -%>

@@ -1,24 +1,46 @@
 Vtrack::Application.routes.draw do
 
-  get "report/active"
-  get "report/admin"
-  get "report/calendar"
-  get "report/contact"
-  get "report/event"
-  get "report/index"
-  get "report/month"
-  get "report/monthly"
-  get "report/volunteer"
-  get "report/week"
-  get "report/weekly"
-  get "report/year"
-  get "report/yearly"
+  get "report", as: "reports", to: "report#index"
+  scope "/report", controller: "report" do
+    get "active", as: "active_workers"
+    get "admin"
+    get "calendar/:year/:month", as: "calendar", to: "report#calendar"
+    get "calendar", as: "current_month_calendar", to: "report#calendar"
+    get "contact", as: "contact_list"
+    get "event/:id", as: "event_report", to: "report#event"
+    get 'month/:year/:month', as: "month_report", to: "report#month"
+    get 'month/:year', as: "year_month_report", to: "report#month"
+    get 'month', as: "current_month_report", to: "report#month"
+    get "monthly"
+    get "volunteer/:id", as: "worker_report", to: "report#volunteer"
+    get 'week/:year/:month/:day', as: "day_week_report", to: "report#week"
+    get 'week/:year/:month', as: "month_week_report", to: "report#week"
+    get 'week/:year', as: "year_week_report", to: "report#week"
+    get 'week', as: "week_report", to: "report#week"
+    get "weekly"
+    get "year"
+    get "yearly"
+  end
+
   root 'shop#index'
 
-  get "shop/index"
-  get "shop/directions"
-  get "shop/sign_in"
-  get "shop/sign_out"
+  get "shop", as: "shop", to: "shop#index"
+  scope "/shop", controller: "shop" do
+    get "shop/directions"
+    get "shop/sign_in"
+    get "shop/sign_out"
+  end
+
+  scope "/export", controller: "export" do
+    get 'phone'
+    get 'email'
+    get 'no_contact'
+    get 'contact'
+    get 'mailchimp'
+    get 'worker_hours'
+    get 'month/:year/:month', as: "month_csv", to: "export#month"
+    get 'year'
+  end
 
   resources :workers do
     collection do

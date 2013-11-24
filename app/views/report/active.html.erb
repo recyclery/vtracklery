@@ -1,2 +1,31 @@
-<h1>Report#active</h1>
-<p>Find me in app/views/report/active.html.erb</p>
+<%= link_to "Reports", reports_path %>
+<h1>Missing Active Volunteers</h1>
+Active volunteers who have not shown up in the last two weeks
+<table><tbody>
+<% @missing_list.each do |worker| -%>
+<% unless worker.phone.blank? -%>
+<tr><td>
+<%= worker.shoehorn_phone %>
+  </td><td>
+<%= link_to worker.shoehorn_name, worker_report_path(worker) %>
+<%= worker.email.blank? ?  "" : " &#171;#{worker.email}&#187;" %>
+</td></tr>
+<% end -%>
+<% end -%>
+</tbody></table>
+
+<h1>All Active Volunteers</h1>
+Volunteers that have done 10 hours of work in the last 30 days
+<table><tbody>
+<% @active_workers.each do |worker| -%>
+<% unless worker.phone.blank? -%>
+<tr><td>
+<%= worker.shoehorn_phone %>
+  </td><td>
+<%= link_to worker.shoehorn_name, worker_report_path(worker) %>
+<%=raw worker.email.blank? ?  "" : " &#171;#{worker.email}&#187;" %>
+</td></tr>
+<% end -%>
+<% end -%>
+</tbody></table>
+

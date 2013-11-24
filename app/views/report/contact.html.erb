@@ -1,2 +1,49 @@
-<h1>Report#contact</h1>
-<p>Find me in app/views/report/contact.html.erb</p>
+<%=link_to "Reports", reports_path %>
+<h1>Phone Numbers</h1>
+<p><%=link_to "Export to CSV", phone_path %></p>
+<table><tbody>
+<% @workers.each do |worker| -%>
+<%   unless worker.phone.blank? -%>
+<tr><td>
+<%# worker.normalize_phone ? "x " : "o " %>
+<%= worker.shoehorn_phone %>
+  </td><td>
+<%= link_to worker.shoehorn_name, worker_report_path(worker) %>
+<%=raw worker.email.blank? ?  "" : " &#171;#{worker.email}&#187;" %>
+</td></tr>
+<%   end -%>
+<% end -%>
+</tbody></table>
+
+<h1>Email Addresses</h1>
+<p><%=link_to "Export to CSV", email_path %></p>
+<table><tbody>
+<% @workers.each do |worker| -%>
+<%   if worker.phone.blank? and not worker.email.blank? -%>
+<tr><td>
+<%= link_to worker.shoehorn_name, worker_report_path(worker) %>
+  </td><td>
+<%= worker.email %>
+</td></tr>
+<%   end -%>
+<% end -%>
+</tbody></table>
+
+<h1>Shop Elves</h1>
+<p><%=link_to "Export to CSV", no_contact_path %></p>
+<div>
+<% @workers.each do |worker| -%>
+<%   if worker.phone.blank? and worker.email.blank? and not worker.name.blank? -%>
+  <div style="float: left; padding-right: 1em; padding-bottom: 1ex;">
+    <%= link_to worker.shoehorn_name, worker_report_path(worker) %>
+  </div>
+<%   end -%>
+<% end -%>
+</div>
+
+
+<div style="clear: both;">
+<hr style="color: black;" />
+<p><%=link_to "Export All", contact_path %></p>
+<p><%=link_to "Mail Chimp", mailchimp_path %></p>
+</div>

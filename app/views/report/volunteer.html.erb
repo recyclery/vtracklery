@@ -1,2 +1,50 @@
-<h1>Report#volunteer</h1>
-<p>Find me in app/views/report/volunteer.html.erb</p>
+<table><tr><td width="280px" style="vertical-align: top;">
+<!-- </td><td><tr><td> -->
+<%= link_to 'previous', worker_report_path(@worker.previous) %>
+<%= link_to 'next', worker_report_path(@worker.next) %>
+<div style="vertical-align: top;">
+  <img height="200px" src="<%= @worker.image_url %>" />
+</div>
+<h1><%= @worker.name %></h1>
+<% unless @worker.email.blank? -%>
+<p>
+<%= @worker.email %>
+</p>
+<% end -%>
+<% unless @worker.phone.blank? -%>
+<p>
+<%= @worker.shoehorn_phone %>
+</p>
+<% end -%>
+<p>
+Created on <%= @worker.created_datetime %>
+</p>
+<p>
+<%= @worker.last_visit_text %>
+</p>
+</td><td style="vertical-align: top;">
+<%=link_to "Export to CSV", worker_hours_path(@worker) %>
+<table>
+  <tr>
+    <th>Length</th>
+    <th>Visit</th>
+    <th>Time</th>
+  </tr>
+<% for work_time in @work_times -%>
+  <tr>
+    <% if work_time.is_open? -%>
+    <td><%= work_time.is_today? ? "Still in shop" : "<b>Oops!</b>" %></td>
+    <td><%= work_time.visit_date %></td>
+    <td><%= work_time.start_time %></td>
+    <% else -%>
+    <td><%=h work_time.difference_to_s %></td>
+    <td><%= work_time.visit_date %></td>
+    <td><%= work_time.start_time %> - <%= work_time.end_time %></td>
+    <% end -%>
+    <td><%= link_to 'Show', work_time %></td>
+    <td><%= link_to 'Edit', edit_work_time_path(work_time) %></td>
+  </tr>
+<% end %>
+</table>
+</td></tr></table>
+<%= link_to "Reports", reports_path %>

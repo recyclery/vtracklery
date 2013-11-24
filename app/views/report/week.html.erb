@@ -1,2 +1,44 @@
-<h1>Report#week</h1>
-<p>Find me in app/views/report/week.html.erb</p>
+<h1>Week</h1>
+<h3><%= @first.strftime("%D") %> to <%= @last.strftime("%D") %></h3>
+
+<table class="#{@options[:table_class]}" border="0" cellspacing="0" cellpadding="0">
+<thead>
+  <tr class="<%= @options[:day_name_class] %>">
+<% @day_names.each do |d| -%>
+  <% unless d[@options[:abbrev]].eql? d -%>
+    <th scope='col'><abbr title='<%= d %>'><%= d[@options[:abbrev]] %></abbr></th>
+  <% else -%>
+    <th scope='col'><%= d[@options[:abbrev]] %></th>
+  <% end -%>
+<% end -%>
+  </tr>
+  <tr class="<%= @options[:day_name_class] %>">
+<% @first.upto(@last) do |cur| -%>
+    <th<%= "" %>><%= cur.mday %></th>
+<% end -%>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+<% @first.upto(@last) do |cur|
+   cell_text, cell_attrs = @block.call(cur)
+   cell_text  ||= cur.mday
+   cell_attrs ||= {:class => @options[:day_class]}
+   cell_attrs[:class] += " weekendDay" if [0, 6].include?(cur.wday) 
+   cell_attrs[:class] += " today" if (cur == Date.today) and @options[:show_today]  
+   cell_attrs[:style] = "vertical-align: top;"
+   cell_attrs = cell_attrs.map {|k, v| %(#{k}="#{v}") }.join(" ") -%>
+
+    <td <%= cell_attrs %>>
+<% for time in @hours -%>
+  <% if time.start_at.mday == cur.mday -%>
+      <%= link_to time.worker.name, worker_report_path(time.worker) %>
+ <%# time.start_time %><br />
+ <%= time.difference_to_s %><br />
+  <% end -%>
+<% end -%>
+    </td>
+<% end -%>
+  </tr>
+</tbody>
+</table>

@@ -1,2 +1,21 @@
-<h1>Report#index</h1>
-<p>Find me in app/views/report/index.html.erb</p>
+<h1>Reports</h1>
+<h2>Volunteer</h2>
+<div><%= link_to "Weekly", :controller => "report", :action => "weekly" %></div>
+<div><%= link_to "Monthly", :controller => "report", :action => "monthly" %></div>
+<div><%= link_to "Yearly", :controller => "report", :action => "yearly" %></div>
+<h2>Events</h2>
+<% for event in @events -%>
+<div><%= link_to event.name, :controller => "report", :action => "event", :id => event.id %></div>
+<% end -%>
+<br />
+<%= link_to "Add or change events", events_path %>
+
+<h2>By Vounteer</h2>
+<div><%= link_to "Volunteers", workers_path %></div>
+<div><%= link_to "Contact List", contact_list_path %></div>
+<div><%= link_to "Active Volunteers", active_workers_path %></div>
+
+<h2>Administration</h2>
+<div><%= link_to "Strange Hours", admin_path %></div>
+
+<div></div>

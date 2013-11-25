@@ -17,11 +17,7 @@
   </div>
   <div class="field">
     <%= f.label :image, t("common.image") %><br>
-    <%= f.text_field :image %>
-  </div>
-  <div class="field">
-    <%= f.label :in_shop, t("common.in_shop") %><br>
-    <%= f.check_box :in_shop %>
+    <%= f.file_field :image %>
   </div>
   <div class="field">
     <%= f.label :email, t("common.email") %><br>
@@ -31,6 +27,7 @@
     <%= f.label :phone, t("common.phone") %><br>
     <%= f.text_field :phone %>
   </div>
+<div style='display: none;'>
   <div class="field">
     <%= f.label :status_id, t("common.status") %><br>
     <%= f.collection_select :status_id, Status.all, :id, :name %>
@@ -39,6 +36,7 @@
     <%= f.label :work_status_id, t("common.work_status") %><br>
     <%= f.collection_select :work_status_id, WorkStatus.all, :id, :name %>
   </div>
+</div>
   <div class="field">
     <%= f.label :public_email, t("common.public_email") %><br>
     <%= f.check_box :public_email %>

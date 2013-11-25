@@ -1,46 +1,6 @@
 <h1>Editing volunteer</h1>
 
-<%= form_for(@worker) do |f| %>
-  <% if @worker.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@worker.errors.count, "error") %> prohibited this worker from being saved:</h2>
-
-      <ul>
-      <% @worker.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div id="image_selector">
-    <img src="<%= @worker.avatar_url %>" />
-
-    <%= f.hidden_field :image, :value => @image %>
-  <p>
-    <a class="choose" href="#">Choose another image</a>
-  </p>
-  </div>
-  <p>
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </p>
-  <p>
-    <%= f.label :email %><br />
-    <%= f.text_field :email %>
-  </p>
-  <p>
-    <%= f.label :public_email, "Receive Recyclery emails?" %><br />
-    <%= f.check_box :public_email %>
-  </p>
-  <p>
-    <%= f.label :phone %><br />
-    <%= f.text_field :phone %>
-  </p>
-  <p>
-    <%= f.submit "Update" %>
-  </p>
-<% end %>
+<%= render partial: 'workers/form' %>
 
 <%= link_to 'Show', @worker %> |
 <%= link_to 'Back', :controller => 'shop' %>

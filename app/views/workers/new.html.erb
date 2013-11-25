@@ -1,53 +1,5 @@
 <h1>New volunteer</h1>
 
-<%= form_for(@worker) do |f| %>
-  <% if @worker.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@worker.errors.count, "error") %> prohibited this worker from being saved:</h2>
-
-      <ul>
-      <% @worker.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div id="image_selector">
-    <table><tr>
-    <td><a class="prev_image img_nav" href="#"><img src="/assets/left.png" /></a></td>
-    <td id="avatar"><center><img src="/assets/default_avatars/vimg01.png" /></center></td>
-    <td><a class="next_image img_nav" href="#"><img src="/assets/right.png" /></a></td>
-    </tr></table>
-    <%= f.hidden_field :image, :value => "vimg01.png" %>
-  <p>
-    <a id="cheese_link" href="#">Use a local webcam image</a>
-
-    <a id="upload_link" href="#">Upload your own image</a>
-  </p>
-  </div>
-  <p>
-    <%= f.hidden_field( :in_shop, :value => 0 ) %>
-  </p>
-  <p>
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </p>
-  <p>
-    <%= f.label :email %><br />
-    <%= f.text_field :email %>
-  </p>
-  <p>
-    <%= f.label :public_email, "Receive Recyclery emails?" %><br />
-    <%= f.check_box :public_email %>
-  </p>
-  <p>
-    <%= f.label :phone %><br />
-    <%= f.text_field :phone %>
-  </p>
-  <p>
-    <%= f.submit "Create" %>
-  </p>
-<% end %>
+<%= render partial: 'workers/form' %>
 
 <%= link_to 'Back', :controller => 'shop' %>

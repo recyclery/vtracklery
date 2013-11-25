@@ -42,27 +42,23 @@ class WorkTimeTest < ActiveSupport::TestCase
   # Test may fail within 5 days after a new year
   test "find_stats_for" do
     5.times do |n|
-      time = DateTime.new(2008,3,15) + n.days
-      WorkTime.create(start_at: time,
-                      end_at: time + 3.hours,
+      WorkTime.create(start_at: DateTime.new(2008,3,15) + n,
+                      end_at: DateTime.new(2008,3,15,3) + n,
                       worker_id: @volunteer.id)
     end
     5.times do |n|
-      time = DateTime.new(2008,3,15) + n.days
-      WorkTime.create(start_at: time,
-                      end_at: time + 3.hours,
+      WorkTime.create(start_at: DateTime.new(2008,3,15) + n,
+                      end_at: DateTime.new(2008,3,15,3) + n,
                       worker_id: @member.id)
     end
     5.times do |n| 
-      time = DateTime.new(2007,3,15) + n.days
-      WorkTime.create(start_at: time,
-                      end_at: time + 3.hours,
+      WorkTime.create(start_at: DateTime.new(2007,3,15) + n,
+                      end_at: DateTime.new(2007,3,15,3) + n,
                       worker_id: @member.id)
     end
     5.times do |n| 
-      time = DateTime.new(2007,4,15) + n.days
-      WorkTime.create(start_at: time,
-                      end_at: time + 3.hours,
+      WorkTime.create(start_at: DateTime.new(2007,4,15) + n,
+                      end_at: DateTime.new(2007,4,15,3) + n,
                       worker_id: @member.id)
     end
     wt, w, t, a = WorkTime.find_stats_for(2008)
@@ -87,6 +83,8 @@ class WorkTimeTest < ActiveSupport::TestCase
 
     wt = WorkTime.create(start_at: beg, end_at: fin, worker_id: 1, work_status_id: 1, status_id: 1)
 
+    # find_by_start_date can be passed integer dates or object that responds
+    # to :year, :month, :day
     work_time = WorkTime.find_by_start_date(2008,3,11)
     assert_equal [wt], work_time
     

@@ -67,17 +67,15 @@ module WorkTime::Finder
       year = year.to_i
       if month
         month = month.to_i
-        self.find(:all, :conditions => 
-                  ['start_at >= ? AND end_at <= ? AND status_id = ?',
-                   self.start_of_month(month, year),
-                   self.end_of_month(month, year),
-                   s_id])
+        self.where(['start_at >= ? AND end_at <= ? AND status_id = ?', 
+                    self.start_of_month(month, year),
+                    self.end_of_month(month, year),
+                    s_id])
       else
-        self.find(:all, :conditions => 
-                  ['start_at >= ? AND end_at <= ? AND status_id = ?',
-                   self.start_of_year(year),
-                   self.end_of_year(year),
-                   s_id])
+        self.where(['start_at >= ? AND end_at <= ? AND status_id = ?', 
+                    self.start_of_year(year),
+                    self.end_of_year(year),
+                    s_id])
       end
     end
     
@@ -132,23 +130,20 @@ module WorkTime::Finder
       year = year.to_i
       if month
         month = month.to_i
-        self.find(:all, :conditions => ['start_at >= ? AND end_at <= ?',
-                                        self.start_of_month(month, year),
-                                        self.end_of_month(month, year)],
-                  :order => :start_at)
+        self.where(['start_at >= ? AND end_at <= ?',
+                    self.start_of_month(month, year),
+                    self.end_of_month(month, year)]).order(:start_at)
       else
-        self.find(:all, :conditions => ['start_at >= ? AND end_at <= ?',
-                                        self.start_of_year(year),
-                                        self.end_of_year(year)],
-                  :order => :start_at)
+        self.where(['start_at >= ? AND end_at <= ?',
+                    self.start_of_year(year),
+                    self.end_of_year(year)]).order(:start_at)
       end
     end
     
     def find_for_this_month
       year, month = Time.now.year, Time.now.month
-      self.find(:all, :conditions => ['start_at >= ?',
-                                      self.start_of_month(month, year)],
-                :order => :start_at)
+      s_at = self.start_of_month(month, year)
+      self.where(['start_at >= ?', s_at]).order(:start_at)
     end
 
   end

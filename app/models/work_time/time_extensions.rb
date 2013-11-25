@@ -69,8 +69,8 @@ module WorkTime::TimeExtensions
     def prev(year = Time.now.year, month = nil)
       year = year.to_i
       if month &&= month.to_i
-        (month == 1) ? {:month => 12, :year => year - 1} : 
-          {:month => month - 1, :year => year }        
+        (month == 1) ? {month: 12, year: year - 1} : 
+          {month: month - 1, year: year }        
       else
         year - 1
       end
@@ -79,8 +79,8 @@ module WorkTime::TimeExtensions
     def next(year = Time.now.year, month = nil)
       year = year.to_i
       if month &&= month.to_i
-        (month == 12) ? {:month => 1, :year => year + 1} : 
-          {:month => month + 1, :year => year }        
+        (month == 12) ? {month: 1, year: year + 1} : 
+          {month: month + 1, year: year }        
       else
         year + 1
       end    

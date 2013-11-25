@@ -7,7 +7,7 @@ class Worker < ActiveRecord::Base
 
   include Phone
 
-  #mount_uploader :image, AvatarUploader
+  mount_uploader :image, AvatarUploader
 
   STATUS = ["Volunteer", "Member", "Paid Staff"] 
 
@@ -26,23 +26,25 @@ class Worker < ActiveRecord::Base
   end
 
   def avatar_url
-    if image.nil? then return Settings.avatars.missing_url
-    elsif image =~ /\w+\/\w+/ then
-      return image_exists? ? "/system#{image}" : Settings.avatars.missing_url
-    elsif image_exists? then return "/assets/default_avatars/#{image}"
-    else return Settings.avatars.missing_url
-    end
+    image_url
+    #if image.nil? then return Settings.avatars.missing_url
+    #elsif image =~ /\w+\/\w+/ then
+    #  return image_exists? ? "/system/#{image}" : Settings.avatars.missing_url
+    #elsif image_exists? then return "/assets/default_avatars/#{image}"
+    #else return Settings.avatars.missing_url
+    #end
   end
 
   def avatar_path
-    if image.nil?
-      return File.join(Settings.avatars.missing_path.split('/'))
-    elsif image =~ /\w+\/\w+/
-      File.join("public", "system", image.split("/"))
-    else
-      # If the image name has no directory marks, assume its from the default
-      File.join("app", "assets", "images", "default_avatars", image)
-    end
+    image.path
+    #if image.nil?
+    #  return File.join(Settings.avatars.missing_path.split('/'))
+    #elsif image =~ /\w+\/\w+/
+    #  File.join("public", "system", image.split("/"))
+    #else
+    #  # If the image name has no directory marks, assume its from the default
+    #  File.join("app", "assets", "images", "default_avatars", image)
+    #end
   end
 
   def image_exists?

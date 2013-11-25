@@ -2,12 +2,17 @@ app:
   url: http://localhost:3000
 
 avatars:
-  dir: 
   missing_path: "app/assets/images/default_avatars/vimg01.png"
   missing_url: "/assets/default_avatars/vimg01.png"
+  default_src: "/assets/default_avatars/"
+  default_dir: "app/assets/images/default_avatars"
 
 logo:
   default_url: "/assets/default_logo.png"
   default_dir: "/app/assets/images"
   filename: "logo.png"
 
+# The server has to be running on the same computer as the cheese webcam
+# for this to work.
+cheese:
+  dir: "/home/guest/.gnome2/cheese/media/"

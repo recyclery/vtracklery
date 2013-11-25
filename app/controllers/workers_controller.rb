@@ -1,10 +1,6 @@
 class WorkersController < ApplicationController
   before_action :set_worker, only: [:show, :edit, :update, :destroy]
 
-  DEFAULT_AVATARS_DIR = File.join("app","assets","images","default_avatars")
-  DEFAULT_AVATARS_SRC = "/assets/default_avatars/"
-  CHEESE_DIR = "/home/guest/.gnome2/cheese/media/"
-
   # GET /workers
   # GET /workers.xml
   # GET /workers.json
@@ -26,14 +22,14 @@ class WorkersController < ApplicationController
   def new
     @worker = Worker.new
     @images = []
-    Dir.entries(DEFAULT_AVATARS_DIR).each do |file|
+    Dir.entries(Settings.avatars.default_dir).each do |file|
       @images.push file if file =~ /\.png/
     end
     @cheese = []
     begin
-      Dir.entries(CHEESE_DIR).each do |file|
+      Dir.entries(Settings.cheese.dir).each do |file|
         @cheese.push file if file =~ /\.jpg/
-      end if File.directory? CHEESE_DIR
+      end if File.directory? Settings.cheese.dir
     rescue #"Errno::ENOENT"
     end
   end
@@ -42,12 +38,12 @@ class WorkersController < ApplicationController
   def edit
     @image = @worker.image || "vimg01.png"
     @images = []
-    Dir.entries(DEFAULT_AVATARS_DIR).each do |file|
+    Dir.entries(Settings.avatars.default_dir).each do |file|
       @images.push file if file =~ /\.png/
     end
     @cheese = []
     begin
-      Dir.entries(CHEESE_DIR).each do |file|
+      Dir.entries(Settings.cheese.dir).each do |file|
         @cheese.push file if file =~ /\.jpg/
       end
     rescue #"Errno::ENOENT"

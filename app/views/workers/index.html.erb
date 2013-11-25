@@ -12,7 +12,7 @@ $(document).ready(function() {
 <% @workers.each do |worker| -%>
   <div id="volunteer-<%= worker.id %>" style="float: left; padding: 5px; width: 120px; height: 100px; text-align: center;">
     <a href="<%= worker_report_path(worker) %>">
-    <img class="volunteer" height="100px" title="<%= worker.name %>" src="<%= worker.image_url %>" />
+    <img class="volunteer" height="100px" title="<%= worker.name %>" src="<%= worker.avatar_url %>" />
     </div>
   </div>
 <% end -%>

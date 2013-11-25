@@ -25,7 +25,7 @@ class Worker < ActiveRecord::Base
     self.work_status.name = val
   end
 
-  def image_url
+  def avatar_url
     if image.nil? then return Settings.avatars.missing_url
     elsif image =~ /\w+\/\w+/ then
       return image_exists? ? "/system#{image}" : Settings.avatars.missing_url
@@ -34,7 +34,7 @@ class Worker < ActiveRecord::Base
     end
   end
 
-  def image_path
+  def avatar_path
     if image.nil?
       return File.join(Settings.avatars.missing_path.split('/'))
     elsif image =~ /\w+\/\w+/
@@ -46,7 +46,7 @@ class Worker < ActiveRecord::Base
   end
 
   def image_exists?
-    File.exists?(image_path)
+    File.exists?(avatar_path)
   end
 
   def previous

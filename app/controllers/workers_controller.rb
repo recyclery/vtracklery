@@ -58,7 +58,6 @@ class WorkersController < ApplicationController
   # GET /cheese_chooser
   def cheese_chooser
     @worker = Worker.find(params[:id])
-    @image_path = @worker.image_path
     render :partial => 'cheese_chooser'
   end
 
@@ -75,7 +74,6 @@ class WorkersController < ApplicationController
   # GET /image_chooser
   def image_chooser
     @worker = Worker.find(params[:id])
-    @image_path = @worker.image_url
     render :partial => 'image_chooser'
   end
 

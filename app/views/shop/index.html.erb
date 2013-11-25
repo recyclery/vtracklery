@@ -20,7 +20,7 @@
 <% unless @v_col1.nil? %>
 <%   for person in @v_col1 -%>
       <div class="athome">
-        <div class="vperson"><img src="<%= person.image_url %>" /></div>
+        <div class="vperson"><img src="<%= person.avatar_url %>" /></div>
         <div class="vname">
           <a href="/workers/<%= person.id %>"><%= person.name %></a>
           <span class="vno"><%= person.id %></span>
@@ -33,7 +33,7 @@
 <% unless @v_col2.nil? %>
 <%   for person in @v_col2 -%>
     <div class="athome">
-      <div class="vperson"><img src="<%= person.image_url %>" /></div>
+      <div class="vperson"><img src="<%= person.avatar_url %>" /></div>
         <div class="vname">
         <a href="/workers/<%= person.id %>"><%= person.name %></a>
         <span class="vno"><%= person.id %></span>
@@ -51,7 +51,7 @@
 <% id = 0 -%>
 <% for person in @shop_people -%>
 <div class="atshop" style="position: relative; left: <%= rand(@max_left) %>px; top: <%= rand(@max_top) - id * 140 %>px;">
-  <div class="vperson"><img src="<%= person.image_url %>" /></div>
+  <div class="vperson"><img src="<%= person.avatar_url %>" /></div>
   <div class="vname">
     <a href="/workers/<%= person.id %>"><%= person.name %></a>
     <span class="vno"><%= person.id %></span>

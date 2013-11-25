@@ -3,7 +3,7 @@
 <%= link_to 'previous', worker_report_path(@worker.previous) %>
 <%= link_to 'next', worker_report_path(@worker.next) %>
 <div style="vertical-align: top;">
-  <img height="200px" src="<%= @worker.image_url %>" />
+  <img height="200px" src="<%= @worker.avatar_url %>" />
 </div>
 <h1><%= @worker.name %></h1>
 <% unless @worker.email.blank? -%>

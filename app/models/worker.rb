@@ -5,10 +5,16 @@ class Worker < ActiveRecord::Base
 
   validates_presence_of :name
 
-  #MISSING_IMAGE = "/images/default_avatars/vimg01.png"
-  MISSING_IMAGE_PATH = "app/assets/images/default_avatars/vimg01.png"
-  MISSING_IMAGE_URL = "/assets/default_avatars/vimg01.png"
+  include Phone
+
+  #mount_uploader :image, AvatarUploader
+
   STATUS = ["Volunteer", "Member", "Paid Staff"] 
+
+  scope :email_only, -> { where("email IS NOT NULL AND phone IS NULL") }
+  scope :has_email, -> { where("email IS NOT NULL") }
+  scope :has_phone, -> { where("phone IS NOT NULL") }
+  scope :no_contact, -> { where("email IS NULL AND phone IS NULL") }
 
   delegate :name, to: :status, prefix: true
   def status_name=(val)
@@ -85,10 +91,8 @@ class Worker < ActiveRecord::Base
   end
 
   def sum_time_in_seconds(begin_time, end_time)
-    conditions = ["worker_id = ? AND start_at > ? AND start_at < ?", 
-                  id, begin_time, end_time]
-    time = WorkTime.find(:all, conditions: conditions)
-    return time.sum(&:difference_in_seconds)
+    time = WorkTime.worker_id_between(id, begin_time, end_time)
+    return time.to_a.sum(&:difference_in_seconds)
   end
 
   def sum_time_in_hours(begin_time, end_time)
@@ -100,12 +104,9 @@ class Worker < ActiveRecord::Base
   end
 
   def last_visit_text
-    if not has_hours?
-      I18n.t "Has not volunteered yet"
-    elsif is_in_shop? 
-      "Currently in shop"
-    else
-      "Last visit on " + latest_record.end_date
+    if not has_hours? then I18n.t "messages.new_volunteer"
+    elsif is_in_shop? then I18n.t "messages.in_shop"
+    else I18n.t "messages.last_visit", latest_date: latest_record.end_date
     end
   end
 
@@ -114,39 +115,4 @@ class Worker < ActiveRecord::Base
       n.split('-').map { |nn| 
         nn.capitalize }.join("-")}.join(" ")
   end
-
-  def shoehorn_phone
-    if out = normalize_phone
-      "(#{out[0]}) #{out[1]}-#{out[2]}"
-    else # Split the string in half (minus the middle char)
-      n1 = normalize_phone( phone[0, phone.size/2].strip )
-      n2 = normalize_phone( phone[phone.size/2 + 1, phone.size].strip )
-      if n1 and n2
-        "(#{n1[0]}) #{n1[1]}-#{n1[2]}" + " / " +
-          "(#{n2[0]}) #{n2[1]}-#{n2[2]}" 
-      else
-        phone + " <b>(oops)</b>"
-      end
-    end
-
-  end
-
-  def normalize_phone(number = phone)
-    case number
-    when /^(\d{3})(\d{3})(\d{4})$/ # "8473281212"
-      return [$1, $2, $3]
-    when /^(\d{3})-(\d{3})-(\d{4})$/ # "847-328-1212"
-      return [$1, $2, $3]
-    when /^(\d{3})\.(\d{3})\.(\d{4})$/ # "847.328.1212"
-      return [$1, $2, $3]
-    when /^(\d{3})\s(\d{3})\s(\d{4})$/ # "847 328 1212"
-      return [$1, $2, $3]
-    when /^\((\d{3})\)\s(\d{3})-(\d{4})$/ # "(847) 328-1212"
-      return [$1, $2, $3]
-    when /^(\d{3})\/(\d{3})-(\d{4})$/ # "847/328-1212"
-      return [$1, $2, $3]
-    end
-    return nil
-  end
-
 end

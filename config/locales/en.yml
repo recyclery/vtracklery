@@ -30,7 +30,10 @@ en:
     status: "Status"
     work_status: "Work status"
     public_email: "Public email"
-    "Has not volunteered yet": "Has not volunteered yet"
+  messages:
+    new_volunteer: "Has not volunteered yet"
+    in_shop: "Currently in shop"
+    last_visit: "Last visit on %{latest_date}"
   links:
     show: "Show"
     edit: "Edit"

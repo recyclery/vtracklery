@@ -2,7 +2,7 @@ class ReportController < ApplicationController
   include ReportHelper
 
   def active
-    @workers = Worker.find(:all)
+    @workers = Worker.all
     @active_workers = [] # Have > 10 hours since last month
     @workers.each do |w|
       if w.sum_time_in_seconds(DateTime.now - 30.days, DateTime.now) > 36000
@@ -19,7 +19,7 @@ class ReportController < ApplicationController
 
   # Page for hours that don't look right
   def admin
-    work_times = WorkTime.find(:all, :conditions => 'admin_id IS NULL')
+    work_times = WorkTime.non_admin
     @work_times, @logged_in, @long_volunteers = [], [], []
     work_times.each do |work_time|
       @work_times << work_time if work_time.visit_date == "Start and end date don't match"
@@ -63,7 +63,7 @@ class ReportController < ApplicationController
   end
 
   def contact
-    @workers = Worker.find(:all, :order => 'name')
+    @workers = Worker.order(:name)
   end
 
   def event
@@ -136,27 +136,21 @@ class ReportController < ApplicationController
 
     # @last = Date.civil(@options[:year], @options[:month], @options[:day])
     @date = Date.civil(@year, @month, @day)
+
+    beg = beginning_of_week(@date, 1)
     ending = end_of_week(@date, 1)
     @last = Date.civil(ending.year, ending.month, ending.day)
-    beg =  beginning_of_week(@date, 1)
     @first = Date.civil(beg.year, beg.month, beg.day)
-
-    conditions = ["start_at BETWEEN ? AND ? ", beg.to_date, ending.to_date]
-    @hours = WorkTime.find(:all, :conditions => conditions)
-
-    @week_hash = {}
-
-    @hours.each do |hour|
-      @week_hash[hour.start_at.mday]
-    end
+    @hours = WorkTime.between(beg, ending)
+    
+    # @week_hash = {}
+    # @hours.each { |hour| @week_hash[hour.start_at.mday] }
 
     @first_weekday = first_day_of_week(@options[:first_day_of_week])
     @last_weekday = last_day_of_week(@options[:first_day_of_week])
 
     @day_names = Date::DAYNAMES.dup
-    @first_weekday.times do
-      @day_names.push(@day_names.shift)
-    end
+    @first_weekday.times { @day_names.push(@day_names.shift) }
     
     @block ||= Proc.new {|d| nil}
   end

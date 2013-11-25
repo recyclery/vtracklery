@@ -1,17 +1,16 @@
 class ExportController < ApplicationController
   def contact
-    @workers = Worker.find(:all)
+    @workers = Worker.all
     render template: 'export/contact.csv.erb'
   end
 
   def email
-    conditions = "email IS NOT NULL AND phone IS NULL"
-    @workers = Worker.find(:all, :conditions => conditions)
+    @workers = Worker.email_only
     render template: 'export/email.csv.erb'
   end
 
   def mailchimp
-    @workers = Worker.find(:all, :conditions => "email IS NOT NULL")
+    @workers = Worker.has_email
     render template: 'export/mailchimp.csv.erb'
   end
 
@@ -28,13 +27,12 @@ class ExportController < ApplicationController
   end
 
   def no_contact
-    conditions = "email IS NULL AND phone IS NULL"
-    @workers = Worker.find(:all, :conditions => conditions)
+    @workers = Worker.no_contact
     render template: 'export/no_contact.csv.erb'
   end
 
   def phone
-    @workers = Worker.find(:all, :conditions => "phone IS NOT NULL")
+    @workers = Worker.has_phone
     render template: 'export/phone.csv.erb'
   end
 

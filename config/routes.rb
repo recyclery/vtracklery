@@ -44,8 +44,8 @@ Vtrack::Application.routes.draw do
 
   resources :workers do
     collection do
-      get 'upload_image', to: 'upload_image', as: 'worker_upload_image'
-      get 'upload_form', to: 'upload_form', as: 'upload_form'
+      get 'upload_image', to: 'workers#upload_image', as: 'worker_upload_image'
+      get 'upload_form', to: 'workers#upload_form', as: 'upload_form'
       get 'image_chooser'
       get 'cheese_chooser'
     end

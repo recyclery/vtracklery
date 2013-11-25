@@ -1,41 +1,25 @@
-<h1>Listing workers</h1>
+<script>
+$(document).ready(function() {
+  $('.volunteer').mouseover( function() {
+    $("#volunteer_name_bar").text( $(this).attr('title')  );
+  });
 
-<table>
-  <thead>
-    <tr>
-      <th><%= t('common.name') %></th>
-      <th><%= t('common.image') %></th>
-      <th><%= t('common.in_shop') %></th>
-      <th><%= t('common.email') %></th>
-      <th><%= t('common.phone') %></th>
-      <th><%= t('common.status') %></th>
-      <th><%= t('common.work_status') %></th>
-      <th><%= t('common.public_email') %></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
+})
+</script>
 
-  <tbody>
-    <% @workers.each do |worker| %>
-      <tr>
-        <td><%= worker.name %></td>
-        <td><img src='<%= worker.image_url %>' /></td>
-        <td><%= worker.in_shop %></td>
-        <td><%= worker.email %></td>
-        <td><%= worker.phone %></td>
-        <td><%= worker.status_name %></td>
-        <td><%= worker.work_status_name %></td>
-        <td><%= worker.public_email %></td>
-        <td><%= link_to t("links.show"), worker %></td>
-        <td><%= link_to t("links.edit"), edit_worker_path(worker) %></td>
-        <td><%= link_to t("links.destroy"), worker, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<h1>Listing volunteers: <span id="volunteer_name_bar"> </span></h1>
 
-<br>
+<% @workers.each do |worker| -%>
+  <div id="volunteer-<%= worker.id %>" style="float: left; padding: 5px; width: 120px; height: 100px; text-align: center;">
+    <a href="<%= worker_report_path(worker) %>">
+    <img class="volunteer" height="100px" title="<%= worker.name %>" src="<%= worker.image_url %>" />
+    </div>
+  </div>
+<% end -%>
 
-<%= link_to 'New Worker', new_worker_path %>
+
+<br />
+<div style="clear: both;">
+<%= link_to 'New volunteer', new_worker_path %>
+<%= link_to 'Back to Shop', :controller => :shop %>
+</div>

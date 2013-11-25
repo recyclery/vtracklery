@@ -1,26 +1,86 @@
 class WorkersController < ApplicationController
   before_action :set_worker, only: [:show, :edit, :update, :destroy]
 
+  DEFAULT_AVATARS_DIR = File.join("app","assets","images","default_avatars")
+  DEFAULT_AVATARS_SRC = "/assets/default_avatars/"
+  CHEESE_DIR = "/home/guest/.gnome2/cheese/media/"
+
   # GET /workers
   # GET /workers.xml
   # GET /workers.json
   def index
     @workers = Worker.all
+    @images = []
+    @cheese = []
   end
 
   # GET /workers/1
   # GET /workers/1.xml
   # GET /workers/1.json
   def show
+    @images = []
+    @cheese = []
   end
 
   # GET /workers/new
   def new
     @worker = Worker.new
+    @images = []
+    Dir.entries(DEFAULT_AVATARS_DIR).each do |file|
+      @images.push file if file =~ /\.png/
+    end
+    @cheese = []
+    begin
+      Dir.entries(CHEESE_DIR).each do |file|
+        @cheese.push file if file =~ /\.jpg/
+      end if File.directory? CHEESE_DIR
+    rescue #"Errno::ENOENT"
+    end
   end
 
   # GET /workers/1/edit
   def edit
+    @image = @worker.image || "vimg01.png"
+    @images = []
+    Dir.entries(DEFAULT_AVATARS_DIR).each do |file|
+      @images.push file if file =~ /\.png/
+    end
+    @cheese = []
+    begin
+      Dir.entries(CHEESE_DIR).each do |file|
+        @cheese.push file if file =~ /\.jpg/
+      end
+    rescue #"Errno::ENOENT"
+    end
+  end
+
+  # GET /upload_form
+  def upload_form
+    render :partial => 'upload_form'
+  end
+
+  # GET /cheese_chooser
+  def cheese_chooser
+    @worker = Worker.find(params[:id])
+    @image_path = @worker.image_path
+    render :partial => 'cheese_chooser'
+  end
+
+  # POST /upload
+  def upload_image
+    @avatar = Avatar.new(params[:avatar])
+    if @avatar.save
+      render :partial => 'upload_image'
+    else
+      render :partial => 'upload_form'
+    end
+  end
+
+  # GET /image_chooser
+  def image_chooser
+    @worker = Worker.find(params[:id])
+    @image_path = @worker.image_url
+    render :partial => 'image_chooser'
   end
 
   # POST /workers

@@ -1,0 +1,12 @@
+  <!-- <div id="image_selector"> -->
+  <table><tr>
+    <td><a class="prev_image img_nav" href="#"><img src="/assets/left.png" /></a></td>
+    <td id="avatar"><center><img src="<%= @worker.image_url %>" /></center></td>
+    <td><a class="next_image img_nav" href="#"><img src="/assets/right.png" /></a></td>
+  </tr></table>
+    <%= hidden_field :volunteer, :image, :value => @image %>
+  <p>
+    <a id="default_link" href="#">Use a default image</a>
+
+    <a id="upload_link" href="#">Upload your own image</a>
+  </p>

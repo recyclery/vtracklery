@@ -2,8 +2,8 @@ require 'test_helper'
 
 class WorkTimeTest < ActiveSupport::TestCase
   #fixtures :work_times, :workers, :statuses, :work_statuses
-  STATUS = ["Volunteer", "Member", "Paid Staff"] 
-  WORK_STATUS = ["Volunteer", "Earn-a-bike", "Paid"] 
+  #STATUS = ["Volunteer", "Member", "Paid Staff"] 
+  #WORK_STATUS = ["Volunteer", "Earn-a-bike", "Paid"] 
 
   def setup
     time = DateTime.now
@@ -11,18 +11,18 @@ class WorkTimeTest < ActiveSupport::TestCase
     @member = Worker.create(name: "Mer", status_id:  2, work_status_id: 1)
   end
 
-  def test_before_create_inherit_status_and_work_status
+  test "before_create_inherit_status_and_work_status" do
     work_time = WorkTime.create(start_at: DateTime.now,
                                 worker_id: @member.id)    
     assert_equal @member.status_id, work_time.status_id
     assert_equal @member.work_status_id, work_time.work_status_id
   end
 
-  def test_work_time_without_worker_fails
+  test "work_time_without_worker_fails" do
     assert true
   end
 
-  def test_difference_methods
+  test "difference_methods" do
     work_time = WorkTime.new()
     assert ! work_time.difference?
     work_time.start_at = DateTime.now
@@ -31,7 +31,7 @@ class WorkTimeTest < ActiveSupport::TestCase
     assert work_time.difference?    
   end
 
-  def test_start_and_end_of_time_utilities
+  test "start_and_end_of_time_utilities" do
     assert_equal DateTime.new(2008, 12), WorkTime.start_of_month(12, 2008)
     assert_equal DateTime.new(2009) - 1.second, WorkTime.end_of_month(12, 2008)
     assert_equal DateTime.new(2008), WorkTime.start_of_year(2008)
@@ -40,9 +40,7 @@ class WorkTimeTest < ActiveSupport::TestCase
   end
 
   # Test may fail within 5 days after a new year
-  def test_find_stats_for
-    STATUS.each { |stat| Status.create(name: stat) }
-    WORK_STATUS.each { |stat| WorkStatus.create(name: stat) }
+  test "find_stats_for" do
     5.times do |n|
       time = DateTime.new(2008,3,15) + n.days
       WorkTime.create(start_at: time,
@@ -81,5 +79,18 @@ class WorkTimeTest < ActiveSupport::TestCase
     assert_equal [1, 5], [w.size, wt.size], w.inspect
     assert_equal WorkTime.stringify_hours(15), t, wt.inspect
     assert_equal WorkTime.stringify_hours(15), a, wt.inspect
+  end
+
+  test "find_by_start_date" do
+    beg = DateTime.new(2008,3,11,11,30)
+    fin = DateTime.new(2008,3,11,11,45)
+
+    wt = WorkTime.create(start_at: beg, end_at: fin, worker_id: 1, work_status_id: 1, status_id: 1)
+
+    work_time = WorkTime.find_by_start_date(2008,3,11)
+    assert_equal [wt], work_time
+    
+    work_time = WorkTime.find_by_start_date(beg)
+    assert_equal [wt], work_time
   end
 end

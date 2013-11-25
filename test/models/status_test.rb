@@ -1,7 +1,8 @@
 require 'test_helper'
 
 class StatusTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  test "associations" do
+    @status = Status.first
+    assert_equal "Volunteer", @status.name
+  end
 end

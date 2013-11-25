@@ -1,7 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  name: MyString
+  id: 1
+  name: Volunteer
 
 two:
-  name: MyString
+  id: 2
+  name: Earn-a-bike
+
+three:
+  id: 3
+  name: Paid

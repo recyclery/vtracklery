@@ -1,0 +1,60 @@
+$(document).ready(function() {
+// do stuff when DOM is ready
+/* help: http://www.detacheddesigns.com/blog/blogSpecific.aspx?BlogId=62 */
+    $("a.next_image").click(function(event){ showImage( nextImage() ); });
+    $("a.prev_image").click(function(event){ showImage( prevImage() ); });
+
+    $("a.choose").click(function(event){
+	$.get('/workers/image_chooser',
+	      <% if @worker %>{id: "<%= @worker.id %>"},<% else %>{}, <% end %> 
+	      function(html) {
+		  $('div#image_selector').html( html );
+		  $("a.next_image").click(function(event){ showImage( nextImage() ); });
+		  $("a.prev_image").click(function(event){ showImage( prevImage() ); });
+       /* Add ajaxy input to load image filename to form */
+		  $("a#upload_link").click(function(event){
+		      $.ajax({
+			  url: '/workers/upload_form',
+			  type: 'GET',
+			  dataType: 'html',
+			  timeout: 1000,
+			  error: function(){
+			      alert('Error loading HTML document');
+			  },
+			  success: function(html){
+			      $('div#image_selector').append( html );
+			      $("#imageForm").ajaxForm(form_options);
+			  }
+		      });
+		  });
+		  $("a#cheese_link").click(function(event){
+		      $.get('/workers/cheese_chooser',
+			    <% if @worker %>{id: "<%= @worker.id %>"},<% else %>{}, <% end %> 
+			    function(html) {
+				$('div#image_selector').html( html );
+				$("a.next_image").click(function(event){ showCheeseImage( nextCheeseImage() ); });
+				$("a.prev_image").click(function(event){ showCheeseImage( prevCheeseImage() ); });
+			    });
+		  });
+
+	      });
+    });
+
+  /* Add ajaxy input to load image filename to form */
+    $("a#upload_link").click(function(event){
+	$.ajax({
+	    url: '/workers/upload_form',
+	    type: 'GET',
+	    dataType: 'html',
+	    timeout: 1000,
+	    error: function(){
+		alert('Error loading HTML document');
+	    },
+	    success: function(html){
+		$('div#image_selector').append( html );
+		$("#imageForm").ajaxForm(form_options);
+		$();
+	    }
+	});
+    });
+});

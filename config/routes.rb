@@ -37,7 +37,7 @@ Vtrack::Application.routes.draw do
     get 'no_contact'
     get 'contact'
     get 'mailchimp'
-    get 'worker_hours'
+    get 'worker_hours/:id', as: "worker_hours", to: "export#worker_hours"
     get 'month/:year/:month', as: "month_csv", to: "export#month"
     get 'year'
   end

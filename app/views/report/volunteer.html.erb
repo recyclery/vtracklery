@@ -23,7 +23,7 @@ Created on <%= @worker.created_datetime %>
 <%= @worker.last_visit_text %>
 </p>
 </td><td style="vertical-align: top;">
-<%=link_to "Export to CSV", worker_hours_path(@worker) %>
+<%=link_to "Export to CSV", worker_hours_path(id: @worker) %>
 <table>
   <tr>
     <th>Length</th>

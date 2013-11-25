@@ -37,7 +37,7 @@ class ExportController < ApplicationController
   end
 
   def worker_hours
-    @worker = Worker.find(params[:worker])
+    @worker = Worker.find(params[:id])
     send_csv(@worker.work_times, "#{@worker.name}.csv") do |h|
       [h.difference_in_minutes, h.worker.name, h.start_csv, h.end_csv]
     end
@@ -68,7 +68,7 @@ class ExportController < ApplicationController
   private
   # Couldn't figure out how to dynamically assign name via render
   def send_csv(array, filename = "data.csv")
-    csv_data = FasterCSV.generate do |csv|
+    csv_data = ::CSV.generate do |csv|
       array.each { |row| csv << yield(row) }
     end
     send_data csv_data, :filename => filename, :type => 'text/csv'

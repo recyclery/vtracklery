@@ -26,9 +26,9 @@ Vtrack::Application.routes.draw do
 
   get "shop", as: "shop", to: "shop#index"
   scope "/shop", controller: "shop" do
-    get "shop/directions"
-    get "shop/sign_in"
-    get "shop/sign_out"
+    get "directions"
+    get "sign_in"
+    get "sign_out"
   end
 
   scope "/export", controller: "export" do
@@ -44,7 +44,7 @@ Vtrack::Application.routes.draw do
 
   resources :workers do
     collection do
-      get 'upload_image', to: 'workers#upload_image', as: 'worker_upload_image'
+      post 'upload_image', to: 'workers#upload_image', as: 'worker_upload_image'
       get 'upload_form', to: 'workers#upload_form', as: 'upload_form'
       get 'image_chooser'
       get 'cheese_chooser'

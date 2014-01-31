@@ -18,6 +18,9 @@ class Worker < ActiveRecord::Base
   scope :has_phone, -> { where("phone IS NOT NULL") }
   scope :no_contact, -> { where("email IS NULL AND phone IS NULL") }
 
+  scope :clocked_in, -> { where(in_shop: true) }
+  scope :clocked_out, -> { where(in_shop: false).order('updated_at DESC') }
+
   delegate :name, to: :status, prefix: true
   def status_name=(val)
     #self.status.name = val

@@ -48,14 +48,14 @@ ActiveRecord::Schema.define(version: 1) do
     t.datetime "updated_at"
   end
 
-  add_index "work_times", ["status_id"], name: "index_work_times_on_status_id"
-  add_index "work_times", ["work_status_id"], name: "index_work_times_on_work_status_id"
-  add_index "work_times", ["worker_id"], name: "index_work_times_on_worker_id"
+  add_index "work_times", ["status_id"], name: "index_work_times_on_status_id", using: :btree
+  add_index "work_times", ["work_status_id"], name: "index_work_times_on_work_status_id", using: :btree
+  add_index "work_times", ["worker_id"], name: "index_work_times_on_worker_id", using: :btree
 
   create_table "workers", force: true do |t|
     t.string   "name"
     t.string   "image"
-    t.boolean  "in_shop"
+    t.boolean  "in_shop",        default: false
     t.string   "email"
     t.string   "phone"
     t.integer  "status_id",      default: 1
@@ -65,7 +65,7 @@ ActiveRecord::Schema.define(version: 1) do
     t.datetime "updated_at"
   end
 
-  add_index "workers", ["status_id"], name: "index_workers_on_status_id"
-  add_index "workers", ["work_status_id"], name: "index_workers_on_work_status_id"
+  add_index "workers", ["status_id"], name: "index_workers_on_status_id", using: :btree
+  add_index "workers", ["work_status_id"], name: "index_workers_on_work_status_id", using: :btree
 
 end

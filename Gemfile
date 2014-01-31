@@ -55,5 +55,7 @@ gem 'rails_config'
 
 # Image storage
 gem 'carrierwave'
+gem 'nokogiri'
+
 #gem 'rmagick'
 gem 'mini_magick'

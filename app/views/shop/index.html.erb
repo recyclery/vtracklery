@@ -5,7 +5,7 @@
       <a id="v_prev" href="#"><</a>
     </div>
     <div style="display: table-cell;">
-  <% form_tag(:controller => 'shop', :method => :get) do %>
+  <%= form_tag('/', :method => :get) do %>
     <%= text_field_tag :search, params[:search], :size => 18 %>
     <%= submit_tag 'search', :name => nil %>
   <% end -%>

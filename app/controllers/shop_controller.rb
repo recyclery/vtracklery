@@ -4,32 +4,18 @@ class ShopController < ApplicationController
     @max_left = 500
     @logo = logo_exists? ? logo_url : Settings.logo.default_url
 
-    @workers = Worker.find(:all)
+    @workers = Worker.all
+    @shop_people = Worker.clocked_in
+    v_people = Worker.clocked_out
 
-    v_people = []
-    @v_col1 = []
-    @v_col2 = []
-    @shop_people = []
-    @workers.each do |person|
-      if person.in_shop?
-        @shop_people.push person
-      else
-        v_people.push person
-      end
-
-      if params[:search].nil? || params[:search] == ""
-        v_people.sort! { |v1,v2| 
-          v1.updated_at <=> v2.updated_at
-        }
-        v_people.reverse!
-        @v_col1 = v_people[0..2]
-        @v_col2 = v_people[3..5]
-      else
-        found = []
-        # DEK Putting the unescaped search parameter here is a really bad idea.
-        v_people.each { |v| found.push v if v.name.downcase =~ /#{params[:search].downcase}/ }
-        @v_col1 = found
-      end
+    if params[:search].nil? || params[:search] == ""
+      @v_col1 = v_people[0..2]
+      @v_col2 = v_people[3..5]
+    else
+      found = []
+      # DEK Putting the unescaped search parameter here is a really bad idea.
+      v_people.each { |v| found.push v if v.name.downcase =~ /#{params[:search].downcase}/ }
+      @v_col1 = found
     end
   end
 

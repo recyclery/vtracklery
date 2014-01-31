@@ -29,6 +29,12 @@ class Worker < ActiveRecord::Base
     self.work_status = WorkStatus.find_by_name(val)
   end
 
+  def seed_image; image; end
+  def seed_image=(val)
+    path = File.join(Rails.root, 'public', val)
+    self.image = open(path) if File.exists?(path)
+  end
+
   def avatar_url
     image_url
     #if image.nil? then return Settings.avatars.missing_url

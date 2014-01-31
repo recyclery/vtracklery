@@ -56,9 +56,10 @@ module Worker::XmlExtensions
     # Model.accepts_nested_attributes_for
     #
     def replace_tags(xml_text)
-      #doc = Nokogiri::XML(xml_text)
-      #return doc.to_xml
-      return xml_text
+      doc = Nokogiri::XML(xml_text)
+      doc.xpath("//image").each { |c| c.name = "seed_image" }
+      return doc.to_xml
+      #return xml_text
     end
 
     #

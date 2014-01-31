@@ -20,11 +20,13 @@ class Worker < ActiveRecord::Base
 
   delegate :name, to: :status, prefix: true
   def status_name=(val)
-    self.status.name = val
+    #self.status.name = val
+    self.status = Status.find_by_name(val)
   end
   delegate :name, to: :work_status, prefix: true
   def work_status_name=(val)
-    self.work_status.name = val
+    #self.work_status.name = val
+    self.work_status = WorkStatus.find_by_name(val)
   end
 
   def avatar_url

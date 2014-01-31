@@ -46,6 +46,8 @@ Vtrack::Application.routes.draw do
     collection do
       post 'upload_image', to: 'workers#upload_image', as: 'worker_upload_image'
       get 'upload_form', to: 'workers#upload_form', as: 'upload_form'
+    end
+    member do
       get 'image_chooser'
       get 'cheese_chooser'
     end

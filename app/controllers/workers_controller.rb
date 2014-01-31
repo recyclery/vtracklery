@@ -50,31 +50,32 @@ class WorkersController < ApplicationController
     end
   end
 
-  # GET /upload_form
+  # GET /workers/upload_form
   def upload_form
     render :partial => 'upload_form'
   end
 
-  # GET /cheese_chooser
+  # GET /workers/cheese_chooser
   def cheese_chooser
     @worker = Worker.find(params[:id])
     render :partial => 'cheese_chooser'
   end
 
-  # POST /upload
+  # GET /workers/image_chooser
+  def image_chooser
+    @worker = Worker.find(params[:id])
+    render :partial => 'image_chooser'
+  end
+
+  # POST /workers/upload
   def upload_image
-    @avatar = Avatar.new(params[:avatar])
-    if @avatar.save
+    uploaded_data = params[:avatar]
+    @avatar = AvatarUploader.new
+    if @avatar.store!(uploaded_data.tempfile.name)
       render :partial => 'upload_image'
     else
       render :partial => 'upload_form'
     end
-  end
-
-  # GET /image_chooser
-  def image_chooser
-    @worker = Worker.find(params[:id])
-    render :partial => 'image_chooser'
   end
 
   # POST /workers

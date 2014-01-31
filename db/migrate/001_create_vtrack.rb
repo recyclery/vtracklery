@@ -28,7 +28,7 @@ class CreateVtrack < ActiveRecord::Migration
     create_table :workers do |t|
       t.string :name
       t.string :image
-      t.boolean :in_shop
+      t.boolean :in_shop, default: false
       t.string :email
       t.string :phone
       t.references :status, index: true,      default: 1

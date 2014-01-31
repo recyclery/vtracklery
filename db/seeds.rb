@@ -6,9 +6,17 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 require_relative 'lib/status_seeder'
+require_relative 'lib/worker_seeder'
+require_relative 'lib/work_time_seeder'
 
 puts
-print "Seeding statuses"
+print "Seeding Statuses"
 StatusSeeder.seed { print '.' }
+
+print "\nSeeding Workers"
+WorkerSeeder.seed # { print '.' }
+
+print "\nSeeding WorkTimes"
+WorkTimeSeeder.seed # 
 
 puts

@@ -1,5 +1,6 @@
 class Event < ActiveRecord::Base
   include Runt
+  include XmlExtensions
 
   DAY_OF_THE_WEEK_OPTIONS = [%w(Sunday 0), %w(Monday 1), %w(Tuesday 2), %w(Wednesday 3), %w(Thursday 4), %w(Friday 5), %w(Saturday 6)]
   MINUTE_OPTIONS = 0.step(45,15).map {|n| [ n == 0 ? '00' : n , n]}

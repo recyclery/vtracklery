@@ -1,4 +1,6 @@
 class Worker < ActiveRecord::Base
+  include XmlExtensions
+
   has_many :work_times, dependent: :destroy
   belongs_to :status
   belongs_to :work_status

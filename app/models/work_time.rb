@@ -1,4 +1,6 @@
 class WorkTime < ActiveRecord::Base
+  include XmlExtensions
+
   belongs_to :work_status
   belongs_to :worker
   belongs_to :status

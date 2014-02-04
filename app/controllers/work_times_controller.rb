@@ -5,7 +5,15 @@ class WorkTimesController < ApplicationController
   # GET /work_times.xml
   # GET /work_times.json
   def index
-    @work_times = WorkTime.all
+    respond_to do |format|
+      format.html { # index.html.erb
+        @work_times = WorkTime.page params[:page]
+      } 
+      format.xml { # index.xml.builder
+        @work_times = WorkTime.all
+      }
+      format.json { render json: @contracts }
+    end
   end
 
   # GET /work_times/1

@@ -1,5 +1,7 @@
 <h1>Listing work_times</h1>
 
+<%= paginate @work_times %>
+
 <table>
   <thead>
     <tr>
@@ -32,4 +34,5 @@
 
 <br>
 
+<%= paginate @work_times %>
 <%= link_to 'New Work time', new_work_time_path %>

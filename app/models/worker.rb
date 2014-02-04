@@ -36,7 +36,8 @@ class Worker < ActiveRecord::Base
   # this may be a problem with assigning work hours from xml backup
   #
   def self.duplicate_names
-    all.map(&:name).select{|element| array.count(element) > 1 }
+    array = all.map(&:name)
+    array.select{|element| array.count(element) > 1 }.uniq
   end
 
   # Carrierwave doesn't allow image field to be assigned directly
@@ -75,26 +76,13 @@ class Worker < ActiveRecord::Base
   end
 
   def previous
-    loop do
-      prev = self.id - 1
-      if prev == 0
-        return Worker.find(:last).id
-      elsif Worker.find(prev)
-        return prev
-      end
-    end
+    w = Worker.where(['id < ?', self.id]).order('id DESC').limit(1).first
+    return w.id if w
   end
 
   def next
-    loop do
-      prev = self.id + 1
-      last_volunteer = Worker.find(:last).id
-      if prev > last_volunteer
-        return Worker.find(:first).id
-      elsif Worker.find(prev)
-        return prev
-      end
-    end
+    w = Worker.where(['id > ?', self.id]).limit(1).first
+    return w.id if w
   end
 
   def has_hours?

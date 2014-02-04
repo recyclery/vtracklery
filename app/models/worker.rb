@@ -32,6 +32,10 @@ class Worker < ActiveRecord::Base
     self.work_status = WorkStatus.find_by_name(val)
   end
 
+  def self.duplicate_names
+    all.map(&:name).select{|element| array.count(element) > 1 }
+  end
+
   def seed_image; image; end
   def seed_image=(val)
     path = File.join(Rails.root, 'public', val)

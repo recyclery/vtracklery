@@ -6,12 +6,13 @@ class ShopController < ApplicationController
 
     @workers = Worker.all
     @shop_people = Worker.clocked_in
-    v_people = Worker.clocked_out
 
     if params[:search].nil? || params[:search] == ""
+      v_people = Worker.clocked_out.limit(6)
       @v_col1 = v_people[0..2]
       @v_col2 = v_people[3..5]
     else
+      v_people = Worker.clocked_out
       found = []
       # DEK Putting the unescaped search parameter here is a really bad idea.
       v_people.each { |v| found.push v if v.name.downcase =~ /#{params[:search].downcase}/ }
@@ -29,7 +30,7 @@ class ShopController < ApplicationController
     @person.updated_at = Time.now # To help sort by recently in shop
 
     @time.worker = @person
-    @time.start_at = Time.now
+    @time.start_at = Time.now #.in_time_zone("Central Time (US & Canada)")
 
     @start = @time.start_time
     @person.in_shop = true

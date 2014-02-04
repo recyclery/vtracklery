@@ -32,10 +32,16 @@ class Worker < ActiveRecord::Base
     self.work_status = WorkStatus.find_by_name(val)
   end
 
+  # Find workers with identical names
+  # this may be a problem with assigning work hours from xml backup
+  #
   def self.duplicate_names
     all.map(&:name).select{|element| array.count(element) > 1 }
   end
 
+  # Carrierwave doesn't allow image field to be assigned directly
+  # Must pass a file to be written on assignment.
+  #
   def seed_image; image; end
   def seed_image=(val)
     path = File.join(Rails.root, 'public', val)
@@ -129,6 +135,8 @@ class Worker < ActiveRecord::Base
     end
   end
 
+  # Remove non-standard spaces and dashes and replace with ascii?
+  #
   def shoehorn_name
     name.split(/\s/).map {|n| 
       n.split('-').map { |nn| 

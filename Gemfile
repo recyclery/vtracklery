@@ -59,3 +59,6 @@ gem 'nokogiri'
 
 #gem 'rmagick'
 gem 'mini_magick'
+
+# Pagination
+gem 'kaminari'

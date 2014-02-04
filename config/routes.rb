@@ -1,5 +1,7 @@
 Vtrack::Application.routes.draw do
 
+  resources :surveys
+
   get "report", as: "reports", to: "report#index"
   scope "/report", controller: "report" do
     get "active", as: "active_workers"

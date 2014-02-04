@@ -1,0 +1,221 @@
+<%= form_for(@survey) do |f| %>
+  <% if @survey.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@survey.errors.count, "error") %> prohibited this survey from being saved:</h2>
+
+      <ul>
+      <% @survey.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :worker %><br>
+    <%= f.text_field :worker %>
+  </div>
+  <div class="field">
+    <%= f.label :assist_host %><br>
+    <%= f.check_box :assist_host %>
+  </div>
+  <div class="field">
+    <%= f.label :host_program %><br>
+    <%= f.check_box :host_program %>
+  </div>
+  <div class="field">
+    <%= f.label :greet_open %><br>
+    <%= f.text_field :greet_open %>
+  </div>
+  <div class="field">
+    <%= f.label :frequency %><br>
+    <%= f.number_field :frequency %>
+  </div>
+  <div class="field">
+    <%= f.label :tues_vol %><br>
+    <%= f.check_box :tues_vol %>
+  </div>
+  <div class="field">
+    <%= f.label :tues_open %><br>
+    <%= f.check_box :tues_open %>
+  </div>
+  <div class="field">
+    <%= f.label :thurs_youth %><br>
+    <%= f.check_box :thurs_youth %>
+  </div>
+  <div class="field">
+    <%= f.label :thurs_open %><br>
+    <%= f.check_box :thurs_open %>
+  </div>
+  <div class="field">
+    <%= f.label :fri_vol %><br>
+    <%= f.check_box :fri_vol %>
+  </div>
+  <div class="field">
+    <%= f.label :sat_sale %><br>
+    <%= f.check_box :sat_sale %>
+  </div>
+  <div class="field">
+    <%= f.label :sat_open %><br>
+    <%= f.check_box :sat_open %>
+  </div>
+  <div class="field">
+    <%= f.label :can_name_bike %><br>
+    <%= f.number_field :can_name_bike %>
+  </div>
+  <div class="field">
+    <%= f.label :can_fix_flat %><br>
+    <%= f.number_field :can_fix_flat %>
+  </div>
+  <div class="field">
+    <%= f.label :can_replace_tire %><br>
+    <%= f.number_field :can_replace_tire %>
+  </div>
+  <div class="field">
+    <%= f.label :can_replace_seat %><br>
+    <%= f.number_field :can_replace_seat %>
+  </div>
+  <div class="field">
+    <%= f.label :can_replace_cables %><br>
+    <%= f.number_field :can_replace_cables %>
+  </div>
+  <div class="field">
+    <%= f.label :can_adjust_brakes %><br>
+    <%= f.number_field :can_adjust_brakes %>
+  </div>
+  <div class="field">
+    <%= f.label :can_adjust_derailleurs %><br>
+    <%= f.number_field :can_adjust_derailleurs %>
+  </div>
+  <div class="field">
+    <%= f.label :can_replace_brakes %><br>
+    <%= f.number_field :can_replace_brakes %>
+  </div>
+  <div class="field">
+    <%= f.label :can_replace_shifters %><br>
+    <%= f.number_field :can_replace_shifters %>
+  </div>
+  <div class="field">
+    <%= f.label :can_remove_pedals %><br>
+    <%= f.number_field :can_remove_pedals %>
+  </div>
+  <div class="field">
+    <%= f.label :replace_crank %><br>
+    <%= f.number_field :replace_crank %>
+  </div>
+  <div class="field">
+    <%= f.label :can_adjust_bearing %><br>
+    <%= f.number_field :can_adjust_bearing %>
+  </div>
+  <div class="field">
+    <%= f.label :can_overhaul_hubs %><br>
+    <%= f.number_field :can_overhaul_hubs %>
+  </div>
+  <div class="field">
+    <%= f.label :can_overhaul_bracket %><br>
+    <%= f.number_field :can_overhaul_bracket %>
+  </div>
+  <div class="field">
+    <%= f.label :can_overhaul_headset %><br>
+    <%= f.number_field :can_overhaul_headset %>
+  </div>
+  <div class="field">
+    <%= f.label :can_true_wheels %><br>
+    <%= f.number_field :can_true_wheels %>
+  </div>
+  <div class="field">
+    <%= f.label :can_replace_fork %><br>
+    <%= f.number_field :can_replace_fork %>
+  </div>
+  <div class="field">
+    <%= f.label :assist_youth %><br>
+    <%= f.check_box :assist_youth %>
+  </div>
+  <div class="field">
+    <%= f.label :assist_tuneup %><br>
+    <%= f.check_box :assist_tuneup %>
+  </div>
+  <div class="field">
+    <%= f.label :assist_overhaul %><br>
+    <%= f.check_box :assist_overhaul %>
+  </div>
+  <div class="field">
+    <%= f.label :pickup_donations %><br>
+    <%= f.check_box :pickup_donations %>
+  </div>
+  <div class="field">
+    <%= f.label :taken_tuneup %><br>
+    <%= f.check_box :taken_tuneup %>
+  </div>
+  <div class="field">
+    <%= f.label :taken_overhaul %><br>
+    <%= f.check_box :taken_overhaul %>
+  </div>
+  <div class="field">
+    <%= f.label :drive_stick %><br>
+    <%= f.check_box :drive_stick %>
+  </div>
+  <div class="field">
+    <%= f.label :have_vehicle %><br>
+    <%= f.check_box :have_vehicle %>
+  </div>
+  <div class="field">
+    <%= f.label :represent_recyclery %><br>
+    <%= f.check_box :represent_recyclery %>
+  </div>
+  <div class="field">
+    <%= f.label :sell_ebay %><br>
+    <%= f.check_box :sell_ebay %>
+  </div>
+  <div class="field">
+    <%= f.label :organize_drive %><br>
+    <%= f.check_box :organize_drive %>
+  </div>
+  <div class="field">
+    <%= f.label :organize_events %><br>
+    <%= f.check_box :organize_events %>
+  </div>
+  <div class="field">
+    <%= f.label :skill_graphic_design %><br>
+    <%= f.check_box :skill_graphic_design %>
+  </div>
+  <div class="field">
+    <%= f.label :skill_drawing %><br>
+    <%= f.check_box :skill_drawing %>
+  </div>
+  <div class="field">
+    <%= f.label :skill_photography %><br>
+    <%= f.check_box :skill_photography %>
+  </div>
+  <div class="field">
+    <%= f.label :skill_videography %><br>
+    <%= f.check_box :skill_videography %>
+  </div>
+  <div class="field">
+    <%= f.label :skill_programming %><br>
+    <%= f.check_box :skill_programming %>
+  </div>
+  <div class="field">
+    <%= f.label :skill_grants %><br>
+    <%= f.check_box :skill_grants %>
+  </div>
+  <div class="field">
+    <%= f.label :skill_newsletter %><br>
+    <%= f.check_box :skill_newsletter %>
+  </div>
+  <div class="field">
+    <%= f.label :skill_carpentry %><br>
+    <%= f.check_box :skill_carpentry %>
+  </div>
+  <div class="field">
+    <%= f.label :skill_coordination %><br>
+    <%= f.check_box :skill_coordination %>
+  </div>
+  <div class="field">
+    <%= f.label :skill_fundraising %><br>
+    <%= f.check_box :skill_fundraising %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

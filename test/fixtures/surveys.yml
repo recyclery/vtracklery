@@ -1,0 +1,107 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  worker_id: 
+  assist_host: false
+  host_program: false
+  greet_open: 
+  frequency: 1
+  tues_vol: false
+  tues_open: false
+  thurs_youth: false
+  thurs_open: false
+  fri_vol: false
+  sat_sale: false
+  sat_open: false
+  can_name_bike: 1
+  can_fix_flat: 1
+  can_replace_tire: 1
+  can_replace_seat: 1
+  can_replace_cables: 1
+  can_adjust_brakes: 1
+  can_adjust_derailleurs: 1
+  can_replace_brakes: 1
+  can_replace_shifters: 1
+  can_remove_pedals: 1
+  replace_crank: 1
+  can_adjust_bearing: 1
+  can_overhaul_hubs: 1
+  can_overhaul_bracket: 1
+  can_overhaul_headset: 1
+  can_true_wheels: 1
+  can_replace_fork: 1
+  assist_youth: false
+  assist_tuneup: false
+  assist_overhaul: false
+  pickup_donations: false
+  taken_tuneup: false
+  taken_overhaul: false
+  drive_stick: false
+  have_vehicle: false
+  represent_recyclery: false
+  sell_ebay: false
+  organize_drive: false
+  organize_events: false
+  skill_graphic_design: false
+  skill_drawing: false
+  skill_photography: false
+  skill_videography: false
+  skill_programming: false
+  skill_grants: false
+  skill_newsletter: false
+  skill_carpentry: false
+  skill_coordination: false
+  skill_fundraising: false
+
+two:
+  worker_id: 
+  assist_host: false
+  host_program: false
+  greet_open: 
+  frequency: 1
+  tues_vol: false
+  tues_open: false
+  thurs_youth: false
+  thurs_open: false
+  fri_vol: false
+  sat_sale: false
+  sat_open: false
+  can_name_bike: 1
+  can_fix_flat: 1
+  can_replace_tire: 1
+  can_replace_seat: 1
+  can_replace_cables: 1
+  can_adjust_brakes: 1
+  can_adjust_derailleurs: 1
+  can_replace_brakes: 1
+  can_replace_shifters: 1
+  can_remove_pedals: 1
+  replace_crank: 1
+  can_adjust_bearing: 1
+  can_overhaul_hubs: 1
+  can_overhaul_bracket: 1
+  can_overhaul_headset: 1
+  can_true_wheels: 1
+  can_replace_fork: 1
+  assist_youth: false
+  assist_tuneup: false
+  assist_overhaul: false
+  pickup_donations: false
+  taken_tuneup: false
+  taken_overhaul: false
+  drive_stick: false
+  have_vehicle: false
+  represent_recyclery: false
+  sell_ebay: false
+  organize_drive: false
+  organize_events: false
+  skill_graphic_design: false
+  skill_drawing: false
+  skill_photography: false
+  skill_videography: false
+  skill_programming: false
+  skill_grants: false
+  skill_newsletter: false
+  skill_carpentry: false
+  skill_coordination: false
+  skill_fundraising: false

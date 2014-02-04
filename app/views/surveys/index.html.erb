@@ -1,0 +1,127 @@
+<h1>Listing surveys</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Worker</th>
+      <th>Assist host</th>
+      <th>Host program</th>
+      <th>Greet open</th>
+      <th>Frequency</th>
+      <th>Tues vol</th>
+      <th>Tues open</th>
+      <th>Thurs youth</th>
+      <th>Thurs open</th>
+      <th>Fri vol</th>
+      <th>Sat sale</th>
+      <th>Sat open</th>
+      <th>Can name bike</th>
+      <th>Can fix flat</th>
+      <th>Can replace tire</th>
+      <th>Can replace seat</th>
+      <th>Can replace cables</th>
+      <th>Can adjust brakes</th>
+      <th>Can adjust derailleurs</th>
+      <th>Can replace brakes</th>
+      <th>Can replace shifters</th>
+      <th>Can remove pedals</th>
+      <th>Replace crank</th>
+      <th>Can adjust bearing</th>
+      <th>Can overhaul hubs</th>
+      <th>Can overhaul bracket</th>
+      <th>Can overhaul headset</th>
+      <th>Can true wheels</th>
+      <th>Can replace fork</th>
+      <th>Assist youth</th>
+      <th>Assist tuneup</th>
+      <th>Assist overhaul</th>
+      <th>Pickup donations</th>
+      <th>Taken tuneup</th>
+      <th>Taken overhaul</th>
+      <th>Drive stick</th>
+      <th>Have vehicle</th>
+      <th>Represent recyclery</th>
+      <th>Sell ebay</th>
+      <th>Organize drive</th>
+      <th>Organize events</th>
+      <th>Skill graphic design</th>
+      <th>Skill drawing</th>
+      <th>Skill photography</th>
+      <th>Skill videography</th>
+      <th>Skill programming</th>
+      <th>Skill grants</th>
+      <th>Skill newsletter</th>
+      <th>Skill carpentry</th>
+      <th>Skill coordination</th>
+      <th>Skill fundraising</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @surveys.each do |survey| %>
+      <tr>
+        <td><%= survey.worker %></td>
+        <td><%= survey.assist_host %></td>
+        <td><%= survey.host_program %></td>
+        <td><%= survey.greet_open %></td>
+        <td><%= survey.frequency %></td>
+        <td><%= survey.tues_vol %></td>
+        <td><%= survey.tues_open %></td>
+        <td><%= survey.thurs_youth %></td>
+        <td><%= survey.thurs_open %></td>
+        <td><%= survey.fri_vol %></td>
+        <td><%= survey.sat_sale %></td>
+        <td><%= survey.sat_open %></td>
+        <td><%= survey.can_name_bike %></td>
+        <td><%= survey.can_fix_flat %></td>
+        <td><%= survey.can_replace_tire %></td>
+        <td><%= survey.can_replace_seat %></td>
+        <td><%= survey.can_replace_cables %></td>
+        <td><%= survey.can_adjust_brakes %></td>
+        <td><%= survey.can_adjust_derailleurs %></td>
+        <td><%= survey.can_replace_brakes %></td>
+        <td><%= survey.can_replace_shifters %></td>
+        <td><%= survey.can_remove_pedals %></td>
+        <td><%= survey.replace_crank %></td>
+        <td><%= survey.can_adjust_bearing %></td>
+        <td><%= survey.can_overhaul_hubs %></td>
+        <td><%= survey.can_overhaul_bracket %></td>
+        <td><%= survey.can_overhaul_headset %></td>
+        <td><%= survey.can_true_wheels %></td>
+        <td><%= survey.can_replace_fork %></td>
+        <td><%= survey.assist_youth %></td>
+        <td><%= survey.assist_tuneup %></td>
+        <td><%= survey.assist_overhaul %></td>
+        <td><%= survey.pickup_donations %></td>
+        <td><%= survey.taken_tuneup %></td>
+        <td><%= survey.taken_overhaul %></td>
+        <td><%= survey.drive_stick %></td>
+        <td><%= survey.have_vehicle %></td>
+        <td><%= survey.represent_recyclery %></td>
+        <td><%= survey.sell_ebay %></td>
+        <td><%= survey.organize_drive %></td>
+        <td><%= survey.organize_events %></td>
+        <td><%= survey.skill_graphic_design %></td>
+        <td><%= survey.skill_drawing %></td>
+        <td><%= survey.skill_photography %></td>
+        <td><%= survey.skill_videography %></td>
+        <td><%= survey.skill_programming %></td>
+        <td><%= survey.skill_grants %></td>
+        <td><%= survey.skill_newsletter %></td>
+        <td><%= survey.skill_carpentry %></td>
+        <td><%= survey.skill_coordination %></td>
+        <td><%= survey.skill_fundraising %></td>
+        <td><%= link_to 'Show', survey %></td>
+        <td><%= link_to 'Edit', edit_survey_path(survey) %></td>
+        <td><%= link_to 'Destroy', survey, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Survey', new_survey_path %>

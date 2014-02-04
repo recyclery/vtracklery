@@ -27,4 +27,6 @@ db/sql/*.sql
 
 # Don't save user data
 public/system/*
-
+db/avatars/*
+notes/*
+public/uploads/*

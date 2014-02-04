@@ -5,8 +5,10 @@
 <table>
   <thead>
     <tr>
+      <th>Date</th>
       <th>Start at</th>
       <th>End at</th>
+      <th>Hours</th>
       <th>Worker</th>
       <th>Status</th>
       <th>Work status</th>
@@ -19,9 +21,11 @@
   <tbody>
     <% @work_times.each do |work_time| %>
       <tr>
-        <td><%= work_time.start_at %></td>
-        <td><%= work_time.end_at %></td>
-        <td><%= work_time.worker_name %></td>
+        <td><%= work_time.start_date %></td>
+        <td><%= work_time.start_time %></td>
+        <td><%= work_time.end_time %></td>
+        <td><%= work_time.difference_to_s %></td>
+        <td><%=link_to_worker work_time.worker %></td>
         <td><%= work_time.status_name %></td>
         <td><%= work_time.work_status_name %></td>
         <td><%= link_to 'Show', work_time %></td>

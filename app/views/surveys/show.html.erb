@@ -256,4 +256,8 @@
 </p>
 
 <%= link_to 'Edit', edit_survey_path(@survey) %> |
+<% if @survey.worker_id %>
+<%= link_to 'Back', worker_path(@survey.worker) %>
+<% else -%>
 <%= link_to 'Back', surveys_path %>
+<% end -%>

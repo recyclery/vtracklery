@@ -1,5 +1,13 @@
+<% if @survey.worker_id -%>
+<h1>New survey for <%= @survey.worker.name %></h1>
+<% else %>
 <h1>New survey</h1>
+<% end %>
 
 <%= render 'form' %>
 
+<% if @survey.worker_id %>
+<%= link_to 'Back', worker_path(@survey.worker) %>
+<% else -%>
 <%= link_to 'Back', surveys_path %>
+<% end -%>

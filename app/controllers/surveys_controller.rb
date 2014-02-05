@@ -14,7 +14,7 @@ class SurveysController < ApplicationController
 
   # GET /surveys/new
   def new
-    @survey = Survey.new
+    @survey = Survey.new(worker_id: params[:worker_id])
   end
 
   # GET /surveys/1/edit
@@ -28,7 +28,8 @@ class SurveysController < ApplicationController
 
     respond_to do |format|
       if @survey.save
-        format.html { redirect_to @survey, notice: 'Survey was successfully created.' }
+        #format.html { redirect_to @survey, notice: 'Survey was successfully created.' }
+        format.html { redirect_to @survey.worker, notice: 'Survey was successfully created.' }
         format.json { render action: 'show', status: :created, location: @survey }
       else
         format.html { render action: 'new' }
@@ -42,7 +43,8 @@ class SurveysController < ApplicationController
   def update
     respond_to do |format|
       if @survey.update(survey_params)
-        format.html { redirect_to @survey, notice: 'Survey was successfully updated.' }
+        #format.html { redirect_to @survey, notice: 'Survey was successfully updated.' }
+        format.html { redirect_to @survey.worker, notice: 'Survey was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

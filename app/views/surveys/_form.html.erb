@@ -11,11 +11,14 @@
     </div>
   <% end %>
 
-
+<% if @survey.worker_id -%>
+  <%= f.hidden_field :worker_id %>
+<% else -%>
   <div class="field">
     <%= f.label :worker_id %><br>
     <%= f.collection_select :worker_id, Worker.all, :id, :name %>
   </div>
+<% end -%>
 
 <fieldset>
 <legend>Our ongoing programs always need volunteer help
@@ -100,6 +103,9 @@ I am willing and able to:
 <br />
 
 <fieldset>
+<legend>And there is a whole host of other ongoing needs
+</legend>
+I've got these skills and might have the time:
 <table>
 <%= render partial: 'boolean_row', locals: {f: f, field: :skill_graphic_design, string: "Graphic Design" } %>
 <%= render partial: 'boolean_row', locals: {f: f, field: :skill_drawing, string: "Drawing/painting" } %>

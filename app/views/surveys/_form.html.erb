@@ -11,210 +11,110 @@
     </div>
   <% end %>
 
+
   <div class="field">
-    <%= f.label :worker %><br>
-    <%= f.text_field :worker %>
+    <%= f.label :worker_id %><br>
+    <%= f.collection_select :worker_id, Worker.all, :id, :name %>
   </div>
-  <div class="field">
-    <%= f.label :assist_host %><br>
-    <%= f.check_box :assist_host %>
-  </div>
-  <div class="field">
-    <%= f.label :host_program %><br>
-    <%= f.check_box :host_program %>
-  </div>
-  <div class="field">
-    <%= f.label :greet_open %><br>
-    <%= f.text_field :greet_open %>
-  </div>
-  <div class="field">
-    <%= f.label :frequency %><br>
-    <%= f.number_field :frequency %>
-  </div>
-  <div class="field">
-    <%= f.label :tues_vol %><br>
-    <%= f.check_box :tues_vol %>
-  </div>
-  <div class="field">
-    <%= f.label :tues_open %><br>
-    <%= f.check_box :tues_open %>
-  </div>
-  <div class="field">
-    <%= f.label :thurs_youth %><br>
-    <%= f.check_box :thurs_youth %>
-  </div>
-  <div class="field">
-    <%= f.label :thurs_open %><br>
-    <%= f.check_box :thurs_open %>
-  </div>
-  <div class="field">
-    <%= f.label :fri_vol %><br>
-    <%= f.check_box :fri_vol %>
-  </div>
-  <div class="field">
-    <%= f.label :sat_sale %><br>
-    <%= f.check_box :sat_sale %>
-  </div>
-  <div class="field">
-    <%= f.label :sat_open %><br>
-    <%= f.check_box :sat_open %>
-  </div>
-  <div class="field">
-    <%= f.label :can_name_bike %><br>
-    <%= f.number_field :can_name_bike %>
-  </div>
-  <div class="field">
-    <%= f.label :can_fix_flat %><br>
-    <%= f.number_field :can_fix_flat %>
-  </div>
-  <div class="field">
-    <%= f.label :can_replace_tire %><br>
-    <%= f.number_field :can_replace_tire %>
-  </div>
-  <div class="field">
-    <%= f.label :can_replace_seat %><br>
-    <%= f.number_field :can_replace_seat %>
-  </div>
-  <div class="field">
-    <%= f.label :can_replace_cables %><br>
-    <%= f.number_field :can_replace_cables %>
-  </div>
-  <div class="field">
-    <%= f.label :can_adjust_brakes %><br>
-    <%= f.number_field :can_adjust_brakes %>
-  </div>
-  <div class="field">
-    <%= f.label :can_adjust_derailleurs %><br>
-    <%= f.number_field :can_adjust_derailleurs %>
-  </div>
-  <div class="field">
-    <%= f.label :can_replace_brakes %><br>
-    <%= f.number_field :can_replace_brakes %>
-  </div>
-  <div class="field">
-    <%= f.label :can_replace_shifters %><br>
-    <%= f.number_field :can_replace_shifters %>
-  </div>
-  <div class="field">
-    <%= f.label :can_remove_pedals %><br>
-    <%= f.number_field :can_remove_pedals %>
-  </div>
-  <div class="field">
-    <%= f.label :replace_crank %><br>
-    <%= f.number_field :replace_crank %>
-  </div>
-  <div class="field">
-    <%= f.label :can_adjust_bearing %><br>
-    <%= f.number_field :can_adjust_bearing %>
-  </div>
-  <div class="field">
-    <%= f.label :can_overhaul_hubs %><br>
-    <%= f.number_field :can_overhaul_hubs %>
-  </div>
-  <div class="field">
-    <%= f.label :can_overhaul_bracket %><br>
-    <%= f.number_field :can_overhaul_bracket %>
-  </div>
-  <div class="field">
-    <%= f.label :can_overhaul_headset %><br>
-    <%= f.number_field :can_overhaul_headset %>
-  </div>
-  <div class="field">
-    <%= f.label :can_true_wheels %><br>
-    <%= f.number_field :can_true_wheels %>
-  </div>
-  <div class="field">
-    <%= f.label :can_replace_fork %><br>
-    <%= f.number_field :can_replace_fork %>
-  </div>
-  <div class="field">
-    <%= f.label :assist_youth %><br>
-    <%= f.check_box :assist_youth %>
-  </div>
-  <div class="field">
-    <%= f.label :assist_tuneup %><br>
-    <%= f.check_box :assist_tuneup %>
-  </div>
-  <div class="field">
-    <%= f.label :assist_overhaul %><br>
-    <%= f.check_box :assist_overhaul %>
-  </div>
-  <div class="field">
-    <%= f.label :pickup_donations %><br>
-    <%= f.check_box :pickup_donations %>
-  </div>
-  <div class="field">
-    <%= f.label :taken_tuneup %><br>
-    <%= f.check_box :taken_tuneup %>
-  </div>
-  <div class="field">
-    <%= f.label :taken_overhaul %><br>
-    <%= f.check_box :taken_overhaul %>
-  </div>
-  <div class="field">
-    <%= f.label :drive_stick %><br>
-    <%= f.check_box :drive_stick %>
-  </div>
-  <div class="field">
-    <%= f.label :have_vehicle %><br>
-    <%= f.check_box :have_vehicle %>
-  </div>
-  <div class="field">
-    <%= f.label :represent_recyclery %><br>
-    <%= f.check_box :represent_recyclery %>
-  </div>
-  <div class="field">
-    <%= f.label :sell_ebay %><br>
-    <%= f.check_box :sell_ebay %>
-  </div>
-  <div class="field">
-    <%= f.label :organize_drive %><br>
-    <%= f.check_box :organize_drive %>
-  </div>
-  <div class="field">
-    <%= f.label :organize_events %><br>
-    <%= f.check_box :organize_events %>
-  </div>
-  <div class="field">
-    <%= f.label :skill_graphic_design %><br>
-    <%= f.check_box :skill_graphic_design %>
-  </div>
-  <div class="field">
-    <%= f.label :skill_drawing %><br>
-    <%= f.check_box :skill_drawing %>
-  </div>
-  <div class="field">
-    <%= f.label :skill_photography %><br>
-    <%= f.check_box :skill_photography %>
-  </div>
-  <div class="field">
-    <%= f.label :skill_videography %><br>
-    <%= f.check_box :skill_videography %>
-  </div>
-  <div class="field">
-    <%= f.label :skill_programming %><br>
-    <%= f.check_box :skill_programming %>
-  </div>
-  <div class="field">
-    <%= f.label :skill_grants %><br>
-    <%= f.check_box :skill_grants %>
-  </div>
-  <div class="field">
-    <%= f.label :skill_newsletter %><br>
-    <%= f.check_box :skill_newsletter %>
-  </div>
-  <div class="field">
-    <%= f.label :skill_carpentry %><br>
-    <%= f.check_box :skill_carpentry %>
-  </div>
-  <div class="field">
-    <%= f.label :skill_coordination %><br>
-    <%= f.check_box :skill_coordination %>
-  </div>
-  <div class="field">
-    <%= f.label :skill_fundraising %><br>
-    <%= f.check_box :skill_fundraising %>
-  </div>
+
+<fieldset>
+<legend>Our ongoing programs always need volunteer help
+</legend>
+<table>
+<%= render partial: 'boolean_row', locals: {f: f, field: :assist_host, string: "I want to assist program hosts" } %>
+<%= render partial: 'boolean_row', locals: {f: f, field: :host_program, string: "I feel ready to host a program" } %>
+<%= render partial: 'boolean_row', locals: {f: f, field: :greet_open, string: "For Open Shop I'd like to greet patrons and help with checkout, but not with mechanics" } %>
+</table>
+</fieldset>
+<br />
+
+<fieldset>
+<legend>I plan to come in...
+</legend>
+<table>
+<%= render partial: 'row_radio', locals: {f: f, field: :frequency, string: "I plan to come in...", options: ['Twice a week', 'Once a week', 'Twice a month', 'Once a month'] } %>
+</table>
+<table>
+<%= render partial: 'boolean_row', locals: {f: f, field: :tues_vol, string: "Tuesday Volunteer Hours [12-5 PM]" } %>
+<%= render partial: 'boolean_row', locals: {f: f, field: :tues_open, string: "Tuesday Open Shop [7-9 PM]" } %>
+<%= render partial: 'boolean_row', locals: {f: f, field: :thurs_youth, string: "Youth Open Shop [7-9 PM]" } %>
+<%= render partial: 'boolean_row', locals: {f: f, field: :thurs_open, string: "Thursday Open Shop [7-9 PM]" } %>
+<%= render partial: 'boolean_row', locals: {f: f, field: :fri_vol, string: "Friday Volunteer Hours [5-8 PM]" } %>
+<%= render partial: 'boolean_row', locals: {f: f, field: :sat_sale, string: "Saturday Sale [10 AM - 12 PM]" } %>
+<%= render partial: 'boolean_row', locals: {f: f, field: :sat_open, string: "Saturday Open Shop [1-5 PM]" } %>
+</table>
+</fieldset>
+<br />
+
+<fieldset>
+<legend>To give a sense of my bike mechanics skills at this point:
+</legend>
+I can...
+<table>
+<%= render partial: 'row_inline_radio',  locals: {f: f, field: :can_name_bike, string: "name all parts of a bike" } %>
+<%= render partial: 'row_inline_radio',  locals: {f: f, field: :can_fix_flat, string: "fix a flat tire, front and rear" } %>
+<%= render partial: 'row_inline_radio',  locals: {f: f, field: :can_replace_tire, string: "find appropriate tube & tire replacement" } %>
+<%= render partial: 'row_inline_radio',  locals: {f: f, field: :can_replace_seat, string: "replace seat post" } %>
+<%= render partial: 'row_inline_radio',  locals: {f: f, field: :can_replace_cables, string: "replace cables, brake and derailleur" } %>
+<%= render partial: 'row_inline_radio',  locals: {f: f, field: :can_adjust_brakes, string: "adjust brakes" } %>
+<%= render partial: 'row_inline_radio',  locals: {f: f, field: :can_adjust_derailleurs, string: "adjust derailleurs" } %>
+<%= render partial: 'row_inline_radio',  locals: {f: f, field: :can_replace_brakes, string: "replace brakes and levers" } %>
+<%= render partial: 'row_inline_radio',  locals: {f: f, field: :can_replace_shifters, string: "replace shifters and derailleurs" } %>
+<%= render partial: 'row_inline_radio',  locals: {f: f, field: :can_remove_pedals, string: "remove pedals" } %>
+<%= render partial: 'row_inline_radio',  locals: {f: f, field: :replace_crank, string: "replace a crank set" } %>
+<%= render partial: 'row_inline_radio',  locals: {f: f, field: :can_adjust_bearing, string: "get a proper bearing adjustment" } %>
+<%= render partial: 'row_inline_radio',  locals: {f: f, field: :can_overhaul_hubs, string: "overhaul hubs" } %>
+<%= render partial: 'row_inline_radio',  locals: {f: f, field: :can_overhaul_bracket, string: "overhaul bottom bracket" } %>
+<%= render partial: 'row_inline_radio',  locals: {f: f, field: :can_overhaul_headset, string: "overhaul headset" } %>
+<%= render partial: 'row_inline_radio',  locals: {f: f, field: :can_true_wheels, string: "true wheels" } %>
+<%= render partial: 'row_inline_radio',  locals: {f: f, field: :can_replace_fork, string: "replace a fork" } %>
+</table>
+</fieldset>
+<br />
+
+<fieldset>
+<legend>The following are also important Recyclery happenings, but are not on our weekly calendar.
+</legend>
+I am willing and able to:
+<table>
+<%= render partial: 'boolean_row', locals: {f: f, field: :assist_youth, string: "Assist with youth programs" } %>
+<tr>
+<%= render partial: 'boolean_cell', locals: {f: f, field: :assist_tuneup, string: "Assist a Tune Up class" } %>
+<%= render partial: 'boolean_cell', locals: {f: f, field: :taken_tuneup, string: "I have taken a Tune Up class before" } %>
+</tr>
+<tr>
+<%= render partial: 'boolean_cell', locals: {f: f, field: :assist_overhaul, string: "Assist an Overhaul class" } %>
+<%= render partial: 'boolean_cell', locals: {f: f, field: :taken_overhaul, string: "I have taken an Overhaul class before" } %>
+</tr>
+<tr>
+<%= render partial: 'boolean_cell', locals: {f: f, field: :pickup_donations, string: "Pick up bike donations" } %>
+<%= render partial: 'boolean_cell', locals: {f: f, field: :drive_stick, string: "I can drive stick shift" } %>
+<%= render partial: 'boolean_cell', locals: {f: f, field: :have_vehicle, string: "I have my own vehicle" } %>
+</tr>
+<%= render partial: 'boolean_row', locals: {f: f, field: :represent_recyclery, string: "Represent The Recyclery at events" } %>
+<%= render partial: 'boolean_row', locals: {f: f, field: :sell_ebay, string: "Sell higher end bike parts on Ebay" } %>
+<%= render partial: 'boolean_row', locals: {f: f, field: :organize_drive, string: "Organize a bike drive" } %>
+<%= render partial: 'boolean_row', locals: {f: f, field: :organize_events, string: "Organize other special events" } %>
+</table>
+</fieldset>
+<br />
+
+<fieldset>
+<table>
+<%= render partial: 'boolean_row', locals: {f: f, field: :skill_graphic_design, string: "Graphic Design" } %>
+<%= render partial: 'boolean_row', locals: {f: f, field: :skill_drawing, string: "Drawing/painting" } %>
+<%= render partial: 'boolean_row', locals: {f: f, field: :skill_photography, string: "Photography" } %>
+<%= render partial: 'boolean_row', locals: {f: f, field: :skill_videography, string: "Videography" } %>
+<%= render partial: 'boolean_row', locals: {f: f, field: :skill_programming, string: "Programming" } %>
+<%= render partial: 'boolean_row', locals: {f: f, field: :skill_grants, string: "Writing for grants" } %>
+<%= render partial: 'boolean_row', locals: {f: f, field: :skill_newsletter, string: "Writing for our newsletter" } %>
+<%= render partial: 'boolean_row', locals: {f: f, field: :skill_carpentry, string: "Carpentry and design" } %>
+<%= render partial: 'boolean_row', locals: {f: f, field: :skill_coordination, string: "Shop organization/management" } %>
+<%= render partial: 'boolean_row', locals: {f: f, field: :skill_fundraising, string: "Fundraising/development" } %>
+</table>
+</fieldset>
+<br />
+
   <div class="actions">
     <%= f.submit %>
   </div>

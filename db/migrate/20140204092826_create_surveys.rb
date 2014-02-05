@@ -4,7 +4,7 @@ class CreateSurveys < ActiveRecord::Migration
       t.references :worker, index: true
       t.boolean :assist_host
       t.boolean :host_program
-      t.boolen :greet_open
+      t.boolean :greet_open
       t.integer :frequency
       t.boolean :tues_vol
       t.boolean :tues_open

@@ -1,0 +1,13 @@
+  <tr>
+<% options.each_with_index do |option, i| -%>
+    <td>
+      <%= f.radio_button field, i, title: string %>
+      <%= label_tag "survey_#{field}_#{i}".to_sym, option, title: string %>
+    </td>
+<% end -%>
+    <td>
+      <%= f.radio_button field, options.count + 1, title: string %>
+      <%= label_tag "survey_#{field}_#{options.count + 1}".to_sym, 'other', title: string %>
+      <%= f.number_field :frequency %>
+    </td>
+  </tr>

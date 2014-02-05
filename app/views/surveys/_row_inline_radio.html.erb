@@ -1,0 +1,23 @@
+  <tr>
+    <td><%= f.label field, string %></td>
+    <td>
+      <%= f.radio_button field, 1, title: string %>
+      <%= label_tag "survey_#{field}_1".to_sym, "with LOTS of guidance", title: string %>
+    </td>
+    <td>
+      <%= f.radio_button field, 2, title: string %>
+      <%= label_tag "survey_#{field}_2".to_sym, "with SOME guidance", title: string %>
+    </td>
+    <td>
+      <%= f.radio_button field, 3, title: string %>
+      <%= label_tag "survey_#{field}_3".to_sym, "with MINIMAL guidance", title: string %>
+    </td>
+    <td>
+      <%= f.radio_button field, 4, title: string %>
+      <%= label_tag "survey_#{field}_4".to_sym, "independantly", title: string %>
+    </td>
+    <td>
+      <%= f.radio_button field, 5, title: string %>
+      <%= label_tag "survey_#{field}_5".to_sym, "I can teach this", title: string %>
+    </td>
+  </tr>

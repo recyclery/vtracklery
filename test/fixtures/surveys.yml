@@ -4,7 +4,7 @@ one:
   worker_id: 
   assist_host: false
   host_program: false
-  greet_open: 
+  greet_open: false
   frequency: 1
   tues_vol: false
   tues_open: false

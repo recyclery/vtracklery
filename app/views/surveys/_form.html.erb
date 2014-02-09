@@ -115,6 +115,11 @@ I've got these skills and might have the time:
 </fieldset>
 <br />
 
+  <div class="field">
+    <%= f.label :comment, "Optional comments" %><br>
+    <%= f.text_area :comment, size: "64x5" %>
+  </div>
+
   <div class="actions">
     <%= f.submit "Save" %>
   </div>

@@ -1,4 +1,5 @@
+<% space = defined?(n) ? Array.new(n) { '&nbsp;' }.join : "" -%>
   <tr class="field">
-    <td><%= f.check_box field %></td>
+    <td><%=raw space %><%= f.check_box field %></td>
     <td><%= f.label field, string %></td>
   </tr>

@@ -58,7 +58,7 @@ I can...
 <%= render partial: 'row_inline_radio',  locals: {f: f, field: :can_fix_flat, string: "fix a flat tire, front and rear" } %>
 <%= render partial: 'row_inline_radio',  locals: {f: f, field: :can_replace_tire, string: "find appropriate tube & tire replacement" } %>
 <%= render partial: 'row_inline_radio',  locals: {f: f, field: :can_replace_seat, string: "replace seat post" } %>
-<%= render partial: 'row_inline_radio',  locals: {f: f, field: :can_replace_cables, string: "replace cables, brake and derailleur" } %>
+<%= render partial: 'row_inline_radio',  locals: {f: f, field: :can_replace_cables, string: "replace cables (brake and derailleur)" } %>
 <%= render partial: 'row_inline_radio',  locals: {f: f, field: :can_adjust_brakes, string: "adjust brakes" } %>
 <%= render partial: 'row_inline_radio',  locals: {f: f, field: :can_adjust_derailleurs, string: "adjust derailleurs" } %>
 <%= render partial: 'row_inline_radio',  locals: {f: f, field: :can_replace_brakes, string: "replace brakes and levers" } %>
@@ -81,19 +81,13 @@ I can...
 I am willing and able to:
 <table>
 <%= render partial: 'boolean_row', locals: {f: f, field: :assist_youth, string: "Assist with youth programs" } %>
-<tr>
-<%= render partial: 'boolean_cell', locals: {f: f, field: :assist_tuneup, string: "Assist a Tune Up class" } %>
-<%= render partial: 'boolean_cell', locals: {f: f, field: :taken_tuneup, string: "I have taken a Tune Up class before" } %>
-</tr>
-<tr>
-<%= render partial: 'boolean_cell', locals: {f: f, field: :assist_overhaul, string: "Assist an Overhaul class" } %>
-<%= render partial: 'boolean_cell', locals: {f: f, field: :taken_overhaul, string: "I have taken an Overhaul class before" } %>
-</tr>
-<tr>
-<%= render partial: 'boolean_cell', locals: {f: f, field: :pickup_donations, string: "Pick up bike donations" } %>
-<%= render partial: 'boolean_cell', locals: {f: f, field: :drive_stick, string: "I can drive stick shift" } %>
-<%= render partial: 'boolean_cell', locals: {f: f, field: :have_vehicle, string: "I have my own vehicle" } %>
-</tr>
+<%= render partial: 'boolean_row', locals: {f: f, field: :assist_tuneup, string: "Assist a Tune Up class" } %>
+<%= render partial: 'boolean_row', locals: {f: f, field: :taken_tuneup, string: "I have taken a Tune Up class before", n: 5 } %>
+<%= render partial: 'boolean_row', locals: {f: f, field: :assist_overhaul, string: "Assist an Overhaul class" } %>
+<%= render partial: 'boolean_row', locals: {f: f, field: :taken_overhaul, string: "I have taken an Overhaul class before", n: 5 } %>
+<%= render partial: 'boolean_row', locals: {f: f, field: :pickup_donations, string: "Pick up bike donations" } %>
+<%= render partial: 'boolean_row', locals: {f: f, field: :drive_stick, string: "I can drive stick shift", n: 5 } %>
+<%= render partial: 'boolean_row', locals: {f: f, field: :have_vehicle, string: "I have my own vehicle", n: 5 } %>
 <%= render partial: 'boolean_row', locals: {f: f, field: :represent_recyclery, string: "Represent The Recyclery at events" } %>
 <%= render partial: 'boolean_row', locals: {f: f, field: :sell_ebay, string: "Sell higher end bike parts on Ebay" } %>
 <%= render partial: 'boolean_row', locals: {f: f, field: :organize_drive, string: "Organize a bike drive" } %>
@@ -122,6 +116,6 @@ I've got these skills and might have the time:
 <br />
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Save" %>
   </div>
 <% end %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140204092826) do
+ActiveRecord::Schema.define(version: 20140209023210) do
 
   create_table "events", force: true do |t|
     t.string   "name"
@@ -86,6 +86,7 @@ ActiveRecord::Schema.define(version: 20140204092826) do
     t.boolean  "skill_fundraising"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "comment"
   end
 
   add_index "surveys", ["worker_id"], name: "index_surveys_on_worker_id", using: :btree

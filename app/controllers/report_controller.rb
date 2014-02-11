@@ -19,7 +19,7 @@ class ReportController < ApplicationController
 
   # Page for hours that don't look right
   def admin
-    work_times = WorkTime.non_admin
+    work_times = WorkTime.all
     @work_times, @logged_in, @long_volunteers = [], [], []
     work_times.each do |work_time|
       @work_times << work_time if work_time.visit_date == "Start and end date don't match"

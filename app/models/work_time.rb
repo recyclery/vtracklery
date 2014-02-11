@@ -15,7 +15,7 @@ class WorkTime < ActiveRecord::Base
 
   validates_presence_of :start_at, :worker_id
 
-  scope :non_admin, -> { where('admin_id IS NULL') }
+  #scope :non_admin, -> { where('admin_id IS NULL') }
   scope :between, ->(beg, ending) { where(["start_at BETWEEN ? AND ? ",
                                            beg.to_date, ending.to_date]) }
   scope :worker_id_between, ->(worker_id, begin_time, end_time) do

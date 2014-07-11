@@ -1,14 +1,13 @@
 class WorkTime < ActiveRecord::Base
-  include XmlExtensions
-
   belongs_to :work_status
   belongs_to :worker
   belongs_to :status
   belongs_to :admin, :class_name => "Worker"
 
+  include XmlExtensions
   include ActsAsPunchCard
-  include TimeExtensions
-  include Finder
+  include WorkTime::WorkTimeClock
+  include WorkTime::WorkTimeFinder
 
   #acts_as_punch_card
   before_create :inherit_status

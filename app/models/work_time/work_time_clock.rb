@@ -1,4 +1,4 @@
-module WorkTime::TimeExtensions
+module WorkTime::WorkTimeClock
   extend ActiveSupport::Concern
 
   #included do

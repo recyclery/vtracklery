@@ -1,6 +1,4 @@
 class Worker < ActiveRecord::Base
-  include XmlExtensions
-
   has_many :work_times, dependent: :destroy
   has_one :survey, dependent: :destroy
   belongs_to :status
@@ -8,7 +6,8 @@ class Worker < ActiveRecord::Base
 
   validates_presence_of :name
 
-  include Phone
+  include XmlExtensions
+  include Worker::WorkerPhone
 
   mount_uploader :image, AvatarUploader
 

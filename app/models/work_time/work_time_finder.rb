@@ -1,4 +1,4 @@
-module WorkTime::Finder
+module WorkTime::WorkTimeFinder
   extend ActiveSupport::Concern
 
   #included do

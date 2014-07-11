@@ -1,4 +1,4 @@
-module Worker::Phone
+module Worker::WorkerPhone
   extend ActiveSupport::Concern
 
   #included do

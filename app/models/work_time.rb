@@ -6,6 +6,7 @@ class WorkTime < ActiveRecord::Base
 
   include XmlExtensions
   include ActsAsPunchCard
+  include WorkTime::WorkTimeAlternates
   include WorkTime::WorkTimeClock
   include WorkTime::WorkTimeFinder
 
@@ -24,27 +25,10 @@ class WorkTime < ActiveRecord::Base
 
   STATUS = ["Volunteer", "Earn-a-bike", "Paid"] 
 
-  delegate :name, to: :worker, prefix: true
-  def worker_name=(val)
-    unless val.blank?
-      #self.worker.name = val
-      self.worker = Worker.find_by_name(val)
-    end
-  end
-  delegate :name, to: :status, prefix: true
-  def status_name=(val)
-    #self.status.name = val
-    self.status = Status.find_by_name(val)
-  end
-  delegate :name, to: :work_status, prefix: true
-  def work_status_name=(val)
-    #self.work_status.name = val
-    self.work_status = WorkStatus.find_by_name(val)
-  end
-
   # Automatically inherit the status of the worker that created it
   def inherit_status
     self.status_id = worker.status_id if status_id.nil?
     self.work_status_id = worker.work_status_id if work_status_id.nil?
   end
+
 end

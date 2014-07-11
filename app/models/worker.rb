@@ -7,6 +7,7 @@ class Worker < ActiveRecord::Base
   validates_presence_of :name
 
   include XmlExtensions
+  include Worker::WorkerAlternates
   include Worker::WorkerPhone
 
   mount_uploader :image, AvatarUploader
@@ -20,17 +21,6 @@ class Worker < ActiveRecord::Base
 
   scope :clocked_in, -> { where(in_shop: true) }
   scope :clocked_out, -> { where(in_shop: false).order('updated_at DESC') }
-
-  delegate :name, to: :status, prefix: true
-  def status_name=(val)
-    #self.status.name = val
-    self.status = Status.find_by_name(val)
-  end
-  delegate :name, to: :work_status, prefix: true
-  def work_status_name=(val)
-    #self.work_status.name = val
-    self.work_status = WorkStatus.find_by_name(val)
-  end
 
   # Find workers with identical names
   # this may be a problem with assigning work hours from xml backup

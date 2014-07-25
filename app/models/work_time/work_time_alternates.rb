@@ -17,11 +17,15 @@ module WorkTime::WorkTimeAlternates
   end
 
   def status_name=(val)
-    self.status = Status.find_by_name(val)
+    unless val.blank?
+      self.status = Status.find_by_name(val)
+    end
   end
 
   def work_status_name=(val)
-    self.work_status = WorkStatus.find_by_name(val)
+    unless val.blank?
+      self.work_status = WorkStatus.find_by_name(val)
+    end
   end
 
 end

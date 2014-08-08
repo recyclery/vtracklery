@@ -5,11 +5,6 @@ module ActsAsPunchCard
   #end
 
   module ClassMethods
-    # acts as punch card include method
-    def acts_as_punch_card
-      send :include, InstanceMethods
-    end
-
   end
   
   # Note that leading zeros are replaced with spaces in all functions

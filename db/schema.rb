@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140209023210) do
+ActiveRecord::Schema.define(version: 2) do
 
   create_table "events", force: true do |t|
     t.string   "name"
@@ -19,9 +19,9 @@ ActiveRecord::Schema.define(version: 20140209023210) do
     t.datetime "last_at"
     t.integer  "wday"
     t.integer  "s_hr"
-    t.integer  "s_min"
+    t.integer  "s_min",      default: 0
     t.integer  "e_hr"
-    t.integer  "e_min"
+    t.integer  "e_min",      default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -84,12 +84,12 @@ ActiveRecord::Schema.define(version: 20140209023210) do
     t.boolean  "skill_carpentry"
     t.boolean  "skill_coordination"
     t.boolean  "skill_fundraising"
+    t.text     "comment"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "comment"
   end
 
-  add_index "surveys", ["worker_id"], name: "index_surveys_on_worker_id", using: :btree
+  add_index "surveys", ["worker_id"], name: "index_surveys_on_worker_id"
 
   create_table "work_statuses", force: true do |t|
     t.string   "name"
@@ -107,9 +107,9 @@ ActiveRecord::Schema.define(version: 20140209023210) do
     t.datetime "updated_at"
   end
 
-  add_index "work_times", ["status_id"], name: "index_work_times_on_status_id", using: :btree
-  add_index "work_times", ["work_status_id"], name: "index_work_times_on_work_status_id", using: :btree
-  add_index "work_times", ["worker_id"], name: "index_work_times_on_worker_id", using: :btree
+  add_index "work_times", ["status_id"], name: "index_work_times_on_status_id"
+  add_index "work_times", ["work_status_id"], name: "index_work_times_on_work_status_id"
+  add_index "work_times", ["worker_id"], name: "index_work_times_on_worker_id"
 
   create_table "workers", force: true do |t|
     t.string   "name"
@@ -119,12 +119,12 @@ ActiveRecord::Schema.define(version: 20140209023210) do
     t.string   "phone"
     t.integer  "status_id",      default: 1
     t.integer  "work_status_id", default: 1
-    t.boolean  "public_email",   default: false
+    t.boolean  "public_email"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "workers", ["status_id"], name: "index_workers_on_status_id", using: :btree
-  add_index "workers", ["work_status_id"], name: "index_workers_on_work_status_id", using: :btree
+  add_index "workers", ["status_id"], name: "index_workers_on_status_id"
+  add_index "workers", ["work_status_id"], name: "index_workers_on_work_status_id"
 
 end

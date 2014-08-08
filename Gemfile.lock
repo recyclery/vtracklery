@@ -146,7 +146,7 @@ DEPENDENCIES
   rails_config
   runt
   sass-rails (~> 4.0.3)
-  sdoc
+  sdoc (~> 0.4.0)
   spring
   sqlite3
   turbolinks

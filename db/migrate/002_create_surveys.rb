@@ -52,6 +52,7 @@ class CreateSurveys < ActiveRecord::Migration
       t.boolean :skill_carpentry
       t.boolean :skill_coordination
       t.boolean :skill_fundraising
+      t.text :comment
 
       t.timestamps
     end

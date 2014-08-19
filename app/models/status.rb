@@ -3,4 +3,7 @@ class Status < ActiveRecord::Base
   has_many :work_times
 
   validates_presence_of :name
+
+  include XmlExtensions
+
 end

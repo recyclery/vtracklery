@@ -1,6 +1,11 @@
 app:
   url: http://localhost:3000
 
+api:
+  site: https://localhost:3000/api/v1
+  login: admin
+  password: password
+
 avatars:
   missing_path: "app/assets/images/default_avatars/vimg01.png"
   missing_url: "/assets/default_avatars/vimg01.png"

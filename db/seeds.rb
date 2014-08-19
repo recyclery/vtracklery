@@ -1,22 +1,20 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
-require_relative 'lib/status_seeder'
-require_relative 'lib/worker_seeder'
-require_relative 'lib/work_time_seeder'
+Dir.glob("#{Rails.root}/db/lib/*_seeder.rb").each { |file| require file }
 
-puts
-print "Seeding Statuses"
+print "\nLoading statuses"
 StatusSeeder.seed { print '.' }
 
-print "\nSeeding Workers"
-WorkerSeeder.seed # { print '.' }
+print "\nLoading workers"
+WorkerSeeder.seed { print '.' }
 
-print "\nSeeding WorkTimes"
-WorkTimeSeeder.seed # 
+print "\nLoading surveys"
+SurveySeeder.seed { print '.' }
 
-puts
+print "\nLoading events"
+EventSeeder.seed { print '.' }
+
+print "\nLoading work_times"
+WorkTimeSeeder.seed { print '.' }
+
+print "\n"

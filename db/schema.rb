@@ -119,7 +119,7 @@ ActiveRecord::Schema.define(version: 2) do
     t.string   "phone"
     t.integer  "status_id",      default: 1
     t.integer  "work_status_id", default: 1
-    t.boolean  "public_email"
+    t.boolean  "public_email",   default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -6,9 +6,9 @@ class CreateVtrack < ActiveRecord::Migration
       t.datetime :last_at
       t.integer :wday
       t.integer :s_hr
-      t.integer :s_min
+      t.integer :s_min, default: 0
       t.integer :e_hr
-      t.integer :e_min
+      t.integer :e_min, default: 0
 
       t.timestamps
     end
@@ -18,26 +18,26 @@ class CreateVtrack < ActiveRecord::Migration
 
       t.timestamps
     end
-  
+
     create_table :work_statuses do |t|
       t.string :name
 
       t.timestamps
     end
-  
+
     create_table :workers do |t|
       t.string :name
       t.string :image
       t.boolean :in_shop, default: false
       t.string :email
       t.string :phone
-      t.references :status, index: true,      default: 1
+      t.references :status,      index: true, default: 1
       t.references :work_status, index: true, default: 1
       t.boolean :public_email,   default: false
 
       t.timestamps
     end
-  
+
     create_table :work_times do |t|
       t.datetime :start_at
       t.datetime :end_at
@@ -47,5 +47,6 @@ class CreateVtrack < ActiveRecord::Migration
 
       t.timestamps
     end
+
   end
 end

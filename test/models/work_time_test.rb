@@ -11,6 +11,15 @@ class WorkTimeTest < ActiveSupport::TestCase
     @member = Worker.create(name: "Mer", status_id:  2, work_status_id: 1)
   end
 
+  test "basic associations" do
+    @work_time = work_times(:one)
+
+    assert @work_time.status, "Should have status"
+    assert @work_time.work_status, "Should have work_status"
+    assert_equal "Volunteer", @work_time.status_name
+    assert_equal "Volunteer", @work_time.work_status_name
+  end
+
   test "before_create_inherit_status_and_work_status" do
     work_time = WorkTime.create(start_at: DateTime.now,
                                 worker_id: @member.id)    

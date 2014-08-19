@@ -3,13 +3,13 @@
 one:
   start_at: 2014-08-08 11:51:34
   end_at: 2014-08-08 11:51:34
-  worker_id: 
-  status_id: 
-  work_status_id: 
+  worker: one
+  status_id: 1
+  work_status_id: 1
 
 two:
   start_at: 2014-08-08 11:51:34
   end_at: 2014-08-08 11:51:34
-  worker_id: 
-  status_id: 
-  work_status_id: 
+  worker: one
+  status_id: 1
+  work_status_id: 1

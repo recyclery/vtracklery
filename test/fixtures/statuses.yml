@@ -3,14 +3,14 @@
 one:
   name: MyString
 
-Volunteer:
+volunteer:
   id: 1
   name: Volunteer
 
-Member:
+member:
   id: 2
   name: Member
 
-Paid Staff:
+paid staff:
   id: 3
   name: Paid Staff

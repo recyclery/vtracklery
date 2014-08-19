@@ -1,0 +1,10 @@
+xml.name event.name
+xml.first_at event.first_at
+xml.last_at event.last_at
+xml.wday event.wday
+xml.s_hr event.s_hr
+xml.s_min event.s_min
+xml.e_hr event.e_hr
+xml.e_min event.e_min
+xml.created_at event.created_at
+xml.updated_at event.updated_at

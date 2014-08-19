@@ -1,50 +1,71 @@
-Vtrack::Application.routes.draw do
+require 'api_constraints'
+
+Rails.application.routes.draw do
+
+  concern :api_v1 do
+    scope :backup, controller: 'backup' do
+      get :surveys
+      get :events
+      get :workers
+      get :work_times
+      get :work_statuses
+      get :statuses
+    end
+
+    resources :surveys
+    resources :events
+    resources :workers
+    resources :work_times
+
+    # Not sure if I should keep these
+    resources :work_statuses
+    resources :statuses
+  end
+
+  namespace :api, defaults: {format: 'json'} do
+    scope( :module => :v1,
+           constraints: ApiConstraints.new(version: 1, default: true) ) do
+      concerns :api_v1
+    end
+    namespace :v1 do
+      concerns :api_v1
+    end
+  end
 
   resources :surveys
 
-  get "report", as: "reports", to: "report#index"
-  scope "/report", controller: "report" do
-    get "active", as: "active_workers"
-    get "admin"
-    get "calendar/:year/:month", as: "calendar", to: "report#calendar"
-    get "calendar", as: "current_month_calendar", to: "report#calendar"
-    get "contact", as: "contact_list"
-    get "event/:id", as: "event_report", to: "report#event"
-    get 'month/:year/:month', as: "month_report", to: "report#month"
-    get 'month/:year', as: "year_month_report", to: "report#month"
-    get 'month', as: "current_month_report", to: "report#month"
-    get "monthly"
-    get "volunteer/:id", as: "worker_report", to: "report#volunteer"
-    get 'week/:year/:month/:day', as: "day_week_report", to: "report#week"
-    get 'week/:year/:month', as: "month_week_report", to: "report#week"
-    get 'week/:year', as: "year_week_report", to: "report#week"
-    get 'week', as: "week_report", to: "report#week"
-    get "weekly"
-    get "year"
-    get "yearly"
+  get 'report', as: 'reports', to: 'report#index'
+  scope '/report', controller: 'report' do
+    get 'active', as: 'active_workers'
+    get 'admin'
+    get 'calendar/:year/:month', as: 'calendar', to: 'report#calendar'
+    get 'calendar', as: 'current_month_calendar', to: 'report#calendar'
+    get 'contact', as: 'contact_list'
+    get 'event/:id', as: 'event_report', to: 'report#event'
+    get 'month/:year/:month', as: 'month_report', to: 'report#month'
+    get 'month/:year', as: 'year_month_report', to: 'report#month'
+    get 'month', as: 'current_month_report', to: 'report#month'
+    get 'monthly'
+    get 'volunteer/:id', as: 'worker_report', to: 'report#volunteer'
+    get 'week/:year/:month/:day', as: 'day_week_report', to: 'report#week'
+    get 'week/:year/:month', as: 'month_week_report', to: 'report#week'
+    get 'week/:year', as: 'year_week_report', to: 'report#week'
+    get 'week', as: 'week_report', to: 'report#week'
+    get 'weekly'
+    get 'year'
+    get 'yearly'
   end
 
   root 'shop#index'
 
-  get "shop", as: "shop", to: "shop#index"
-  scope "/shop", controller: "shop" do
-    get "directions"
-    get "sign_in"
-    get "sign_out"
+  get 'shop', as: 'shop', to: 'shop#index'
+  scope '/shop', controller: 'shop' do
+    get 'directions'
+    get 'sign_in'
+    get 'sign_out'
   end
 
-  scope "/export", controller: "export" do
-    get 'phone'
-    get 'email'
-    get 'no_contact'
-    get 'contact'
-    get 'mailchimp'
-    get 'worker_hours/:id', as: "worker_hours", to: "export#worker_hours"
-    get 'month/:year/:month', as: "month_csv", to: "export#month"
-    get 'year'
-  end
-
-  resources :workers do
+  resources :workers do 
     collection do
       post 'upload_image', to: 'workers#upload_image', as: 'worker_upload_image'
       get 'upload_form', to: 'workers#upload_form', as: 'upload_form'
@@ -54,8 +75,13 @@ Vtrack::Application.routes.draw do
       get 'cheese_chooser'
     end
   end
-  resources :work_times
+
   resources :events
+  resources :work_times
+
+  # Not sure if I should keep these
+  resources :work_statuses
+  resources :statuses
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -97,7 +123,7 @@ Vtrack::Application.routes.draw do
   #       get 'recent', on: :collection
   #     end
   #   end
-  
+
   # Example resource route with concerns:
   #   concern :toggleable do
   #     post 'toggle'

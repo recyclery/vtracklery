@@ -1,9 +1,9 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
   name: MyString
-  first_at: 2013-11-21 08:15:32
-  last_at: 2013-11-21 08:15:32
+  first_at: 2014-08-08 11:52:25
+  last_at: 2014-08-08 11:52:25
   wday: 1
   s_hr: 1
   s_min: 1
@@ -12,8 +12,8 @@ one:
 
 two:
   name: MyString
-  first_at: 2013-11-21 08:15:32
-  last_at: 2013-11-21 08:15:32
+  first_at: 2014-08-08 11:52:25
+  last_at: 2014-08-08 11:52:25
   wday: 1
   s_hr: 1
   s_min: 1

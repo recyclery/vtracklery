@@ -6,6 +6,25 @@ module Worker::WorkerImage
   end
 
   module ClassMethods
+    def avatar_filepaths
+      filepaths = []
+      Dir.entries(Settings.avatars.default_dir).each do |file|
+        filepaths.push file if file =~ /\.png/
+      end
+      return filepaths
+    end
+
+    def cheese_filepaths
+      filepaths = []
+      begin
+        Dir.entries(Settings.cheese.dir).each do |file|
+          filepaths.push file if file =~ /\.jpg/
+        end if File.directory? Settings.cheese.dir
+      rescue #"Errno::ENOENT"
+      end
+      return filepaths
+    end
+
   end
 
   # Carrierwave doesn't allow image field to be assigned directly

@@ -1,3 +1,4 @@
+xml.worker_name survey.worker_name
 xml.assist_host survey.assist_host
 xml.host_program survey.host_program
 xml.greet_open survey.greet_open

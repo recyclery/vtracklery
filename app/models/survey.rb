@@ -3,6 +3,8 @@ class Survey < ActiveRecord::Base
 
   include XmlExtensions
 
+  validates_presence_of :worker
+
   delegate :name, to: :worker, prefix: true
 
   def worker_name=(val)

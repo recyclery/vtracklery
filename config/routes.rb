@@ -20,6 +20,15 @@ Rails.application.routes.draw do
     # Not sure if I should keep these
     resources :work_statuses
     resources :statuses
+
+    scope :report, controller: 'report' do
+      get :active
+      get :logged_in
+      get :month
+      get :volunteer
+      get :week
+      get :year
+    end
   end
 
   namespace :api, defaults: {format: 'json'} do
@@ -74,6 +83,17 @@ Rails.application.routes.draw do
       get 'image_chooser'
       get 'cheese_chooser'
     end
+  end
+
+  scope "/export", controller: "export" do
+    get 'phone'
+    get 'email'
+    get 'no_contact'
+    get 'contact'
+    get 'mailchimp'
+    get 'worker_hours/:id', as: "worker_hours", to: "export#worker_hours"
+    get 'month/:year/:month', as: "month_csv", to: "export#month"
+    get 'year'
   end
 
   resources :events

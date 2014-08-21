@@ -17,8 +17,18 @@ class EventsControllerTest < ActionController::TestCase
   end
 
   test "should create event" do
+    event_hash = {
+      e_hr: @event.e_hr,
+      e_min: @event.e_min,
+      first_at: @event.first_at,
+      last_at: @event.last_at,
+      name: @event.name,
+      s_hr: @event.s_hr,
+      s_min: @event.s_min,
+      wday: @event.wday
+    }
     assert_difference('Event.count') do
-      post :create, event: { e_hr: @event.e_hr, e_min: @event.e_min, first_at: @event.first_at, last_at: @event.last_at, name: @event.name, s_hr: @event.s_hr, s_min: @event.s_min, wday: @event.wday }
+      post :create, event: event_hash
     end
 
     assert_redirected_to event_path(assigns(:event))
@@ -35,7 +45,17 @@ class EventsControllerTest < ActionController::TestCase
   end
 
   test "should update event" do
-    patch :update, id: @event, event: { e_hr: @event.e_hr, e_min: @event.e_min, first_at: @event.first_at, last_at: @event.last_at, name: @event.name, s_hr: @event.s_hr, s_min: @event.s_min, wday: @event.wday }
+    event_hash = {
+      e_hr: @event.e_hr,
+      e_min: @event.e_min,
+      first_at: @event.first_at,
+      last_at: @event.last_at,
+      name: @event.name,
+      s_hr: @event.s_hr,
+      s_min: @event.s_min,
+      wday: @event.wday
+    }
+    patch :update, id: @event, event: event_hash
     assert_redirected_to event_path(assigns(:event))
   end
 

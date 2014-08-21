@@ -42,7 +42,8 @@ class ReportControllerTest < ActionController::TestCase
   end
 
   test "should get volunteer" do
-    get :volunteer
+    volunteer = workers(:one)
+    get :volunteer, id: volunteer
     assert_response :success
   end
 

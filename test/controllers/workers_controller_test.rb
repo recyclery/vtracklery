@@ -17,8 +17,18 @@ class WorkersControllerTest < ActionController::TestCase
   end
 
   test "should create worker" do
+    worker_hash = {
+      email: @worker.email,
+      image: @worker.image,
+      in_shop: @worker.in_shop,
+      name: @worker.name,
+      phone: @worker.phone,
+      public_email: @worker.public_email,
+      status_id: @worker.status_id,
+      work_status_id: @worker.work_status_id
+    }
     assert_difference('Worker.count') do
-      post :create, worker: { email: @worker.email, image: @worker.image, in_shop: @worker.in_shop, name: @worker.name, phone: @worker.phone, public_email: @worker.public_email, status_id: @worker.status_id, work_status_id: @worker.work_status_id }
+      post :create, worker: worker_hash
     end
 
     assert_redirected_to worker_path(assigns(:worker))
@@ -35,7 +45,17 @@ class WorkersControllerTest < ActionController::TestCase
   end
 
   test "should update worker" do
-    patch :update, id: @worker, worker: { email: @worker.email, image: @worker.image, in_shop: @worker.in_shop, name: @worker.name, phone: @worker.phone, public_email: @worker.public_email, status_id: @worker.status_id, work_status_id: @worker.work_status_id }
+    worker_hash = {
+      email: @worker.email,
+      image: @worker.image,
+      in_shop: @worker.in_shop,
+      name: @worker.name,
+      phone: @worker.phone,
+      public_email: @worker.public_email,
+      status_id: @worker.status_id,
+      work_status_id: @worker.work_status_id
+    }
+    patch :update, id: @worker, worker: worker_hash
     assert_redirected_to worker_path(assigns(:worker))
   end
 

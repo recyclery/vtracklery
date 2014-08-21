@@ -17,8 +17,15 @@ class WorkTimesControllerTest < ActionController::TestCase
   end
 
   test "should create work_time" do
+    work_time_hash = {
+      end_at: @work_time.end_at,
+      start_at: @work_time.start_at,
+      status_id: @work_time.status_id,
+      work_status_id: @work_time.work_status_id,
+      worker_id: @work_time.worker_id
+    }
     assert_difference('WorkTime.count') do
-      post :create, work_time: { end_at: @work_time.end_at, start_at: @work_time.start_at, status_id: @work_time.status_id, work_status_id: @work_time.work_status_id, worker_id: @work_time.worker_id }
+      post :create, work_time: work_time_hash
     end
 
     assert_redirected_to work_time_path(assigns(:work_time))
@@ -35,7 +42,15 @@ class WorkTimesControllerTest < ActionController::TestCase
   end
 
   test "should update work_time" do
-    patch :update, id: @work_time, work_time: { end_at: @work_time.end_at, start_at: @work_time.start_at, status_id: @work_time.status_id, work_status_id: @work_time.work_status_id, worker_id: @work_time.worker_id }
+    work_time_hash = {
+      end_at: @work_time.end_at,
+      start_at: @work_time.start_at,
+      status_id: @work_time.status_id,
+      work_status_id: @work_time.work_status_id,
+      worker_id: @work_time.worker_id
+    }
+
+    patch :update, id: @work_time, work_time: work_time_hash
     assert_redirected_to work_time_path(assigns(:work_time))
   end
 

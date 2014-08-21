@@ -59,3 +59,5 @@ gem 'mini_magick'
 # Pagination
 gem 'kaminari'
 
+# API
+gem 'activeresource', require: 'active_resource'

@@ -21,33 +21,15 @@ class WorkersController < ApplicationController
   # GET /workers/new
   def new
     @worker = Worker.new
-    @images = []
-    Dir.entries(Settings.avatars.default_dir).each do |file|
-      @images.push file if file =~ /\.png/
-    end
-    @cheese = []
-    begin
-      Dir.entries(Settings.cheese.dir).each do |file|
-        @cheese.push file if file =~ /\.jpg/
-      end if File.directory? Settings.cheese.dir
-    rescue #"Errno::ENOENT"
-    end
+    @images = Worker.avatar_filepaths
+    @cheese = Worker.cheese_filepaths
   end
 
   # GET /workers/1/edit
   def edit
     @image = @worker.image || "vimg01.png"
-    @images = []
-    Dir.entries(Settings.avatars.default_dir).each do |file|
-      @images.push file if file =~ /\.png/
-    end
-    @cheese = []
-    begin
-      Dir.entries(Settings.cheese.dir).each do |file|
-        @cheese.push file if file =~ /\.jpg/
-      end
-    rescue #"Errno::ENOENT"
-    end
+    @images = Worker.avatar_filepaths
+    @cheese = Worker.cheese_filepaths
   end
 
   # GET /workers/upload_form
@@ -86,9 +68,9 @@ class WorkersController < ApplicationController
     respond_to do |format|
       if @worker.save
         format.html { redirect_to @worker, notice: 'Worker was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @worker }
+        format.json { render :show, status: :created, location: @worker }
       else
-        format.html { render action: 'new' }
+        format.html { render :new }
         format.json { render json: @worker.errors, status: :unprocessable_entity }
       end
     end
@@ -100,9 +82,9 @@ class WorkersController < ApplicationController
     respond_to do |format|
       if @worker.update(worker_params)
         format.html { redirect_to @worker, notice: 'Worker was successfully updated.' }
-        format.json { head :no_content }
+        format.json { render :show, status: :ok, location: @worker }
       else
-        format.html { render action: 'edit' }
+        format.html { render :edit }
         format.json { render json: @worker.errors, status: :unprocessable_entity }
       end
     end
@@ -113,7 +95,7 @@ class WorkersController < ApplicationController
   def destroy
     @worker.destroy
     respond_to do |format|
-      format.html { redirect_to workers_url }
+      format.html { redirect_to workers_url, notice: 'Worker was successfully destroyed' }
       format.json { head :no_content }
     end
   end

@@ -21,21 +21,15 @@ class ShopController < ApplicationController
   end
 
   def sign_in
-    @person = Worker.find(params[:person])
-    @time = WorkTime.new()
     cur_top = params[:left].to_i # "-34px".to_i => -34
     cur_left = params[:top].to_i # "422px".to_i => 422
     img_order = params[:order]
 
-    @person.updated_at = Time.now # To help sort by recently in shop
-
-    @time.worker = @person
-    @time.start_at = Time.now #.in_time_zone("Central Time (US & Canada)")
-
+    @person = Worker.find(params[:person])
+    @time = @person.clock_in()
     @start = @time.start_time
-    @person.in_shop = true
 
-    if @person.save and @time.save
+    if @person.save && @time.save
       respond_to do |format|
         format.html { render :partial => "sign_in" }
         #render @person.to_xml
@@ -45,32 +39,10 @@ class ShopController < ApplicationController
 
   def sign_out
     @person = Worker.find(params[:person])
-    @time = @person.work_times.last
-
-    @person.updated_at = Time.now  # To help sort by recently in shop
-
-    @time.end_at = Time.now
+    @time = @person.clock_out
     @end = @time.end_at.strftime("%I:%M%p")
-    seconds = (@time.end_at - @time.start_at)
-    minutes = (seconds / 60).to_i
-    hours = (minutes / 60).to_i
+    @difference = @time.punch_message()
 
-    case minutes
-    when 0
-      @difference = "less than a minute.  Oops?"
-    when 1
-      @difference = "barely a minute.  Cumon!  Don't waste my time."
-    when 2..10
-      @difference = "less than ten minutes.  That shouldn't count!"
-    when 10..59
-      @difference = "#{minutes} minutes."
-    when 60..119
-      @difference = "one hour and #{minutes % (hours * 60)} minutes."
-    else
-      @difference = "#{hours} hours and #{minutes % (hours * 60)} minutes."
-    end
-    # @minutes = "DIFFERENCE"
-    @person.in_shop = false
     if @person.save and @time.save
       respond_to do |format|
         format.html { render :partial => "sign_out" }

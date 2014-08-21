@@ -3,31 +3,16 @@ class ReportController < ApplicationController
 
   def active
     @workers = Worker.all
-    @active_workers = [] # Have > 10 hours since last month
-    @workers.each do |w|
-      if w.sum_time_in_seconds(DateTime.now - 30.days, DateTime.now) > 36000
-        @active_workers << w 
-      end
-    end
-    @missing_list = []
-    @active_workers.each do |w|
-      if w.sum_time_in_seconds(DateTime.now - 14.days, DateTime.now) == 0
-        @missing_list << w
-      end
-    end
+    # Have > 10 hours since last month
+    @active_workers = Worker.active_workers
+    @missing_list = Worker.missing_list
   end
 
   # Page for hours that don't look right
   def admin
-    work_times = WorkTime.all
-    @work_times, @logged_in, @long_volunteers = [], [], []
-    work_times.each do |work_time|
-      @work_times << work_time if work_time.visit_date == "Start and end date don't match"
-      @logged_in << work_time if work_time.end_at.nil?
-      if work_time.difference_in_hours > 5 && work_time.worker.status_id == 1
-        @long_volunteers << work_time
-      end
-    end
+    @work_times = WorkTime.mismatched_dates
+    @logged_in = WorkTime.logged_in
+    @long_volunteers = WorkTime.long_volunteers
   end
 
   def calendar

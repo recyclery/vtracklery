@@ -8,11 +8,11 @@ class WorkTimesController < ApplicationController
     respond_to do |format|
       format.html { # index.html.erb
         @work_times = WorkTime.page params[:page]
-      } 
+      }
       format.xml { # index.xml.builder
         @work_times = WorkTime.all
       }
-      format.json { render json: @contracts }
+      format.json { render json: WorkTime.all }
     end
   end
 
@@ -39,9 +39,9 @@ class WorkTimesController < ApplicationController
     respond_to do |format|
       if @work_time.save
         format.html { redirect_to @work_time, notice: 'Work time was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @work_time }
+        format.json { render :show, status: :created, location: @work_time }
       else
-        format.html { render action: 'new' }
+        format.html { render :new }
         format.json { render json: @work_time.errors, status: :unprocessable_entity }
       end
     end
@@ -53,9 +53,9 @@ class WorkTimesController < ApplicationController
     respond_to do |format|
       if @work_time.update(work_time_params)
         format.html { redirect_to @work_time, notice: 'Work time was successfully updated.' }
-        format.json { head :no_content }
+        format.json { render :show, status: :ok, location: @work_time }
       else
-        format.html { render action: 'edit' }
+        format.html { render :edit }
         format.json { render json: @work_time.errors, status: :unprocessable_entity }
       end
     end
@@ -66,7 +66,7 @@ class WorkTimesController < ApplicationController
   def destroy
     @work_time.destroy
     respond_to do |format|
-      format.html { redirect_to work_times_url }
+      format.html { redirect_to work_times_url, notice: 'Work time was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

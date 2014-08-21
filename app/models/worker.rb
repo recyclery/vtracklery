@@ -11,6 +11,8 @@ class Worker < ActiveRecord::Base
   include Worker::WorkerHours
   include Worker::WorkerImage
   include Worker::WorkerPhone
+  include Worker::WorkerPunchCard
+  include Worker::WorkerReports
 
   STATUS = ["Volunteer", "Member", "Paid Staff"] 
 
@@ -18,14 +20,6 @@ class Worker < ActiveRecord::Base
   scope :has_email, -> { where("email IS NOT NULL") }
   scope :has_phone, -> { where("phone IS NOT NULL") }
   scope :no_contact, -> { where("email IS NULL AND phone IS NULL") }
-
-  # Find workers with identical names
-  # this may be a problem with assigning work hours from xml backup
-  #
-  def self.duplicate_names
-    array = all.map(&:name)
-    array.select{|element| array.count(element) > 1 }.uniq
-  end
 
   def previous
     w = Worker.where(['id < ?', self.id]).order('id DESC').limit(1).first
@@ -49,4 +43,5 @@ class Worker < ActiveRecord::Base
         nn.capitalize }.join("-")}.join(" ")
   end
 
+  API_ATTRIBUTES = [ :id, :name, :image, :in_shop, :email, :phone, :public_email, :created_at, :updated_at ]
 end

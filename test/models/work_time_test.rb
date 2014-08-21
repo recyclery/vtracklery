@@ -20,6 +20,19 @@ class WorkTimeTest < ActiveSupport::TestCase
     assert_equal "Volunteer", @work_time.work_status_name
   end
 
+  test "duplicates valid" do
+    @work_time = work_times(:one)
+    work_time_hash = {
+      end_at: @work_time.end_at,
+      start_at: @work_time.start_at,
+      status_id: @work_time.status_id,
+      work_status_id: @work_time.work_status_id,
+      worker_id: @work_time.worker_id
+    }
+    @dup_work_time = WorkTime.new(work_time_hash)
+    assert @dup_work_time.valid?, "Duplicate work time should be valid"
+  end
+
   test "before_create_inherit_status_and_work_status" do
     work_time = WorkTime.create(start_at: DateTime.now,
                                 worker_id: @member.id)    

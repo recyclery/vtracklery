@@ -6,4 +6,5 @@ class WorkStatus < ActiveRecord::Base
 
   include XmlExtensions
 
+  API_ATTRIBUTES = [ :name, :created_at, :updated_at ]
 end

@@ -3,5 +3,3 @@ json.array!(@workers) do |worker|
   json.url api_v1_worker_url(worker, format: :json)
 end
 
-API_ATTRIBUTES = [ :name, :image, :in_shop, :email, :phone, :public_email, :created_at, :updated_at ]
-

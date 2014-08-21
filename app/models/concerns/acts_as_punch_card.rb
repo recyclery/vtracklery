@@ -1,3 +1,7 @@
+#
+# Generic concern for clocking in and out. Only uses the start_at and end_at
+# fields of the inheriting object.
+#
 module ActsAsPunchCard
   extend ActiveSupport::Concern
 
@@ -5,6 +9,58 @@ module ActsAsPunchCard
   #end
 
   module ClassMethods
+    def punch_message(minutes)
+      hours = (minutes / 60).to_i
+
+      case minutes
+      when 0
+        "less than a minute.  Oops?"
+      when 1
+        "barely a minute.  Cumon!  Don't waste my time."
+      when 2..10
+        "less than ten minutes.  That shouldn't count!"
+      when 10..59
+        "#{minutes} minutes."
+      when 60..119
+        "one hour and #{minutes % (hours * 60)} minutes."
+      else
+        "#{hours} hours and #{minutes % (hours * 60)} minutes."
+      end
+    end
+
+    def stringify_minutes(minutes)
+      hours = minutes_to_hours(minutes)
+      case minutes
+      when 0
+        "< 1 minute"
+      when 1
+        "1 minute"
+      when 2..59
+        "#{minutes} minutes"
+      when 60
+        "1 hour"
+      when 61
+        "1 hr 1 min"
+      when 62..119
+        # "1 hour #{minutes % (hours * 60)} minutes"
+        "1 hr #{minutes % (hours * 60)} min"
+      when 120
+        "2 hours"
+      when 121
+        "2 hr 1 min"
+      else
+        "#{hours}h #{minutes % (hours * 60)} min"
+      end
+    end
+    
+    def stringify_seconds(seconds)
+      stringify_minutes(seconds_to_minutes(seconds))
+    end
+    
+    def stringify_hours(hours)
+      stringify_minutes(hours * 60)
+    end
+    
   end
   
   # Note that leading zeros are replaced with spaces in all functions
@@ -50,6 +106,15 @@ module ActsAsPunchCard
   def difference_in_hours
     return 0 unless self.end_at && start_at
     ((( self.end_at - start_at ) / 60) / 60).to_i
+  end
+
+  def difference_to_s
+    return "" unless difference?
+    return self.class.stringify_minutes( difference_in_minutes )
+  end
+
+  def punch_message
+    return self.class.punch_message( difference_in_minutes )
   end
 
   def start_datetime # "Sun Oct 05 01:13 PM 2008"

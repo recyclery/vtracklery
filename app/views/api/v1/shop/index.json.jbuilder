@@ -3,5 +3,4 @@ json.array!(@shop) do |shop|
   json.url api_v1_shop_url(shop, format: :json)
 end
 
-API_ATTRIBUTES = [  ]
 

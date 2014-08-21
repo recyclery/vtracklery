@@ -4,68 +4,8 @@ module WorkTime::WorkTimeClock
   #included do
   #end
 
-  def difference_to_s
-    return "" unless difference?
-    minutes = difference_in_minutes
-    hours = difference_in_hours
-    case minutes
-    when 0
-      "< 1 minute"
-    when 1
-      "1 minute"
-    when 2..59
-      "#{minutes} minutes"
-    when 60
-      "1 hour"
-    when 61
-      "1 hr 1 min"
-    when 62..119
-      # "1 hour #{minutes % (hours * 60)} minutes"
-      "1 hr #{minutes % (hours * 60)}min"
-    when 120
-      "2 hours"
-    when 121
-      "2 hr 1 min"
-    else
-      "#{hours} hr #{minutes % (hours * 60)} min"
-    end
-  end
-
   module ClassMethods
     # Plugin Class Methods
-    def stringify_minutes(minutes)
-      hours = minutes_to_hours(minutes)
-      case minutes
-      when 0
-        "< 1 minute"
-      when 1
-        "1 minute"
-      when 2..59
-        "#{minutes} minutes"
-      when 60
-        "1 hour"
-      when 61
-        "1 hr 1 min"
-      when 62..119
-        # "1 hour #{minutes % (hours * 60)} minutes"
-        "1 hr #{minutes % (hours * 60)} min"
-      when 120
-        "2 hours"
-      when 121
-        "2 hr 1 min"
-      else
-        "#{hours}h #{minutes % (hours * 60)} min"
-      end
-    end
-    
-    def stringify_seconds(seconds)
-      stringify_minutes(seconds_to_minutes(seconds))
-    end
-    
-    def stringify_hours(hours)
-      stringify_minutes(hours * 60)
-    end
-    
     def prev(year = Time.now.year, month = nil)
       year = year.to_i
       if month &&= month.to_i
@@ -113,5 +53,6 @@ module WorkTime::WorkTimeClock
     def minutes_to_hours(minutes)
       (minutes / 60).to_i
     end
+
   end
 end

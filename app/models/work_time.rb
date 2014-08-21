@@ -9,6 +9,7 @@ class WorkTime < ActiveRecord::Base
   include WorkTime::WorkTimeAlternates
   include WorkTime::WorkTimeClock
   include WorkTime::WorkTimeFinder
+  include WorkTime::WorkTimeReports
 
   before_create :inherit_status
 
@@ -29,4 +30,5 @@ class WorkTime < ActiveRecord::Base
     self.work_status_id = worker.work_status_id if work_status_id.nil?
   end
 
+  API_ATTRIBUTES = [ :id, :worker_name, :start_at, :end_at, :created_at, :updated_at ]
 end

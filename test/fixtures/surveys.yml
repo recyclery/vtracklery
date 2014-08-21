@@ -1,7 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  worker_id: 
+  worker: one
   assist_host: false
   host_program: false
   greet_open: false
@@ -55,7 +55,7 @@ one:
   comment: MyText
 
 two:
-  worker_id: 
+  worker: two
   assist_host: false
   host_program: false
   greet_open: false

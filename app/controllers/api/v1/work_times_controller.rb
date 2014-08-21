@@ -53,6 +53,6 @@ class Api::V1::WorkTimesController < Api::V1::BaseController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def work_time_params
-      params.require(:work_time).permit(:start_at, :end_at, :created_at, :updated_at)
+      params.require(:work_time).permit(:start_at, :end_at, :worker_id, :status_id, :work_status_id, :created_at, :updated_at)
     end
 end

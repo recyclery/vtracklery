@@ -17,6 +17,9 @@ class Api::V1::WorkTimesControllerTest < ActionController::TestCase
       work_time_hash = {
         start_at: @work_time.start_at,
         end_at: @work_time.end_at,
+        status_id: @work_time.status_id,
+        work_status_id: @work_time.work_status_id,
+        worker_id: @work_time.worker_id,
         created_at: @work_time.created_at,
         updated_at: @work_time.updated_at
       }

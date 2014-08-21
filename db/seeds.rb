@@ -8,13 +8,13 @@ StatusSeeder.seed { print '.' }
 print "\nLoading workers"
 WorkerSeeder.seed { print '.' }
 
-print "\nLoading surveys"
-SurveySeeder.seed { print '.' }
+print "\nLoading work_times"
+WorkTimeSeeder.seed { print '.' }
 
 print "\nLoading events"
 EventSeeder.seed { print '.' }
 
-print "\nLoading work_times"
-WorkTimeSeeder.seed { print '.' }
+print "\nLoading surveys"
+SurveySeeder.seed { print '.' }
 
 print "\n"

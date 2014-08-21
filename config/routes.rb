@@ -41,8 +41,6 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :surveys
-
   get 'report', as: 'reports', to: 'report#index'
   scope '/report', controller: 'report' do
     get 'active', as: 'active_workers'
@@ -75,6 +73,7 @@ Rails.application.routes.draw do
   end
 
   resources :workers do 
+    resources :surveys
     collection do
       post 'upload_image', to: 'workers#upload_image', as: 'worker_upload_image'
       get 'upload_form', to: 'workers#upload_form', as: 'upload_form'

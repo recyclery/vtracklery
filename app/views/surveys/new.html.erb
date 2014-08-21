@@ -4,10 +4,12 @@
 <h1>New survey</h1>
 <% end %>
 
-<%= render 'form' %>
+<%= form_for([@worker, @survey]) do |f| %>
+<%= render partial: 'surveys/form', locals: {f: f} %>
+<% end %>
 
 <% if @survey.worker_id %>
 <%= link_to 'Back', worker_path(@survey.worker) %>
 <% else -%>
-<%= link_to 'Back', surveys_path %>
+<%= link_to 'Back', worker_surveys_path(@worker) %>
 <% end -%>

@@ -255,9 +255,9 @@
   <%= @survey.skill_fundraising %>
 </p>
 
-<%= link_to 'Edit', edit_survey_path(@survey) %> |
+<%= link_to 'Edit', edit_worker_survey_path(@worker, @survey) %> |
 <% if @survey.worker_id %>
 <%= link_to 'Back', worker_path(@survey.worker) %>
 <% else -%>
-<%= link_to 'Back', surveys_path %>
+<%= link_to 'Back', worker_surveys_path(@worker) %>
 <% end -%>

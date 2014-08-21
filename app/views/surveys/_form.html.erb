@@ -1,4 +1,3 @@
-<%= form_for(@survey) do |f| %>
   <% if @survey.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@survey.errors.count, "error") %> prohibited this survey from being saved:</h2>
@@ -123,4 +122,4 @@ I've got these skills and might have the time:
   <div class="actions">
     <%= f.submit "Save" %>
   </div>
-<% end %>
+

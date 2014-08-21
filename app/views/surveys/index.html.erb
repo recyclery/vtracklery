@@ -63,7 +63,7 @@
   <tbody>
     <% @surveys.each do |survey| %>
       <tr>
-        <td><%= survey.worker %></td>
+        <td><%=link_to_worker survey.worker %></td>
         <td><%= survey.assist_host %></td>
         <td><%= survey.host_program %></td>
         <td><%= survey.greet_open %></td>
@@ -114,9 +114,9 @@
         <td><%= survey.skill_carpentry %></td>
         <td><%= survey.skill_coordination %></td>
         <td><%= survey.skill_fundraising %></td>
-        <td><%= link_to 'Show', survey %></td>
-        <td><%= link_to 'Edit', edit_survey_path(survey) %></td>
-        <td><%= link_to 'Destroy', survey, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', worker_survey_path(@worker, survey) %></td>
+        <td><%= link_to 'Edit', edit_worker_survey_path(@worker, survey) %></td>
+        <td><%= link_to 'Destroy', worker_survey_path(@worker, survey), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -124,4 +124,4 @@
 
 <br>
 
-<%= link_to 'New Survey', new_survey_path %>
+<%= link_to 'New Survey', new_worker_survey_path %>

@@ -13,8 +13,10 @@ class Api::V1::SurveysControllerTest < ActionController::TestCase
   end
 
   test "should create survey" do
+    worker = Worker.create(name: "non-survey worker")
     assert_difference('Survey.count') do
       survey_hash = {
+        worker_name: worker.name,
         assist_host: @survey.assist_host,
         host_program: @survey.host_program,
         greet_open: @survey.greet_open,

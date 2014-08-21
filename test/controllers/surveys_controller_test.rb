@@ -2,21 +2,23 @@ require 'test_helper'
 
 class SurveysControllerTest < ActionController::TestCase
   setup do
-    @survey = surveys(:one)
+    @worker = workers(:one)
+    @survey = @worker.survey
   end
 
   test "should get index" do
-    get :index
+    get :index, worker_id: @worker
     assert_response :success
     assert_not_nil assigns(:surveys)
   end
 
   test "should get new" do
-    get :new
+    get :new, worker_id: @worker
     assert_response :success
   end
 
   test "should create survey" do
+    worker = Worker.create(name: "non-survey worker")
     survey_hash = {
       assist_host: @survey.assist_host,
       assist_overhaul: @survey.assist_overhaul,
@@ -69,24 +71,22 @@ class SurveysControllerTest < ActionController::TestCase
       thurs_youth: @survey.thurs_youth,
       tues_open: @survey.tues_open,
       tues_vol: @survey.tues_vol,
-      worker_id: @survey.worker_id
     }
 
     assert_difference('Survey.count') do
-      post :create, survey: survey_hash
+      post :create, worker_id: worker.id, survey: survey_hash
     end
 
-    #assert_redirected_to worker_path(assigns(:worker))
-    assert_redirected_to worker_path(@survey.worker_id)
+    assert_redirected_to worker_path(assigns(:worker))
   end
 
   test "should show survey" do
-    get :show, id: @survey
+    get :show, worker_id: @worker, id: @survey
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, id: @survey
+    get :edit, worker_id: @worker, id: @survey
     assert_response :success
   end
 
@@ -146,15 +146,15 @@ class SurveysControllerTest < ActionController::TestCase
       worker_id: @survey.worker_id
     }
 
-    patch :update, id: @survey, survey: survey_hash
-    assert_redirected_to survey_path(assigns(:survey))
+    patch :update, worker_id: @worker, id: @survey, survey: survey_hash
+    assert_redirected_to worker_path(assigns(:worker))
   end
 
   test "should destroy survey" do
     assert_difference('Survey.count', -1) do
-      delete :destroy, id: @survey
+      delete :destroy, worker_id: @worker, id: @survey
     end
 
-    assert_redirected_to surveys_path
+    assert_redirected_to worker_path(assigns(:worker))
   end
 end

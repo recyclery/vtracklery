@@ -4,7 +4,8 @@ class SurveysController < ApplicationController
   # GET /surveys
   # GET /surveys.json
   def index
-    @surveys = Survey.all
+    @worker = Worker.find(params[:worker_id])
+    @surveys = @worker.survey.blank? ? [] : [@worker.survey]
   end
 
   # GET /surveys/1
@@ -14,7 +15,8 @@ class SurveysController < ApplicationController
 
   # GET /surveys/new
   def new
-    @survey = Survey.new(worker_id: params[:worker_id])
+    @worker = Worker.find(params[:worker_id])
+    @survey = @worker.build_survey
   end
 
   # GET /surveys/1/edit
@@ -24,13 +26,14 @@ class SurveysController < ApplicationController
   # POST /surveys
   # POST /surveys.json
   def create
-    @survey = Survey.new(survey_params)
+    @worker = Worker.find(params[:worker_id])
+    @survey = @worker.build_survey(survey_params)
 
     respond_to do |format|
       if @survey.save
         #format.html { redirect_to @survey, notice: 'Survey was successfully created.' }
         format.html { redirect_to @survey.worker, notice: 'Survey was successfully created.' }
-        format.json { render :show, status: :created, location: @survey }
+        format.json { render :show, status: :created, location: worker_survey_path(@worker, @survey) }
       else
         format.html { render :new }
         format.json { render json: @survey.errors, status: :unprocessable_entity }
@@ -45,7 +48,7 @@ class SurveysController < ApplicationController
       if @survey.update(survey_params)
         #format.html { redirect_to @survey, notice: 'Survey was successfully updated.' }
         format.html { redirect_to @survey.worker, notice: 'Survey was successfully updated.' }
-        format.json { render :show, status: :ok, location: @survey }
+        format.json { render :show, status: :ok, location: worker_survey_path(@worker, @survey) }
       else
         format.html { render :edit }
         format.json { render json: @survey.errors, status: :unprocessable_entity }
@@ -56,10 +59,10 @@ class SurveysController < ApplicationController
   # DELETE /surveys/1
   # DELETE /surveys/1.json
   def destroy
+    @worker = @survey.worker
     @survey.destroy
     respond_to do |format|
-      format.html { redirect_to surveys_url, notice: 'Survey was successfully d
-estroyed' }
+      format.html { redirect_to @worker, notice: 'Survey was successfully destroyed' }
       format.json { head :no_content }
     end
   end
@@ -67,7 +70,8 @@ estroyed' }
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_survey
-      @survey = Survey.find(params[:id])
+      @worker = Worker.find(params[:worker_id])
+      @survey = @worker.survey
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

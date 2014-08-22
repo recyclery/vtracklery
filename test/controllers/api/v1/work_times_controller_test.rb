@@ -12,6 +12,12 @@ class Api::V1::WorkTimesControllerTest < ActionController::TestCase
     assert_not_nil assigns(:work_times)
   end
 
+  test "should get logged_in" do
+    xhr :get, :logged_in
+    assert_response :success
+    assert_not_nil assigns(:work_times)
+  end
+
   test "should create work_time" do
     assert_difference('WorkTime.count') do
       work_time_hash = {

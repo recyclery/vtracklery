@@ -27,7 +27,17 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :work_times
+    resources :work_times do
+      collection do
+        get :logged_in
+        get :too_long
+        get :mismatched_dates
+
+        get :week
+        get :month
+        get :year
+      end
+    end
 
     # Not sure if I should keep these
     resources :work_statuses

@@ -6,6 +6,33 @@ class Api::V1::WorkTimesController < Api::V1::BaseController
     @work_times = WorkTime.all
   end
 
+  # GET /api/v1/work_times/logged_in.json
+  def logged_in
+    @work_times = WorkTime.logged_in
+    render :index
+  end
+
+  # GET /api/v1/work_times/too_long.json
+  def too_long
+    @work_times = WorkTime.long_volunteers
+    render :index
+  end
+
+  # GET /api/v1/work_times/mismatched_dates.json
+  def mismatched_dates
+    @work_times = WorkTime.mismatched_dates
+    render :index
+  end
+
+  def week
+  end
+
+  def month
+  end
+
+  def year
+  end
+
   # GET /api/v1/work_times/1.json
   def show
   end

@@ -25,25 +25,25 @@ class ShopController < ApplicationController
     cur_left = params[:top].to_i # "422px".to_i => 422
     img_order = params[:order]
 
-    @person = Worker.find(params[:person])
-    @time = @person.clock_in()
-    @start = @time.start_time
+    @worker = Worker.find(params[:worker])
+    @work_time = @worker.clock_in()
+    @start = @work_time.start_time
 
-    if @person.save && @time.save
+    if @worker.save && @work_time.save
       respond_to do |format|
         format.html { render :partial => "sign_in" }
-        #render @person.to_xml
+        #render @worker.to_xml
       end
     end
   end
 
   def sign_out
-    @person = Worker.find(params[:person])
-    @time = @person.clock_out
-    @end = @time.end_at.strftime("%I:%M%p")
-    @difference = @time.punch_message()
+    @worker = Worker.find(params[:worker])
+    @work_time = @worker.clock_out
+    @end = @work_time.end_at.strftime("%I:%M%p")
+    @message = @work_time.punch_message()
 
-    if @person.save and @time.save
+    if @worker.save and @work_time.save
       respond_to do |format|
         format.html { render :partial => "sign_out" }
       end

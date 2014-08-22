@@ -18,12 +18,12 @@
   <table style="border-spacing: 20px;">
     <tr><td valign="top">
 <% unless @v_col1.nil? %>
-<%   for person in @v_col1 -%>
+<%   for worker in @v_col1 -%>
       <div class="athome">
-        <div class="vperson"><img src="<%= person.avatar_url %>" /></div>
+        <div class="vperson"><img src="<%= worker.avatar_url %>" /></div>
         <div class="vname">
-          <a href="/workers/<%= person.id %>"><%= person.name %></a>
-          <span class="vno"><%= person.id %></span>
+          <a href="/workers/<%= worker.id %>"><%= worker.name %></a>
+          <span class="vno"><%= worker.id %></span>
         </div>
       </div>
 <%   end -%>
@@ -31,12 +31,12 @@
     </td>
     <td valign="top">
 <% unless @v_col2.nil? %>
-<%   for person in @v_col2 -%>
+<%   for worker in @v_col2 -%>
     <div class="athome">
-      <div class="vperson"><img src="<%= person.avatar_url %>" /></div>
+      <div class="vperson"><img src="<%= worker.avatar_url %>" /></div>
         <div class="vname">
-        <a href="/workers/<%= person.id %>"><%= person.name %></a>
-        <span class="vno"><%= person.id %></span>
+        <a href="/workers/<%= worker.id %>"><%= worker.name %></a>
+        <span class="vno"><%= worker.id %></span>
         </div>
       </div>
 <%   end -%>
@@ -49,12 +49,12 @@
 <div class="shop">
 
 <% id = 0 -%>
-<% for person in @shop_people -%>
+<% for worker in @shop_people -%>
 <div class="atshop" style="position: relative; left: <%= rand(@max_left) %>px; top: <%= rand(@max_top) - id * 140 %>px;">
-  <div class="vperson"><img src="<%= person.avatar_url %>" /></div>
+  <div class="vperson"><img src="<%= worker.avatar_url %>" /></div>
   <div class="vname">
-    <a href="/workers/<%= person.id %>"><%= person.name %></a>
-    <span class="vno"><%= person.id %></span>
+    <a href="/workers/<%= worker.id %>"><%= worker.name %></a>
+    <span class="vno"><%= worker.id %></span>
   </div>
 </div>
 <% id += 1 -%>

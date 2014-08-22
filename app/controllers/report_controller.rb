@@ -64,7 +64,7 @@ class ReportController < ApplicationController
   def month
     @month = params[:month] ? params[:month].to_i : DateTime.now.month
     @year = params[:year] ? params[:year].to_i : DateTime.now.year
-    @statuses = Status.find([1,2], :order => 'id DESC')
+    @statuses = Status.find([1,2]).sort_by(&:id).reverse
 
     @prev = WorkTime.prev(@year, @month)
     @next = WorkTime.next(@year, @month)

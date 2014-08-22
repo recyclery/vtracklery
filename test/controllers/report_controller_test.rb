@@ -22,7 +22,7 @@ class ReportControllerTest < ActionController::TestCase
   end
 
   test "should get event" do
-    get :event
+    get :event, id: events(:one)
     assert_response :success
   end
 
@@ -42,7 +42,7 @@ class ReportControllerTest < ActionController::TestCase
   end
 
   test "should get volunteer" do
-    volunteer = workers(:one)
+    volunteer = Worker.find(500)
     get :volunteer, id: volunteer
     assert_response :success
   end

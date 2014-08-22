@@ -50,8 +50,8 @@ class Api::V1::WorkersController < Api::V1::BaseController
 
     if @worker.save && @work_time.save
       respond_to do |format|
-        format.html { render json: @work_time }
-        #render @person.to_xml
+        format.json { render json: @work_time }
+        #render @worker.to_xml
       end
     end
   end
@@ -63,7 +63,7 @@ class Api::V1::WorkersController < Api::V1::BaseController
 
     if @worker.save and @work_time.save
       respond_to do |format|
-        format.html { render json: @work_time }
+        format.json { render json: @work_time }
       end
     end
   end

@@ -19,3 +19,36 @@ two:
   status_id: 1
   work_status_id: 1
   public_email: false
+
+report_prev:
+  id: 499
+  name: Report prev
+  image: MyString
+  in_shop: false
+  email: MyString
+  phone: MyString
+  status_id: 1
+  work_status_id: 1
+  public_email: false
+
+report:
+  id: 500
+  name: Report
+  image: MyString
+  in_shop: false
+  email: MyString
+  phone: MyString
+  status_id: 1
+  work_status_id: 1
+  public_email: false
+
+report_next:
+  id: 501
+  name: Report next
+  image: MyString
+  in_shop: false
+  email: MyString
+  phone: MyString
+  status_id: 1
+  work_status_id: 1
+  public_email: false

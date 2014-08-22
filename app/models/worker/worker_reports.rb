@@ -39,4 +39,14 @@ module Worker::WorkerReports
 
   end
 
+  def previous
+    w = Worker.where(['id < ?', self.id]).order('id DESC').limit(1).first
+    return w.id if w
+  end
+
+  def next
+    w = Worker.where(['id > ?', self.id]).limit(1).first
+    return w.id if w
+  end
+
 end

@@ -21,16 +21,6 @@ class Worker < ActiveRecord::Base
   scope :has_phone, -> { where("phone IS NOT NULL") }
   scope :no_contact, -> { where("email IS NULL AND phone IS NULL") }
 
-  def previous
-    w = Worker.where(['id < ?', self.id]).order('id DESC').limit(1).first
-    return w.id if w
-  end
-
-  def next
-    w = Worker.where(['id > ?', self.id]).limit(1).first
-    return w.id if w
-  end
-
   def created_datetime
     created_at.strftime("%a %b %d %Y")
   end

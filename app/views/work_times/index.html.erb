@@ -21,8 +21,8 @@
   <tbody>
     <% @work_times.each do |work_time| %>
       <tr>
-        <td><%= work_time.start_date %></td>
-        <td><%= work_time.start_time %></td>
+        <td><%= work_time.start_date_to_s %></td>
+        <td><%= work_time.start_time_to_s %></td>
         <td><%= work_time.end_time %></td>
         <td><%= work_time.difference_to_s %></td>
         <td><%=link_to_worker work_time.worker %></td>

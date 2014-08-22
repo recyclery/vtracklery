@@ -120,19 +120,28 @@ module ActsAsPunchCard
   def start_datetime # "Sun Oct 05 01:13 PM 2008"
     start_at.strftime("%a %b %d %I:%M %p %Y")
   end
-    
-  def start_date # "Sun Oct 05 01:13 PM 2008"
+
+  def start_date
+    start_at.to_date
+  end
+
+  def start_date_to_s # "Sun Oct 05 01:13 PM 2008"
     start_at.strftime("%a %d %b %Y").gsub(/\s0/, " ")
   end
-  
+
+  #FIXME
   def start_time
     start_at.strftime("%I:%M %p").gsub(/^0/, " ").strip
   end
-        
+
+  def start_time_to_s
+    start_at.strftime("%I:%M %p").gsub(/^0/, " ").strip
+  end
+
   def start_stamp
     start_at.strftime("%a %d%b%Y %I:%M&nbsp;%p").gsub(/\s0/, " ")
   end
-  
+
   def start_csv
     start_at.strftime(FMT_CSV).gsub(/\s0/, " ").strip
   end
@@ -144,22 +153,34 @@ module ActsAsPunchCard
       self.end_at.strftime("%a %b %d %I:%M %p %Y")
     end
   end
-    
-  def end_date # "Sun Oct 05 01:13 PM 2008"
+
+  #FIXME
+  def end_date
     return nil unless self.end_at
     self.end_at.strftime("%a %d %b %Y").gsub(/\s0/, " ")
   end
-    
+
+  def end_date_to_s # "Sun Oct 05 01:13 PM 2008"
+    return nil unless self.end_at
+    self.end_at.strftime("%a %d %b %Y").gsub(/\s0/, " ")
+  end
+
+  #FIXME
   def end_time
     return nil unless self.end_at
     self.end_at.strftime("%I:%M %p").gsub(/^0/, " ").strip
   end
-    
+
+  def end_time_to_s
+    return nil unless self.end_at
+    self.end_at.strftime("%I:%M %p").gsub(/^0/, " ").strip
+  end
+
   def end_stamp
     return nil unless self.end_at 
     self.end_at.strftime("%a %d%b%Y %I:%M&nbsp;%p").gsub(/\s0/, " ")
   end
-        
+
   def end_csv
     return nil unless self.end_at 
     self.end_at.strftime(FMT_CSV).gsub(/\s0/, " ").strip

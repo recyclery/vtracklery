@@ -12,9 +12,6 @@ Rails.application.routes.draw do
       get :statuses
     end
 
-    resources :surveys
-    resources :events
-
     resources :workers do
       collection do
         get :shop
@@ -39,18 +36,9 @@ Rails.application.routes.draw do
       end
     end
 
-    # Not sure if I should keep these
-    resources :work_statuses
-    resources :statuses
+    resources :surveys
+    resources :events
 
-    scope :report, controller: 'report' do
-      get :active
-      get :logged_in
-      get :month
-      get :volunteer
-      get :week
-      get :year
-    end
   end
 
   namespace :api, defaults: {format: 'json'} do
@@ -61,6 +49,19 @@ Rails.application.routes.draw do
     namespace :v1 do
       concerns :api_v1
     end
+  end
+
+  root 'shop#index'
+
+  get 'shop', as: 'shop', to: 'shop#index'
+  scope '/shop', controller: 'shop' do
+    get :directions
+    post :sign_in
+    post :sign_out
+
+    get    "time/:id", as: 'edit_shop_time',   to: 'shop#edit'
+    patch  "time/:id", as: 'update_shop_time', to: 'shop#update'
+    delete "time/:id", as: 'delete_shop_time', to: 'shop#destroy'
   end
 
   get 'report', as: 'reports', to: 'report#index'
@@ -83,19 +84,6 @@ Rails.application.routes.draw do
     get 'weekly'
     get 'year'
     get 'yearly'
-  end
-
-  root 'shop#index'
-
-  get 'shop', as: 'shop', to: 'shop#index'
-  scope '/shop', controller: 'shop' do
-    get :directions
-    post :sign_in
-    post :sign_out
-
-    get    "time/:id", as: 'edit_shop_time',   to: 'shop#edit'
-    patch  "time/:id", as: 'update_shop_time', to: 'shop#update'
-    delete "time/:id", as: 'delete_shop_time', to: 'shop#destroy'
   end
 
   resources :workers do 
@@ -123,12 +111,8 @@ Rails.application.routes.draw do
     get 'year'
   end
 
-  resources :events
   resources :work_times
-
-  # Not sure if I should keep these
-  resources :work_statuses
-  resources :statuses
+  resources :events
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

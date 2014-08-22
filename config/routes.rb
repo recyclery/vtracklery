@@ -14,7 +14,19 @@ Rails.application.routes.draw do
 
     resources :surveys
     resources :events
-    resources :workers
+
+    resources :workers do
+      collection do
+        get :shop
+        get :active
+        get :missing
+      end
+      member do
+        post :sign_in
+        post :sign_out
+      end
+    end
+
     resources :work_times
 
     # Not sure if I should keep these

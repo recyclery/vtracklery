@@ -12,6 +12,24 @@ class Api::V1::WorkersControllerTest < ActionController::TestCase
     assert_not_nil assigns(:workers)
   end
 
+  test "should get shop" do
+    xhr :get, :shop
+    assert_response :success
+    assert_not_nil assigns(:workers)
+  end
+
+  test "should get active" do
+    xhr :get, :active
+    assert_response :success
+    assert_not_nil assigns(:workers)
+  end
+
+  test "should get missing" do
+    xhr :get, :missing
+    assert_response :success
+    assert_not_nil assigns(:workers)
+  end
+
   test "should create worker" do
     assert_difference('Worker.count') do
       worker_hash = {
@@ -27,6 +45,18 @@ class Api::V1::WorkersControllerTest < ActionController::TestCase
       xhr :post, :create, worker: worker_hash
     end
 
+    assert_response :success
+  end
+
+  test "should sign in" do
+    assert_difference('WorkTime.count') do
+      xhr :post, :sign_in, id: @worker
+    end
+    assert_response :success
+  end
+
+  test "should sign out" do
+    xhr :post, :sign_out, id: @worker
     assert_response :success
   end
 

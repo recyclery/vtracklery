@@ -12,24 +12,25 @@ sign_out_message = (xml) ->
   dialog($("worker", xml).text() + " signed out at " + 
     $("end", xml).text() + ", worked " +
     $("message", xml).text() +
-    " <a href='http://vtrack.ru.lan/work_times/" +
-    $("work_time_id", xml).text() +
+    " <a href='http://vtrack.ru.lan/shop/time/" +
+    $("worker_id", xml).text() +
     "'>change this</a>" +
     "<br />")
 
 sign_in = (ev, ui) ->
   $(this).append( $(ui.draggable).addClass("atshop").removeClass("athome").end() )
-  $.get("shop/sign_in", {
-    worker: $(ui.draggable).find(".vno").text(), 
-    top: $(ui.draggable).css('top'), 
-    left: $(ui.draggable).css('left'),
-    order: $("div.shop .atshop").index($(ui.draggable))
-    }, sign_in_message)
+  $.ajax(
+    url: "shop/sign_in", type: "POST",
+    data: {
+      id: $(ui.draggable).find(".vno").text(), 
+      top: $(ui.draggable).css('top'), 
+      left: $(ui.draggable).css('left'),
+      order: $("div.shop .atshop").index($(ui.draggable)) }).done(sign_in_message)
+    
 
 sign_out = (ev, ui) ->
-  $(this).append( $(ui.draggable).addClass("athome").removeClass("atshop").end() );
-  $.get("shop/sign_out",
-    { worker: $(ui.draggable).find(".vno").text() }, sign_out_message)
+  $(this).append( $(ui.draggable).addClass("athome").removeClass("atshop").end() )
+  $.post("shop/sign_out", { id: $(ui.draggable).find(".vno").text() }, sign_out_message)
 
 $(document).ready(() ->
   # do stuff when DOM is ready

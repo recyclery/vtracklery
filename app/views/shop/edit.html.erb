@@ -1,0 +1,32 @@
+<h1>Editing shop time for <%= @worker.name %></h1>
+
+<%= form_for(@work_time, url: update_shop_time_path(@worker)) do |f| %>
+  <% if @work_time.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@work_time.errors.count, "error") %> prohibited this work_time from being saved:</h2>
+
+      <ul>
+      <% @work_time.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :start_at %><br>
+    <%= f.datetime_select :start_at %>
+  </div>
+  <div class="field">
+    <%= f.label :end_at %><br>
+    <%= f.datetime_select :end_at %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+<nav>
+<%= link_to 'Back', root_path %> |
+<%= link_to 'Delete', delete_shop_time_path(@worker), method: :delete, data: { confirm: 'Are you sure?' } %>
+</nav>

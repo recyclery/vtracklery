@@ -67,9 +67,13 @@ Rails.application.routes.draw do
 
   get 'shop', as: 'shop', to: 'shop#index'
   scope '/shop', controller: 'shop' do
-    get 'directions'
-    get 'sign_in'
-    get 'sign_out'
+    get :directions
+    post :sign_in
+    post :sign_out
+
+    get    "time/:id", as: 'edit_shop_time',   to: 'shop#edit'
+    patch  "time/:id", as: 'update_shop_time', to: 'shop#update'
+    delete "time/:id", as: 'delete_shop_time', to: 'shop#destroy'
   end
 
   resources :workers do 
@@ -79,8 +83,10 @@ Rails.application.routes.draw do
       get 'upload_form', to: 'workers#upload_form', as: 'upload_form'
     end
     member do
-      get 'image_chooser'
-      get 'cheese_chooser'
+      get :image_chooser
+      get :cheese_chooser
+      put :sign_in
+      put :sign_out
     end
   end
 

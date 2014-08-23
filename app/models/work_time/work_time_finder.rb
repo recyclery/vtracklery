@@ -1,10 +1,16 @@
 module WorkTime::WorkTimeFinder
   extend ActiveSupport::Concern
 
-  #included do
-  #end
+  included do
+    # All the WorkTime since the given time.
+    #
+    scope :find_since, ->(dt) { where(['start_at >= ?', dt]).order(:start_at) }
+
+  end
 
   module ClassMethods
+    # Return all work_times in the 24-hour period of a single day
+    #
     def find_by_start_date(*args)
       if 1 == args.size && args[0].respond_to?(:year) && 
           args[0].respond_to?(:month) && args[0].respond_to?(:day)
@@ -16,11 +22,12 @@ module WorkTime::WorkTimeFinder
       end
       beg = Date.civil(year, month, day)
       ending = beg + 1
-      conditions = ["start_at BETWEEN ? AND ? ", beg.to_date, ending.to_date]
-      hours = WorkTime.where(conditions)
-      return hours
+      #conditions = ["start_at BETWEEN ? AND ? ", beg.to_date, ending.to_date]
+      return WorkTime.where(start_at: beg.to_date..ending.to_date)
     end
 
+    # Return statistics for a given year, or month of the year.
+    #
     def find_stats_for(year = Time.now.year, month = nil)
       work_times = WorkTime.find_for(year, month)
       workers = WorkTime.workers_for(year, month)
@@ -35,6 +42,9 @@ module WorkTime::WorkTimeFinder
       return [work_times, workers, total_time, avg_time]
     end
 
+    # Return statistics for a given year, or month of the year but
+    # only for Workers of the given status.
+    #
     def status_stats_for(sts, year = Time.now.year, month = nil)
       work_times = find_status_for(sts, year, month)
       workers = worker_type_for(sts, year, month)
@@ -48,8 +58,9 @@ module WorkTime::WorkTimeFinder
       end
       return [work_times, workers, total, avg]
     end
-    
-    # Get array of workers who were active during a given month or year
+
+    # Get array of workers who were active during a given month or year.
+    #
     def workers_for(year = Time.now.year, month = nil)
       year = year.to_i
       if month # Get all unique workers for the month
@@ -60,7 +71,10 @@ module WorkTime::WorkTimeFinder
       end
       Worker.find(w_ids)
     end
-    
+
+    # Return WorkTime for a given year, or month of the year where the
+    # records are of the given status.
+    #
     def find_status_for(s, year = Time.now.year, month = nil)
       s_id = s.id
       #s_id = s.is_a? Fixnum ? s : s.id
@@ -78,23 +92,29 @@ module WorkTime::WorkTimeFinder
                     s_id])
       end
     end
-    
+
+    # Tally the total time for a year or month of the year where the
+    # WorkTime is of the given status.
+    #
     def status_time_for(s, year = Time.now.year, month = nil)
       year = year.to_i
       time = 0
-      if month # Get all unique volunteers for the month
+      if month # Tally all the time for the month
         month = month.to_i
         find_status_for(s, year, month).each do |card| 
           time += card.difference_in_seconds if card.difference?
         end
-      else # Get all unique volunteers for the entire year
+      else # Tally the work time for the entire year
         find_status_for(s, year).each do |card| 
           time += card.difference_in_seconds if card.difference?
         end
       end
       return time
     end
-    
+
+    # Return all workers who match a particular status and that had hours
+    # during a given year or month of a year.
+    #
     def worker_type_for(s, year = Time.now.year, month = nil)
       #s_id = s.is_a? Status ? s.id : s
       s_id = s.id
@@ -110,6 +130,9 @@ module WorkTime::WorkTimeFinder
       Worker.find(w_ids)
     end
 
+    # Total all the WorkTime time that took place in a given year or
+    # month of a year (in seconds).
+    #
     def time_for(year = Time.now.year, month = nil)
       year = year.to_i
       time = 0
@@ -125,7 +148,9 @@ module WorkTime::WorkTimeFinder
       end
       return time
     end
-        
+
+    # Find all the work_times for a year, or month of the year
+    #
     def find_for(year = Time.now.year, month = nil)
       year = year.to_i
       if month
@@ -140,6 +165,8 @@ module WorkTime::WorkTimeFinder
       end
     end
     
+    # All WorkTime that took place this calendar month.
+    #
     def find_for_this_month
       year, month = Time.now.year, Time.now.month
       s_at = self.start_of_month(month, year)

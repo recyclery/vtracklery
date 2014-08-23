@@ -48,7 +48,7 @@
     <% else -%>
     <td><%= work_time.start_datetime %></td>
     <td><%= work_time.end_datetime %></td>
-    <td><%=h work_time.difference_to_s %></td>
+    <td><%= work_time.difference_to_s %></td>
     <% end -%>
     <td><%= link_to 'Show', work_time %></td>
     <td><%= link_to 'Edit', edit_work_time_path(work_time) %></td>

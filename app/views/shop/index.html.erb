@@ -77,6 +77,11 @@
     <br />
     <br />
     <%= link_to t("links.help"), :controller => :shop, :action => :directions %>
+<% if WorkTime.has_long_hours? %>
+    <br />
+    <br />
+    <%= link_to "fix hours", fix_month_hours_path() %>
+<% end %>
     </div>
   </div>
   <div style="display:table-cell; padding: 0px 0px 0px 10px; vertical-align: top;">

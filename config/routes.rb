@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   scope '/report', controller: 'report' do
     get 'active', as: 'active_workers'
     get 'admin'
+    get 'admin_month', as: 'fix_month_hours'
     get 'calendar/:year/:month', as: 'calendar', to: 'report#calendar'
     get 'calendar', as: 'current_month_calendar', to: 'report#calendar'
     get 'contact', as: 'contact_list'

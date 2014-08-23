@@ -15,6 +15,10 @@ class ReportController < ApplicationController
     @long_volunteers = WorkTime.long_volunteers
   end
 
+  def admin_month
+    @work_times = WorkTime.find_since(Date.today - 21).long_volunteers
+  end
+
   def calendar
     @month = params[:month] ? params[:month].to_i : Time.now.month
     @year = params[:year] ? params[:year].to_i : Time.now.year

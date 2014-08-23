@@ -52,17 +52,17 @@ module ActsAsPunchCard
         "#{hours}h #{minutes % (hours * 60)} min"
       end
     end
-    
+
     def stringify_seconds(seconds)
       stringify_minutes(seconds_to_minutes(seconds))
     end
-    
+
     def stringify_hours(hours)
       stringify_minutes(hours * 60)
     end
-    
+
   end
-  
+
   # Note that leading zeros are replaced with spaces in all functions
   # except for datetime; FMT_TIME/CSV may have leading whitespace
   FMT_DATETIME = "%a %b %d %I:%M %p %Y" # "Mon Oct 06 05:18 PM 2008"
@@ -70,7 +70,7 @@ module ActsAsPunchCard
   FMT_TIME = "%I:%M %p"                 # "05:18 PM"
   FMT_STAMP = "%a %d%b%Y %I:%M&nbsp;%p" # "Mon 06Oct2008 05:18&nbsp;PM"
   FMT_CSV   = "%m/%d/%y %I:%M %p"       # "12/31/99 12:01 PM"
-  
+
   def wday; self.start_at.wday; end
   def yday; self.start_at.yday; end
   #def sec; self.start_at.sec; end
@@ -82,35 +82,47 @@ module ActsAsPunchCard
   def day; self.start_at.day; end
   def month; self.start_at.month; end
   def year; self.start_at.year; end
-  
+
+  def is_complete?
+    self.start_at && self.end_at
+  end
+
+  def valid_order?
+    is_complete? && (self.start_at <= self.end_at)
+  end
+
   def difference?
-    if self.end_at
-      raise "End before start: #{id}" if start_at > self.end_at
-      return true
+    if is_complete?
+      raise "End before start: #{id}" unless valid_order?
+      return self.start_at < self.end_at
     end
     return false
   end
-  
+
   def difference_in_seconds
     #unless self.end.nil? or self.start_at.nil?
-    return 0 unless self.end_at && start_at
+    return 0 unless is_complete?
     ( self.end_at - start_at ).to_i
   end
-  
+
   def difference_in_minutes
     #unless self.end.nil? or self.start_at.nil?
-    return 0 unless self.end_at && start_at
+    return 0 unless is_complete?
     (( self.end_at - start_at ) / 60).to_i
   end
-        
+
   def difference_in_hours
-    return 0 unless self.end_at && start_at
+    return 0 unless is_complete?
     ((( self.end_at - start_at ) / 60) / 60).to_i
   end
 
   def difference_to_s
-    return "" unless difference?
-    return self.class.stringify_minutes( difference_in_minutes )
+    if ! is_complete?    then return "Not complete"
+    elsif ! valid_order? then return "Invalid order"
+    elsif ! difference?  then return ""
+    else    
+      return self.class.stringify_minutes( difference_in_minutes )
+    end
   end
 
   def punch_message

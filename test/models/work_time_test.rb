@@ -44,15 +44,6 @@ class WorkTimeTest < ActiveSupport::TestCase
     assert true
   end
 
-  test "difference_methods" do
-    work_time = WorkTime.new()
-    assert ! work_time.difference?
-    work_time.start_at = DateTime.now
-    assert ! work_time.difference?
-    work_time.end_at = DateTime.now
-    assert work_time.difference?    
-  end
-
   test "start_and_end_of_time_utilities" do
     assert_equal DateTime.new(2008, 12), WorkTime.start_of_month(12, 2008)
     assert_equal DateTime.new(2009) - 1.second, WorkTime.end_of_month(12, 2008)

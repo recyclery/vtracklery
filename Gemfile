@@ -51,7 +51,7 @@ gem 'rails_config'
 
 # Image storage
 gem 'carrierwave'
-gem 'nokogiri'
+gem 'nokogiri', '>= 1.5.5' # Earlier versions fail to compile on modern distros
 
 #gem 'rmagick'
 gem 'mini_magick'

@@ -148,7 +148,7 @@ DEPENDENCIES
   kaminari
   mini_magick
   mysql2
-  nokogiri
+  nokogiri (>= 1.5.5)
   rails (= 4.1.4)
   rails_config
   runt

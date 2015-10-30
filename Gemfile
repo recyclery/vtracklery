@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.4'
+gem 'rails', '4.1.6'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 gem 'mysql2'
@@ -47,7 +47,7 @@ gem 'runt'
 # gem 'image_science' # used attachment_fu plugin
 # gem 'fastercsv'
 
-gem 'rails_config'
+gem 'rails_config', '0.4.2'
 
 # Image storage
 gem 'carrierwave'

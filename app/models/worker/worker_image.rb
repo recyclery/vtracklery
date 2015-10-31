@@ -6,6 +6,7 @@ module Worker::WorkerImage
   end
 
   module ClassMethods
+    # @return [Array<String>]
     def avatar_filepaths
       filepaths = []
       Dir.entries(Settings.avatars.default_dir).each do |file|
@@ -14,6 +15,12 @@ module Worker::WorkerImage
       return filepaths
     end
 
+    # @return [String]
+    def cheese_dir
+      return Settings.cheese.dir
+    end
+
+    # @return [Array<String>]
     def cheese_filepaths
       filepaths = []
       begin
@@ -23,6 +30,11 @@ module Worker::WorkerImage
       rescue #"Errno::ENOENT"
       end
       return filepaths
+    end
+
+    # @return [String]
+    def default_avatar_dir
+      return Settings.avatars.default_dir
     end
 
   end
@@ -36,6 +48,7 @@ module Worker::WorkerImage
     self.image = open(path) if File.exists?(path)
   end
 
+  # @return [String]
   def avatar_url
     image_url
     #if image.nil? then return Settings.avatars.missing_url
@@ -46,6 +59,7 @@ module Worker::WorkerImage
     #end
   end
 
+  # @return [String]
   def avatar_path
     image.path
     #if image.nil?
@@ -58,6 +72,7 @@ module Worker::WorkerImage
     #end
   end
 
+  # @return [Boolean] true if there's a file at #avatar_path
   def image_exists?
     File.exists?(avatar_path)
   end

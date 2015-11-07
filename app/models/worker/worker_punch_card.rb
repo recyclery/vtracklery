@@ -12,23 +12,26 @@ module Worker::WorkerPunchCard
       return worker.clock_in
     end
 
+    # @return [Boolean]
     def clock_in!(worker)
       worker = Worker.find(params[:person])
       return worker.clock_in!
     end
 
+    # @return [Worker]
     def clock_out(worker)
       worker = Worker.find(params[:person])
       return worker.clock_out
     end
 
+    # @return [Boolean]
     def clock_out!(worker)
       worker = Worker.find(params[:person])
       return worker.clock_out!
     end
   end
 
-  # Returns the work_time with start_at filled in
+  # @return [WorkTime] the work_time with start_at filled in
   def clock_in
     work_time = self.work_times.build()
     self.updated_at = Time.now
@@ -38,11 +41,16 @@ module Worker::WorkerPunchCard
   end
 
   # Should be a transaction?
+  #
+  # @return [Boolean] true if both the Worker updated_at is touched and
+  #   the WorkTime is saved.
   def clock_in!
     work_time = self.clock_in()
     return self.save && work_time.save
   end
 
+  # @return [WorkTime] the worktime record that was just created (closed on
+  #   execution)
   def clock_out
     work_time = self.work_times.last
     self.updated_at = Time.now  # To help sort by recently in shop
@@ -52,6 +60,8 @@ module Worker::WorkerPunchCard
   end
 
   # Should be a transaction?
+  # @return [Boolean] true if both the Worker updated_at is touched and
+  #   the WorkTime is saved.
   def clock_out!
     work_time = self.clock_out()
     return self.save && work_time.save

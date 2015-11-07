@@ -1,3 +1,6 @@
+#
+# Workers are the individual Volunteers
+#
 class Worker < ActiveRecord::Base
   has_many :work_times, dependent: :destroy
   has_one :survey, dependent: :destroy
@@ -21,12 +24,14 @@ class Worker < ActiveRecord::Base
   scope :has_phone, -> { where("phone IS NOT NULL") }
   scope :no_contact, -> { where("email IS NULL AND phone IS NULL") }
 
+  # @return [String] the string formatted :created_at value
   def created_datetime
     created_at.strftime("%a %b %d %Y")
   end
 
   # Remove non-standard spaces and dashes and replace with ascii?
   #
+  # @return [String] standardized version of worker name for filenames etc.
   def shoehorn_name
     name.split(/\s/).map {|n| 
       n.split('-').map { |nn| 

@@ -1,3 +1,6 @@
+#
+# Holds data about the Survey that is filled out by each {Worker}
+#
 class Survey < ActiveRecord::Base
   belongs_to :worker
 
@@ -7,6 +10,7 @@ class Survey < ActiveRecord::Base
 
   delegate :name, to: :worker, prefix: true
 
+  # @param val [String] the worker name
   def worker_name=(val)
     self.worker = Worker.find_by(name: val) unless val.blank?
   end

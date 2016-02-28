@@ -61,3 +61,7 @@ gem 'kaminari'
 
 # API
 gem 'activeresource', require: 'active_resource'
+
+gem 'yard'
+gem 'redcarpet'
+gem 'github-markup'

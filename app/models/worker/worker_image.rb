@@ -37,6 +37,16 @@ module Worker::WorkerImage
 
   end
 
+  # @return [String]
+  def cheese_dir
+    return Settings.cheese.dir
+  end
+
+  # @return [String]
+  def default_avatar_dir
+    return Settings.avatars.default_dir
+  end
+
   # Carrierwave doesn't allow image field to be assigned directly
   # Must pass a file to be written on assignment.
   #

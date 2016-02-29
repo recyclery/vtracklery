@@ -1,3 +1,6 @@
+#
+# Methods for handling the {Worker} image. Uses {AvatarUploader}.
+#
 module Worker::WorkerImage
   extend ActiveSupport::Concern
 
@@ -5,7 +8,13 @@ module Worker::WorkerImage
     mount_uploader :image, AvatarUploader
   end
 
+  # Class methods added to the object when {Worker::WorkerImage}
+  # is included
+  #
   module ClassMethods
+    # ["vimg02.png", "vimg01.png", "vimg04.png", "vimg05.png", "vimg03.png"]
+    #
+    # @return [Array<String>] array of default avatar filenames
     def avatar_filepaths
       filepaths = []
       Dir.entries(Settings.avatars.default_dir).each do |file|
@@ -14,6 +23,7 @@ module Worker::WorkerImage
       return filepaths
     end
 
+    # @return [Array<String>] array of filenames based on cheese.dir setting
     def cheese_filepaths
       filepaths = []
       begin
@@ -30,12 +40,17 @@ module Worker::WorkerImage
   # Carrierwave doesn't allow image field to be assigned directly
   # Must pass a file to be written on assignment.
   #
+  # @return [AvatarUploader]
   def seed_image; image; end
+
+  # @param val [String] the filename for the image to be seeded
+  # @return [String]
   def seed_image=(val)
     path = File.join(Rails.root, 'public', val)
     self.image = open(path) if File.exists?(path)
   end
 
+  # @return [String]
   def avatar_url
     image_url
     #if image.nil? then return Settings.avatars.missing_url
@@ -46,6 +61,7 @@ module Worker::WorkerImage
     #end
   end
 
+  # @return [String]
   def avatar_path
     image.path
     #if image.nil?
@@ -58,6 +74,7 @@ module Worker::WorkerImage
     #end
   end
 
+  # @return [Boolean] true if file at :avatar_path exists
   def image_exists?
     File.exists?(avatar_path)
   end

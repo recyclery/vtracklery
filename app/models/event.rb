@@ -1,26 +1,55 @@
+#
+# Weekly scheduled events.
+#
 class Event < ActiveRecord::Base
   include Runt
   include XmlExtensions
 
+  # Array of tuples of [WeekdayName, id]
   DAY_OF_THE_WEEK_OPTIONS = [%w(Sunday 0), %w(Monday 1), %w(Tuesday 2), %w(Wednesday 3), %w(Thursday 4), %w(Friday 5), %w(Saturday 6)]
+  # Array of tuples separated by 15
   MINUTE_OPTIONS = 0.step(45,15).map {|n| [ n == 0 ? '00' : n , n]}
+  # Array of tuples starting at 7am, ending at 23pm
   START_HOUR_OPTIONS = 7.upto(23).map {|n| [ (n % 12) == 0 ? 12 : n % 12, n]}
+  # Array of tuples starting at 8am, ending at 24pm
   END_HOUR_OPTIONS = 8.upto(24).map {|n| [ (n % 12) == 0 ? 12 : n % 12, n]}
 
+  # @return [Runt::Intersect] temporal expression
   def texpr; @texpr ||= compose_temporal_expression; end
 
+  # @param day [Integer] day of the week (0..6)
+  # @param shr [Integer] start hour
+  # @param smin [Integer] start minute
+  # @param ehr [Integer] end hour
+  # @param emin [Integer] end minute
+  # @return [Runt::Intersect] temporal expression
   def compose_temporal_expression(day = wday, shr = s_hr, smin = s_min, ehr = e_hr, emin = e_min)
     DIWeek.new(day) & REDay.new(shr, smin, ehr, emin)
   end
 
+  # @return [String] the weekday name
   def week_day; DateTime::DAYNAMES[wday]; end
+
+  # @return [String]
   def first_date; first_at.strftime("%a %b %d %Y") if first_at; end
+
+  # @return [String]
   def last_date; last_at.strftime("%a %b %d %Y") if last_at; end
+
+  # @return [DateTime]
   def s_time; DateTime.new(1,1,1,s_hr,s_min); end
+
+  # @return [String]
   def start_time; s_time.strftime("%I:%M %p") if s_time; end
+
+  # @return [DateTime]
   def e_time; DateTime.new(1,1,1,e_hr,e_min); end
+
+  # @return [String]
   def end_time; e_time.strftime("%I:%M %p") if e_time; end
 
+  # @param time [DateTime,WorkTime]
+  # @return [Boolean]
   def include?(time)
     case time
     when DateTime
@@ -49,6 +78,12 @@ class Event < ActiveRecord::Base
   #    @times = WorkTime.find_by_start_date(self)
   #  end
   #end
+
+  # For building a calendar
+  #
+  # @param n [Integer] (default: 0)
+  # @param per_page [Integer] (default: 10)
+  # @return [Array< [DateTime, WorkTime] >] array of date tuples
   def dates(n = 0, per_page = 10)
     @dates = []
     n.upto(n + per_page) do |n|
@@ -65,5 +100,8 @@ class Event < ActiveRecord::Base
     return @dates
   end
 
-  API_ATTRIBUTES = [ :id, :name, :first_at, :last_at, :wday, :s_hr, :s_min, :e_hr, :e_min, :created_at, :updated_at ]
+  # Attributes accessible via the API
+  API_ATTRIBUTES = [ :id, :name, :first_at, :last_at,
+                     :wday, :s_hr, :s_min, :e_hr, :e_min,
+                     :created_at, :updated_at ]
 end

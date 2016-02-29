@@ -1,3 +1,6 @@
+#
+# The Employees/Volunteers of the Shop
+#
 class Worker < ActiveRecord::Base
   has_many :work_times, dependent: :destroy
   has_one :survey, dependent: :destroy
@@ -21,17 +24,21 @@ class Worker < ActiveRecord::Base
   scope :has_phone, -> { where("phone IS NOT NULL") }
   scope :no_contact, -> { where("email IS NULL AND phone IS NULL") }
 
+  # @return [String] "%a %b %d %Y" formatted :created_at datetime
   def created_datetime
     created_at.strftime("%a %b %d %Y")
   end
 
   # Remove non-standard spaces and dashes and replace with ascii?
-  #
+  # @return [String]
   def shoehorn_name
     name.split(/\s/).map {|n| 
       n.split('-').map { |nn| 
         nn.capitalize }.join("-")}.join(" ")
   end
 
-  API_ATTRIBUTES = [ :id, :name, :image, :in_shop, :email, :phone, :public_email, :created_at, :updated_at ]
+  # Attributes accessible via the API
+  API_ATTRIBUTES = [ :id, :name, :image, :in_shop,
+                     :email, :phone, :public_email,
+                     :created_at, :updated_at ]
 end

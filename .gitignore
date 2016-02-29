@@ -30,3 +30,8 @@ public/system/*
 db/avatars/*
 notes/*
 public/uploads/*
+
+# YARD doc
+.yardoc/
+doc/
+

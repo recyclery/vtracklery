@@ -1,3 +1,6 @@
+#
+# Eg. Volunteer, Member, Paid Staff
+#
 class Status < ActiveRecord::Base
   has_many :workers
   has_many :work_times
@@ -6,5 +9,7 @@ class Status < ActiveRecord::Base
 
   include XmlExtensions
 
+  # Attributes accessible via the API
   API_ATTRIBUTES = [ :name, :created_at, :updated_at ]
+
 end

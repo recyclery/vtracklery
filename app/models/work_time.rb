@@ -1,3 +1,6 @@
+#
+# The hours worked by a {Worker}.
+#
 class WorkTime < ActiveRecord::Base
   belongs_to :work_status
   belongs_to :worker
@@ -22,13 +25,17 @@ class WorkTime < ActiveRecord::Base
     where(worker_id: worker_id, start_at: begin_time..end_time)
   end
 
+  # Duplication of the {Status} object
   STATUS = ["Volunteer", "Earn-a-bike", "Paid"] 
 
   # Automatically inherit the status of the worker that created it
+  # @return [Boolean] true (callback method)
   def inherit_status
     self.status_id = worker.status_id if status_id.nil?
     self.work_status_id = worker.work_status_id if work_status_id.nil?
+    return true
   end
 
+  # Attributes accessible via the API
   API_ATTRIBUTES = [ :id, :worker_name, :start_at, :end_at, :created_at, :updated_at ]
 end

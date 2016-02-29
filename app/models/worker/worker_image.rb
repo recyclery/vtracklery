@@ -12,14 +12,24 @@ module Worker::WorkerImage
   # is included
   #
   module ClassMethods
+    # @return [String]
+    def cheese_dir
+      return Settings.cheese.dir
+    end
+
+    # @return [String]
+    def default_avatar_dir
+      return Settings.avatars.default_dir
+    end
+
     # ["vimg02.png", "vimg01.png", "vimg04.png", "vimg05.png", "vimg03.png"]
     #
     # @return [Array<String>] array of default avatar filenames
     def avatar_filepaths
       filepaths = []
-      Dir.entries(Settings.avatars.default_dir).each do |file|
+      Dir.entries(default_avatar_dir).each do |file|
         filepaths.push file if file =~ /\.png/
-      end
+      end if File.directory? default_avatar_dir
       return filepaths
     end
 
@@ -27,24 +37,14 @@ module Worker::WorkerImage
     def cheese_filepaths
       filepaths = []
       begin
-        Dir.entries(Settings.cheese.dir).each do |file|
+        Dir.entries(cheese_dir).each do |file|
           filepaths.push file if file =~ /\.jpg/
-        end if File.directory? Settings.cheese.dir
+        end if File.directory? cheese_dir
       rescue #"Errno::ENOENT"
       end
       return filepaths
     end
 
-  end
-
-  # @return [String]
-  def cheese_dir
-    return Settings.cheese.dir
-  end
-
-  # @return [String]
-  def default_avatar_dir
-    return Settings.avatars.default_dir
   end
 
   # Carrierwave doesn't allow image field to be assigned directly

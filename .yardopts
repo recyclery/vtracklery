@@ -1,0 +1,16 @@
+--title 'Vtrack Documentation'
+--embed-mixin ClassMethods
+--exclude /tmp/
+--exclude /manual/
+--exclude /app/assets/
+--exclude /app/views/
+--markup-provider=redcarpet
+--markup=markdown
+--tag path:"PATH"
+--tag get:"GET"
+--tag post:"POST"
+--tag patch:"PATCH"
+--tag delete:"DELETE"
+-
+'*.md'
+'wiki/*.md'

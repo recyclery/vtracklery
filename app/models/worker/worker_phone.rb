@@ -1,15 +1,22 @@
+#
+# Methods to handle the {Worker} phone number input.
+#
 module Worker::WorkerPhone
   extend ActiveSupport::Concern
 
   #included do
   #end
 
-  module ClassMethods
-  end
+  # Class methods added to the object when {Worker::WorkerPhone}
+  # is included
+  #
+  #module ClassMethods
+  #end
 
+  # @return [String] the shoehorned phone number
   def shoehorn_phone
     # Normalize phone will return 'nil' if there aren't 10 digits
-    if out = normalize_phone
+    if out = normalize_phone # assignment is intentional!
       "(#{out[0]}) #{out[1]}-#{out[2]}"
     else
       # Some people enter two phone numbers, usually separated by a stroke
@@ -25,6 +32,8 @@ module Worker::WorkerPhone
     end
   end # def shoehorn_phone
 
+  # @return [String,nil] given 10 digit number is converted into a standard
+  #   format. Return nil if there's not exactly 10 digits.
   def normalize_phone(number = phone)
     case number
     when /^\s+/ # Begins with whitespace, remove whitespace and try again

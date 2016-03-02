@@ -20,8 +20,8 @@ class Worker < ActiveRecord::Base
   STATUS = ["Volunteer", "Member", "Paid Staff"] 
 
   scope :email_only, -> { where("email IS NOT NULL AND phone IS NULL") }
-  scope :has_email, -> { where("email IS NOT NULL") }
-  scope :has_phone, -> { where("phone IS NOT NULL") }
+  scope :has_email,  -> { where("email IS NOT NULL") }
+  scope :has_phone,  -> { where("phone IS NOT NULL") }
   scope :no_contact, -> { where("email IS NULL AND phone IS NULL") }
 
   # @return [String] "%a %b %d %Y" formatted :created_at datetime
@@ -41,4 +41,9 @@ class Worker < ActiveRecord::Base
   API_ATTRIBUTES = [ :id, :name, :image, :in_shop,
                      :email, :phone, :public_email,
                      :created_at, :updated_at ]
+
+  # Attributes accessible via the web interface
+  WEB_PARAMS = [ :name, :image, :in_shop, :email, :phone,
+                 :status_id, :work_status_id, :public_email ]
+
 end

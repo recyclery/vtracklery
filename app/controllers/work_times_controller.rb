@@ -79,6 +79,7 @@ class WorkTimesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def work_time_params
-      params.require(:work_time).permit(:start_at, :end_at, :worker_id, :status_id, :work_status_id)
+      params.require(:work_time).permit(WorkTime::WEB_PARAMS)
     end
+
 end

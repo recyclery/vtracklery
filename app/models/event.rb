@@ -104,4 +104,9 @@ class Event < ActiveRecord::Base
   API_ATTRIBUTES = [ :id, :name, :first_at, :last_at,
                      :wday, :s_hr, :s_min, :e_hr, :e_min,
                      :created_at, :updated_at ]
+
+  # Attributes accessible via the web interface
+  WEB_PARAMS = [ :name, :first_at, :last_at,
+                 :wday, :s_hr, :s_min, :e_hr, :e_min ]
+
 end

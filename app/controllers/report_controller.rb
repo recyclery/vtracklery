@@ -167,4 +167,5 @@ class ReportController < ApplicationController
 
   def yearly
   end
+
 end

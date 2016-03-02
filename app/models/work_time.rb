@@ -38,4 +38,8 @@ class WorkTime < ActiveRecord::Base
 
   # Attributes accessible via the API
   API_ATTRIBUTES = [ :id, :worker_name, :start_at, :end_at, :created_at, :updated_at ]
+
+  # Attributes accessible via the web interface
+  WEB_PARAMS = [ :start_at, :end_at, :worker_id, :status_id, :work_status_id ]
+
 end

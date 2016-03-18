@@ -12,7 +12,7 @@ sign_out_message = (xml) ->
   dialog($("worker", xml).text() + " signed out at " + 
     $("end", xml).text() + ", worked " +
     $("message", xml).text() +
-    " <a href='http://vtrack.ru.lan/shop/time/" +
+    " <a href='http://vtrack.recyclery/shop/time/" +
     $("worker_id", xml).text() +
     "'>change this</a>" +
     "<br />")

@@ -18,18 +18,21 @@ module Worker::WorkerPunchCard
     end
 
     # @param worker [Worker]
+    # @return [Boolean]
     def clock_in!(worker)
       worker = Worker.find(params[:person])
       return worker.clock_in!
     end
 
     # @param worker [Worker]
+    # @return [Worker]
     def clock_out(worker)
       worker = Worker.find(params[:person])
       return worker.clock_out
     end
 
     # @param worker [Worker]
+    # @return [Boolean]
     def clock_out!(worker)
       worker = Worker.find(params[:person])
       return worker.clock_out!
@@ -46,7 +49,9 @@ module Worker::WorkerPunchCard
   end
 
   # Should be a transaction?
-  # @return [Boolean] the result of "save && work_time.save"
+  #
+  # @return [Boolean] true if both the Worker updated_at is touched and
+  #   the WorkTime is saved.
   def clock_in!
     work_time = self.clock_in()
     return self.save && work_time.save
@@ -64,7 +69,9 @@ module Worker::WorkerPunchCard
   end
 
   # Should be a transaction?
-  # @return [Boolean] the result of "save && work_time.save"
+  #
+  # @return [Boolean] true if both the Worker updated_at is touched and
+  #   the WorkTime is saved.
   def clock_out!
     work_time = self.clock_out()
     return self.save && work_time.save

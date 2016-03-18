@@ -10,7 +10,7 @@ class Survey < ActiveRecord::Base
 
   delegate :name, to: :worker, prefix: true
 
-  # @param val [String]
+  # @param val [String] the worker name
   # @return [String]
   def worker_name=(val)
     self.worker = Worker.find_by(name: val) unless val.blank?

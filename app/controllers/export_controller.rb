@@ -18,6 +18,18 @@ class ExportController < ApplicationController
     @month = params[:month] ? params[:month].to_i : DateTime.now.month
     @year = params[:year] ? params[:year].to_i : DateTime.now.year
 
+    @workers = WorkTime.workers_for(@year, @month)
+
+    send_csv(@workers, "#{params[:year]}-#{"%0.2d" % @month}.csv") do |w|
+      [w.shoehorn_name, w.email, w.month_time_in_minutes(@year, @month),
+       w.month_time_in_minutes(@year, @month) - w.last_month_time_in_minutes(@year, @month)]
+    end
+  end
+
+  def month_totals
+    @month = params[:month] ? params[:month].to_i : DateTime.now.month
+    @year = params[:year] ? params[:year].to_i : DateTime.now.year
+
     @work_times, @workers, @total_time,
     @avg_time = WorkTime.find_stats_for(@year, @month)
 

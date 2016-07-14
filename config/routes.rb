@@ -26,6 +26,7 @@ Rails.application.routes.draw do
     get 'contact', as: 'contact_list'
     get 'event/:id', as: 'event_report', to: 'report#event'
     get 'month/:year/:month', as: 'month_report', to: 'report#month'
+    get 'month/:year/:month/totals', as: 'month_totals_report', to: 'report#month_totals'
     get 'month/:year', as: 'year_month_report', to: 'report#month'
     get 'month', as: 'current_month_report', to: 'report#month'
     get 'monthly'
@@ -61,6 +62,7 @@ Rails.application.routes.draw do
     get 'mailchimp'
     get 'worker_hours/:id', as: "worker_hours", to: "export#worker_hours"
     get 'month/:year/:month', as: "month_csv", to: "export#month"
+    get 'month/:year/:month/totals', as: "month_totals_csv", to: "export#month_totals"
     get 'year'
   end
 

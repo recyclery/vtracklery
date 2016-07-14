@@ -1,6 +1,7 @@
 class ReportController < ApplicationController
   include ReportHelper
 
+  # GET /report/active
   def active
     @workers = Worker.all
     # Have > 10 hours since last month
@@ -9,16 +10,20 @@ class ReportController < ApplicationController
   end
 
   # Page for hours that don't look right
+  #
+  # GET /report/admin
   def admin
     @work_times = WorkTime.mismatched_dates
     @logged_in = WorkTime.logged_in
     @long_volunteers = WorkTime.long_volunteers
   end
 
+  # GET /report/admin_month
   def admin_month
     @work_times = WorkTime.find_since(Date.today - 21).long_volunteers
   end
 
+  # GET /report/calendar/2015/12
   def calendar
     @month = params[:month] ? params[:month].to_i : Time.now.month
     @year = params[:year] ? params[:year].to_i : Time.now.year
@@ -51,20 +56,24 @@ class ReportController < ApplicationController
     @options = defaults.merge options
   end
 
+  # GET /report/contact
   def contact
     @workers = Worker.order(:name)
   end
 
+  # GET /report/event/1
   def event
     @count = params[:n] ? params[:n].to_i : 0
     @event = Event.find(params[:id])
     @dates = @event.dates(@count)
   end
 
+  # GET /report
   def index
     @events = Event.all
   end
 
+  # GET /report/month/2015/12
   def month
     @month = params[:month] ? params[:month].to_i : DateTime.now.month
     @year = params[:year] ? params[:year].to_i : DateTime.now.year
@@ -77,16 +86,32 @@ class ReportController < ApplicationController
     @avg_time = WorkTime.find_stats_for(@year, @month)
   end
 
+  # GET /report/month/2015/12/totals
+  def month_totals
+    @month = params[:month] ? params[:month].to_i : DateTime.now.month
+    @year = params[:year] ? params[:year].to_i : DateTime.now.year
+    @statuses = Status.find([1,2]).sort_by(&:id).reverse
+
+    @prev = WorkTime.prev(@year, @month)
+    @next = WorkTime.next(@year, @month)
+
+    @work_times, @workers, @total_time,
+    @avg_time = WorkTime.find_stats_for(@year, @month)
+  end
+
+  # GET /report/monthly
   def monthly
     @month = DateTime.now.month
     @year = DateTime.now.year
   end
 
+  # GET /report/volunteer/1
   def volunteer
     @worker = Worker.find( params[:id] )
     @work_times = @worker.work_times
   end
 
+  # GET /report/week/2015/12/31
   def week
     # SELECT start_at FROM work_times where start_at > '2008-01-01';
     # SELECT start_at FROM work_times where start_at BETWEEN '2008-01-01' AND '2008-01-31;
@@ -144,9 +169,11 @@ class ReportController < ApplicationController
     @block ||= Proc.new {|d| nil}
   end
 
+  # GET /report/weekly
   def weekly
   end
 
+  # GET /report/year/2015
   def year
     @year = params[:year] ? params[:year].to_i : Time.now.year
 
@@ -165,6 +192,7 @@ class ReportController < ApplicationController
     end
   end
 
+  # GET /report/yearly
   def yearly
   end
 

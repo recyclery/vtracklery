@@ -1,41 +1,57 @@
 <%= link_to "prev", month_report_path(WorkTime.prev(@year, @month)) %>
 <%= link_to "next", month_report_path(WorkTime.next(@year, @month)) %>
 
-<div style="width: 100%; text-align: center;">
-<h1><%= Date::MONTHNAMES[@month] %> <%= @year %></h1>
-</div>
-<table><tbody>
-    <tr><td>Total time: </td><td><%= @total_time %></td></tr>
-    <tr><td>Avg time: </td><td><%= @avg_time %></td></tr>
-<% for s in @statuses -%>
-<% work_times, workers, total, 
-   avg = WorkTime.status_stats_for(s, @year, @month) -%>
-    <tr><td>Total <%= s.name %> time: </td><td><%= total %></td></tr>
-    <tr><td>Avg <%= s.name %> time: </td><td><%= avg %></td></tr>
-<% end -%>
-</tbody></table>
-
-<br />
-
 <% for status in @statuses -%>
 <% workers = WorkTime.worker_type_for(status, @year, @month) -%>
 <h3><%= status.name.pluralize %> (<%= workers.size %>)</h3>
-<div width="400px">
-<% workers.each do |worker| -%>
-  <div style="float: left; padding-right: 1em; padding-bottom: 1ex;">
-<%= link_to worker.shoehorn_name, worker_report_path(worker) %>
-  </div>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Minutes</th>
+      <th>Last month</th>
+    </tr>
+  </thead>
+  <tbody>
+<% workers.sort_by(&:name).each do |worker| -%>
+<tr>
+  <td>
+    <%= link_to worker.shoehorn_name, worker_report_path(worker) %>
+  </td>
+  <td>
+    <%= worker.email %>
+  </td>
+  <td style='text-align: right;'>
+    <% this_month = worker.month_time_in_minutes(@year, @month) %>
+    <%= this_month %>
+  </td>
+  <td style='text-align: right;'>
+    <% last_month = worker.last_month_time_in_minutes(@year, @month) %>
+    <%= last_month %>
+  </td>
+  <td style='text-align: right;'>
+    <% change = this_month - last_month %>
+    <% if change > 0 %>
+    <span style='color: green;'>
+      +<%= change %>
+    </span>
+    <% else %>
+    <span style='color: red;'>
+      <%= change %>
+    </span>
+    <% end %>
+  </td>
+</tr>
 <% end -%>
-</div>
-<div style="clear: both;"></div>
+  </tbody>
+</table>
 <% end -%>
 
 <br />
 
 <h2>Hours</h2>
-<%=link_to 'export to csv', month_csv_path(year: @year, month: @month) %>
-<table><tbody>
-<% for work_time in @work_times -%>
-<tr><td><%= work_time.difference_to_s %></td><td><%= work_time.worker.name %></td><td><%= work_time.visit_date %></td></tr>
-<% end -%>
-</tbody></table>
+<nav>
+  <%=link_to 'export to csv', month_csv_path(year: @year, month: @month) %> |
+  <%=link_to 'month totals', month_totals_report_path(year: @year, month: @month) %>
+</nav>

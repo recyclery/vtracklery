@@ -18,6 +18,38 @@ module Worker::WorkerHours
     work_times.empty? ? false : true
   end
 
+  # @param year [Integer]
+  # @param month [Integer]
+  def last_month_time_in_seconds(year, month)
+    date = Time.new(year, month) - 1.month
+    return sum_time_in_seconds(date.beginning_of_month, date.end_of_month)
+  end
+
+  # @param year [Integer]
+  # @param month [Integer]
+  def last_month_time_in_minutes(year, month)
+    return last_month_time_in_seconds(year, month) / 60
+  end
+
+  # @param year [Integer]
+  # @param month [Integer]
+  def month_time_in_seconds(year, month)
+    date = Time.new(year, month)
+    return sum_time_in_seconds(date.beginning_of_month, date.end_of_month)
+  end
+
+  # @param year [Integer]
+  # @param month [Integer]
+  def month_time_in_minutes(year, month)
+    return month_time_in_seconds(year, month) / 60
+  end
+
+  # @param year [Integer]
+  # @param month [Integer]
+  def month_time_in_hours(year, month)
+    return month_time_in_minutes(year, month) / 60
+  end
+
   # @param begin_time [DateTime]
   # @param end_time [DateTime]
   # @return [Integer] the difference between the times in seconds

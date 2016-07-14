@@ -26,6 +26,7 @@ Rails.application.routes.draw do
     get 'contact', as: 'contact_list'
     get 'event/:id', as: 'event_report', to: 'report#event'
     get 'month/:year/:month', as: 'month_report', to: 'report#month'
+    get 'month/:year/:month/totals', as: 'month_totals_report', to: 'report#month_totals'
     get 'month/:year', as: 'year_month_report', to: 'report#month'
     get 'month', as: 'current_month_report', to: 'report#month'
     get 'monthly'

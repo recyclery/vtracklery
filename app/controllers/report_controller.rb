@@ -86,6 +86,19 @@ class ReportController < ApplicationController
     @avg_time = WorkTime.find_stats_for(@year, @month)
   end
 
+  # GET /report/month/2015/12/totals
+  def month_totals
+    @month = params[:month] ? params[:month].to_i : DateTime.now.month
+    @year = params[:year] ? params[:year].to_i : DateTime.now.year
+    @statuses = Status.find([1,2]).sort_by(&:id).reverse
+
+    @prev = WorkTime.prev(@year, @month)
+    @next = WorkTime.next(@year, @month)
+
+    @work_times, @workers, @total_time,
+    @avg_time = WorkTime.find_stats_for(@year, @month)
+  end
+
   # GET /report/monthly
   def monthly
     @month = DateTime.now.month

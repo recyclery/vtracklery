@@ -33,7 +33,7 @@
 <br />
 
 <h2>Hours</h2>
-<%=link_to 'export to csv', month_csv_path(year: @year, month: @month) %>
+<%=link_to 'export to csv', month_totals_csv_path(year: @year, month: @month) %>
 <table><tbody>
 <% for work_time in @work_times -%>
 <tr><td><%= work_time.difference_to_s %></td><td><%= work_time.worker.name %></td><td><%= work_time.visit_date %></td></tr>

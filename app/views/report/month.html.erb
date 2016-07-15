@@ -9,8 +9,9 @@
     <tr>
       <th>Name</th>
       <th>Email</th>
-      <th>Minutes</th>
+      <th>Hours</th>
       <th>Last month</th>
+      <th>Change</th>
     </tr>
   </thead>
   <tbody>
@@ -24,21 +25,21 @@
   </td>
   <td style='text-align: right;'>
     <% this_month = worker.month_time_in_minutes(@year, @month) %>
-    <%= this_month %>
+    <%= "%0.2f" % (this_month / 60.0) %>
   </td>
   <td style='text-align: right;'>
     <% last_month = worker.last_month_time_in_minutes(@year, @month) %>
-    <%= last_month %>
+    <%= "%0.2f" % (last_month / 60.0) %>
   </td>
   <td style='text-align: right;'>
     <% change = this_month - last_month %>
     <% if change > 0 %>
     <span style='color: green;'>
-      +<%= change %>
+      +<%= "%0.2f" % (change / 60.0) %>
     </span>
     <% else %>
     <span style='color: red;'>
-      <%= change %>
+      <%= "%0.2f" % (change / 60.0) %>
     </span>
     <% end %>
   </td>

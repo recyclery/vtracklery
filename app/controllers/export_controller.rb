@@ -21,8 +21,12 @@ class ExportController < ApplicationController
     @workers = WorkTime.workers_for(@year, @month)
 
     send_csv(@workers, "#{params[:year]}-#{"%0.2d" % @month}.csv") do |w|
-      [w.shoehorn_name, w.email, w.month_time_in_minutes(@year, @month),
-       w.month_time_in_minutes(@year, @month) - w.last_month_time_in_minutes(@year, @month)]
+      this_month = w.month_time_in_minutes(@year, @month)
+      last_month = w.last_month_time_in_minutes(@year, @month)
+      change = this_month - last_month
+      this_month_s = "%0.2f" % (this_month / 60.0)
+      change_s = "%0.2f" % (change / 60.0)
+      [w.shoehorn_name, w.email, this_month_s, change_s]
     end
   end
 

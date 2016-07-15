@@ -33,7 +33,12 @@ module Worker::WorkerImage
       return filepaths
     end
 
-    # @return [Array<String>] array of filenames based on cheese.dir setting
+    # @return [String] The directory headshots taken with Cheese are stored
+    def cheese_dir
+      return Settings.cheese.dir
+    end
+
+    # @return [Array<String>]
     def cheese_filepaths
       filepaths = []
       begin
@@ -43,6 +48,11 @@ module Worker::WorkerImage
       rescue #"Errno::ENOENT"
       end
       return filepaths
+    end
+
+    # @return [String]
+    def default_avatar_dir
+      return Settings.avatars.default_dir
     end
 
   end
@@ -84,7 +94,7 @@ module Worker::WorkerImage
     #end
   end
 
-  # @return [Boolean] true if file at :avatar_path exists
+  # @return [Boolean] true if there's a file at #avatar_path
   def image_exists?
     File.exists?(avatar_path)
   end

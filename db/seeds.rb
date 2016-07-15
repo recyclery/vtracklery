@@ -14,7 +14,7 @@ WorkTimeSeeder.seed { print '.' }
 print "\nLoading events"
 EventSeeder.seed { print '.' }
 
-print "\nLoading surveys"
-SurveySeeder.seed { print '.' }
+#print "\nLoading surveys"
+#SurveySeeder.seed { print '.' }
 
 print "\n"

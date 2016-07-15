@@ -34,7 +34,7 @@ db/avatars/*
 notes/*
 public/uploads/*
 
-# YARD doc
+# Hide automatically generated documentation
 .yardoc/
 doc/
 

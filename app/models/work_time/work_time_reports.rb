@@ -11,7 +11,7 @@ module WorkTime::WorkTimeReports
 
   module ClassMethods
 
-    # @return [Array<WorkTime>] Volunteer WorkTimes longer than 5 hours
+    # @return [Array<WorkTime>] volunteer WorkTimes longer than 5 hours
     def long_volunteers
       all.select do |work_time|
         work_time.difference_in_hours > 5 && work_time.worker.status_id == 1
@@ -26,7 +26,8 @@ module WorkTime::WorkTimeReports
       end
     end
 
-    # @return [Boolean] true if this current month has wonky volunteer hours
+    # @return [Boolean] true if this month has volunteers whose hours went
+    #   too long.
     def has_long_hours?
       find_for_this_month.long_volunteers.count > 0
     end

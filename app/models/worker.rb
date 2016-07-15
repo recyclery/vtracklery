@@ -30,7 +30,8 @@ class Worker < ActiveRecord::Base
   end
 
   # Remove non-standard spaces and dashes and replace with ascii?
-  # @return [String]
+  #
+  # @return [String] standardized version of worker name for filenames etc.
   def shoehorn_name
     name.split(/\s/).map {|n| 
       n.split('-').map { |nn| 

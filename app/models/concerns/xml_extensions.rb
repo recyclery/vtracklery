@@ -69,12 +69,31 @@ module XmlExtensions
       self.nested_attributes_options.keys.map(&:to_s)
     end
 
+    def has_carrierwave_image_tags?
+      defined?(CarrierWave) && self.cache_attributes.include?("image")
+    end
+
+    #
+    # Replace 'image' tags with 'seed_image' which inserts the image in a
+    # way Carrierwave accepts.
+    #
+    def replace_image_tags(xml_text)
+      doc = Nokogiri::XML(xml_text)
+      doc.xpath("//image").each { |c| c.name = "seed_image" }
+      return doc.to_xml
+    end
+
     #
     # Replace normal xml tags with ones that support
     # Model.accepts_nested_attributes_for
     #
     def replace_nested_xml_tags(xml_text)
-      if nested_attributes_tags.empty? then return xml_text
+      if nested_attributes_tags.empty?
+        if has_carrierwave_image_tags?
+          return replace_image_tags(xml_text)
+        else
+          return xml_text
+        end
       else
         doc = Nokogiri::XML(xml_text)
         self.nested_attributes_tags.each do |old_tag|
@@ -82,7 +101,12 @@ module XmlExtensions
             c.name = "#{old_tag}_attributes"
           end
         end
-        return doc.to_xml
+
+        if has_carrierwave_image_tags?
+          return replace_image_tags(doc.to_xml)
+        else
+          return doc.to_xml
+        end
       end
     end
 

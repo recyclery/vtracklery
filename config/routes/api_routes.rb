@@ -20,6 +20,8 @@ module Routes
               get :shop
               get :active
               get :missing
+              get :email
+              get :where
             end
             member do
               post :sign_in

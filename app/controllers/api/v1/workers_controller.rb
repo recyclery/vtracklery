@@ -6,18 +6,51 @@ class Api::V1::WorkersController < Api::V1::BaseController
     @workers = Worker.all
   end
 
+  # All workers currently in the shop
+  #
   # GET /api/v1/workers/shop.json
   def shop
     @workers = Worker.clocked_in
     render :index
   end
 
+  # Find workers by email.
+  #
+  # GET /api/v1/workers/email?value=example@example.com
+  def email
+    email = params[:value]
+    @workers = Worker.where(email: email)
+    render :index
+  end
+
+  # Find workers by email or phone.
+  # This works okay for email, but since phone numbers aren't normalized in
+  # the database, they aren't guarunteed to work as well.
+  #
+  # GET /api/v1/workers/where.json
+  # GET /api/v1/workers/where.json?email=example@example.com
+  # GET /api/v1/workers/where?phone=3125550192
+  def where
+    email = params[:email]
+    phone = params[:phone]
+    if email then @workers = Worker.where(email: email)
+    elsif phone then @workers = Worker.where(phone: phone)
+    end
+    render :index
+  end
+
+  # Have > 10 hours since last month
+  #
+  # @see Worker::WorkerReports::ClassMethods#active_workers
   # GET /api/v1/workers/active.json
   def active
     @workers = Worker.active_workers
     render :index
   end
 
+  # Have > 10 hours since last month and haven't been in the last two weeks
+  #
+  # @see Worker::WorkerReports::ClassMethods#missing_list
   # GET /api/v1/workers/missing.json
   def missing
     @workers = Worker.missing_list

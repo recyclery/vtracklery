@@ -1,0 +1,32 @@
+[general]
+accounts = yandex-accountname
+ui = ttyui
+
+[Account yandex-accountname]
+localrepository = yandex-accountname-local
+remoterepository = yandex-accountname-remote
+status_backend = sqlite
+
+[Repository yandex-accountname-local]
+type = Maildir
+localfolders = ~/mail/yandex/accountname
+nametrans = lambda folder: {'sent': '&BB4EQgQ,BEAEMAQyBDsENQQ9BD0ESwQ1-',
+                            'outbox': '&BBgEQQRFBD4ENARPBEkEOAQ1-',
+                            'drafts': '&BCcENQRABD0EPgQyBDgEOgQ4-',
+                            'spam': '&BCEEPwQwBDw-',
+                            'trash': '&BCMENAQwBDsENQQ9BD0ESwQ1-',
+                            'inbox': 'INBOX'}.get(folder, folder)
+
+[Repository yandex-accountname-remote]
+type = IMAP
+remotehost = imap.yandex.com
+remoteport = 143
+remoteuser = accountname@yandex.com
+remotepass = oxcmfj4fsk
+nametrans = lambda folder: {'&BB4EQgQ,BEAEMAQyBDsENQQ9BD0ESwQ1-': 'sent',
+                            '&BBgEQQRFBD4ENARPBEkEOAQ1-': 'outbox',
+                            '&BCcENQRABD0EPgQyBDgEOgQ4-': 'drafts',
+                            '&BCEEPwQwBDw-': 'spam',
+                            '&BCMENAQwBDsENQQ9BD0ESwQ1-': 'trash',
+                            'INBOX': 'inbox'}.get(folder, folder)
+folderfilter = lambda folder: folder not in ['&BCMENAQwBDsENQQ9BD0ESwQ1-']

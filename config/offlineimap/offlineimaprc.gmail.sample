@@ -1,0 +1,24 @@
+[general]
+accounts = gmail-accountname
+ui = ttyui
+
+[Account gmail-accountname]
+localrepository = gmail-accountname-local
+remoterepository = gmail-accountname-remote
+status_backend = sqlite
+
+[Repository gmail-accountname-local]
+type = Maildir
+localfolders = ~/mail/gmail/accountname
+nametrans = lambda folder: {'archive': '[Gmail]/All Mail',
+                            }.get(folder, folder)
+
+[Repository gmail-accountname-remote]
+type = Gmail
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+remoteuser = accountname@gmail.com
+remotepass = lasdfewDD
+nametrans = lambda folder: {'[Gmail]/All Mail': 'archive',
+                            }.get(folder, folder)
+folderfilter = lambda folder: folder == '[Gmail]/All Mail'
+

@@ -1,6 +1,8 @@
 <table><tr><td width="280px" style="vertical-align: top;">
 <!-- </td><td><tr><td> -->
+<% unless @worker.previous.nil? %>
 <%= link_to 'previous', worker_report_path(@worker.previous) %>
+<% end %>
 <%= link_to 'next', worker_report_path(@worker.next) %>
 <div style="vertical-align: top;">
   <img height="200px" src="<%= @worker.avatar_url %>" />

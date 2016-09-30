@@ -6,6 +6,8 @@ class Api::V1::WorkTimesController < Api::V1::BaseController
     @work_times = WorkTime.all
   end
 
+  # WorkTime records where :end_at is nil
+  #
   # GET /api/v1/work_times/logged_in.json
   def logged_in
     @work_times = WorkTime.logged_in

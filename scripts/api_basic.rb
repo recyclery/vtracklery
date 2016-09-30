@@ -2,14 +2,25 @@ require 'faraday'
 require 'faraday_middleware'
 require 'json'
 
+# Sample script for logging in through the API with an email address
+#
+#    #!/usr/bin/env ruby
+#    require_relative 'api_basic'
+#    email = ARGV[0] || "example@example.com"
+#    vtrack = ApiBasic.new('http://vtrack.domain')
+#    worker_id = vtrack.api_get_worker(email)
+#    vtrack.sign_in(worker_id)
+#
 class ApiBasic
-  URL = 'http://localhost:3000/api/v1'
+  URL = 'http://localhost:3000'
 
+  # @param url [String] The base domain for the Api
   def initialize(url = URL)
-    @base_url = url
+    @base_url = "#{url}/api/v1"
     api_connection
   end
 
+  # @return [Faraday::Connection]
   def api_connection
     @conn = Faraday.new(url: @base_url) do |faraday|
       faraday.request :url_encoded
@@ -19,6 +30,8 @@ class ApiBasic
     @conn.basic_auth('admin', 'password')
   end
 
+  # @param email [String] the email for the worker
+  # @return [Integer] the worker's database id
   def api_get_worker(email)
     response = @conn.get 'workers/email', { value: email }
     workers = response.body
@@ -30,11 +43,15 @@ class ApiBasic
     end
   end
 
+  # @param worker_id [Integer] the worker's database id
+  # @return [Hash]
   def sign_in(worker_id)
     response = @conn.post "workers/#{worker_id}/sign_in"
     return response.body
   end
 
+  # @param worker_id [Integer] the worker's database id
+  # @return [Hash]
   def sign_out(worker_id)
     response = @conn.post "workers/#{worker_id}/sign_out"
     return response.body

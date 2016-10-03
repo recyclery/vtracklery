@@ -39,6 +39,9 @@ class WorkerWorkerPunchCardTest < ActiveSupport::TestCase
     work_time = worker.latest_record
     assert_equal t_in, work_time.start_at
 
+    work_time = worker.latest_record
+    assert_equal t_in, work_time.start_at
+
     t_out = DateTime.current + 10
 
     worker.clock_out(t_out)
@@ -47,5 +50,26 @@ class WorkerWorkerPunchCardTest < ActiveSupport::TestCase
     work_time = worker.latest_record
     assert_equal t_in, work_time.start_at
     assert_equal t_out, work_time.end_at
+
+    e_in = (DateTime.current - 10).to_i
+
+    worker.clock_in(e_in.to_i)
+    assert_equal e_in, worker.updated_at.to_i
+
+    work_time = worker.latest_record
+    assert_equal e_in, work_time.start_at.to_i
+
+    work_time = worker.latest_record
+    assert_equal e_in, work_time.start_at.to_i
+
+    e_out = (DateTime.current + 10).to_i
+
+    worker.clock_out(e_out)
+    assert_equal e_out, worker.updated_at.to_i
+    
+    work_time = worker.latest_record
+    assert_equal e_in, work_time.start_at.to_i
+    assert_equal e_out, work_time.end_at.to_i
   end
+
 end

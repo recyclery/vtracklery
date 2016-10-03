@@ -12,7 +12,7 @@ module Worker::WorkerPunchCard
   # I don't think any of these are used, as they are broken.
   module ClassMethods
     # @param worker [Worker]
-    # @param t [DateTime] the time the worker clocked in
+    # @param t [DateTime,Integer] the time the worker clocked in
     # @return [WorkTime]
     def clock_in(worker, t = DateTime.current)
       worker = Worker.find(params[:person])
@@ -20,7 +20,7 @@ module Worker::WorkerPunchCard
     end
 
     # @param worker [Worker]
-    # @param t [DateTime] the time the worker clocked in
+    # @param t [DateTime,Integer] the time the worker clocked in
     # @return [Boolean]
     def clock_in!(worker, t = DateTime.current)
       worker = Worker.find(params[:person])
@@ -28,15 +28,16 @@ module Worker::WorkerPunchCard
     end
 
     # @param worker [Worker]
-    # @param t [DateTime] the time the worker clocked out
+    # @param t [DateTime,Integer] the time the worker clocked out
     # @return [WorkTime]
     def clock_out(worker, t = DateTime.current)
+      t = Time.at(t) if t.is_a?(Integer)
       worker = Worker.find(params[:person])
       return worker.clock_out(t)
     end
 
     # @param worker [Worker]
-    # @param t [DateTime] the time the worker clocked out
+    # @param t [DateTime,Integer] the time the worker clocked out
     # @return [Boolean]
     def clock_out!(worker, t = DateTime.current)
       worker = Worker.find(params[:person])
@@ -44,9 +45,10 @@ module Worker::WorkerPunchCard
     end
   end
 
-  # @param t [DateTime] the time the worker clocked in
+  # @param t [DateTime,Integer] the time the worker clocked in
   # @return [WorkTime] the {WorkTime} with :start_at and :worker_id filled in
   def clock_in(t = DateTime.current)
+    t = Time.at(t) if t.is_a?(Integer)
     work_time = self.work_times.build()
     self.updated_at = t
     work_time.start_at = t
@@ -56,7 +58,7 @@ module Worker::WorkerPunchCard
 
   # Should be a transaction?
   #
-  # @param t [DateTime] the time the worker clocked in
+  # @param t [DateTime,Integer] the time the worker clocked in
   # @return [Boolean] true if both the Worker updated_at is touched and
   #   the WorkTime is saved.
   def clock_in!(t = DateTime.current)
@@ -64,10 +66,11 @@ module Worker::WorkerPunchCard
     return self.save && work_time.save
   end
 
-  # @param t [DateTime] the time the worker clocked out
+  # @param t [DateTime,Integer] the time the worker clocked out
   # @return [WorkTime] the last {WorkTime} is given a :end_at value, and
   #   :updated_at and :in_shop is updated.
   def clock_out(t = DateTime.current)
+    t = Time.at(t) if t.is_a?(Integer)
     work_time = self.work_times.last
     self.updated_at = t  # To help sort by recently in shop
     work_time.end_at = t
@@ -78,7 +81,7 @@ module Worker::WorkerPunchCard
 
   # Should be a transaction?
   #
-  # @param t [DateTime] the time the worker clocked out
+  # @param t [DateTime,Integer] the time the worker clocked out
   # @return [Boolean] true if both the Worker updated_at is touched and
   #   the WorkTime is saved.
   def clock_out!(t = DateTime.current)

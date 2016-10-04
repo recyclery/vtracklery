@@ -44,16 +44,24 @@ class ApiBasic
   end
 
   # @param worker_id [Integer] the worker's database id
+  # @param e [Integer] the unix time (epoch) the worker clocked in
   # @return [Hash]
-  def sign_in(worker_id)
-    response = @conn.post "workers/#{worker_id}/sign_in"
+  def sign_in(worker_id, e = nil)
+    if e.nil? then response = @conn.post "workers/#{worker_id}/sign_in"
+    else response = @conn.post("workers/#{worker_id}/sign_in", { epoch: e })
+    end
+
     return response.body
   end
 
   # @param worker_id [Integer] the worker's database id
+  # @param epoch [Integer] the unix time (epoch) the worker clocked out
   # @return [Hash]
-  def sign_out(worker_id)
-    response = @conn.post "workers/#{worker_id}/sign_out"
+  def sign_out(worker_id, e = nil)
+    if e.nil? then response = @conn.post "workers/#{worker_id}/sign_out"
+    else response = @conn.post("workers/#{worker_id}/sign_out", { epoch: e })
+    end
+
     return response.body
   end
 

@@ -78,7 +78,9 @@ class Api::V1::WorkersController < Api::V1::BaseController
 
   # POST /api/v1/workers/1/sign_in.json
   def sign_in
-    @work_time = @worker.clock_in()
+    if params[:epoch].blank? then @work_time = @worker.clock_in
+    else @work_time = @worker.clock_in(params[:epoch].to_i)
+    end
     @start = @work_time.start_time
 
     if @worker.save && @work_time.save
@@ -91,7 +93,9 @@ class Api::V1::WorkersController < Api::V1::BaseController
 
   # POST /api/v1/workers/1/sign_out.json
   def sign_out
-    @work_time = @worker.clock_out
+    if params[:epoch].blank? then @work_time = @worker.clock_out
+    else @work_time = @worker.clock_out(params[:epoch].to_i)
+    end
     @end = @work_time.end_at.strftime("%I:%M%p")
 
     if @worker.save and @work_time.save
@@ -129,6 +133,6 @@ class Api::V1::WorkersController < Api::V1::BaseController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def worker_params
-      params.require(:worker).permit(:id, :name, :image, :in_shop, :email, :phone, :public_email, :created_at, :updated_at)
+      params.require(:worker).permit(Worker::API_ATTRIBUTES)
     end
 end

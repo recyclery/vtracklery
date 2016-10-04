@@ -48,16 +48,30 @@ class Api::V1::WorkersControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should sign in" do
+  test "should sign in and out" do
     assert_difference('WorkTime.count') do
       xhr :post, :sign_in, id: @worker
     end
     assert_response :success
-  end
 
-  test "should sign out" do
     xhr :post, :sign_out, id: @worker
     assert_response :success
+  end
+
+  test "should sign in and out - epoch" do
+    e_in = (DateTime.current - 10).to_i
+    assert_difference('WorkTime.count') do
+      xhr :post, :sign_in, id: @worker, epoch: e_in
+    end
+    assert_response :success
+
+    e_out = (DateTime.current - 10).to_i
+    xhr :post, :sign_out, id: @worker, epoch: e_out
+    assert_response :success
+
+    work_time = @worker.latest_record
+    assert_equal e_in, work_time.start_at.to_i
+    assert_equal e_out, work_time.end_at.to_i
   end
 
   test "should show worker" do

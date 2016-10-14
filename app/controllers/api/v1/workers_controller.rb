@@ -1,5 +1,5 @@
 class Api::V1::WorkersController < Api::V1::BaseController
-  before_action :set_worker, only: [:show, :edit, :sign_in, :sign_out, :update, :destroy]
+  before_action :set_worker, only: [:show, :email, :phone, :edit, :sign_in, :sign_out, :update, :destroy]
 
   # GET /api/v1/workers.json
   def index
@@ -11,15 +11,6 @@ class Api::V1::WorkersController < Api::V1::BaseController
   # GET /api/v1/workers/shop.json
   def shop
     @workers = Worker.clocked_in
-    render :index
-  end
-
-  # Find workers by email.
-  #
-  # GET /api/v1/workers/email?value=example@example.com
-  def email
-    email = params[:value]
-    @workers = Worker.where(email: email)
     render :index
   end
 
@@ -76,8 +67,22 @@ class Api::V1::WorkersController < Api::V1::BaseController
     end
   end
 
-  # POST /api/v1/workers/1/sign_in.json
-  def sign_in
+  # GET /api/v1/workers/1/email.json
+  def email
+    respond_to do |format|
+      format.json { render json: @worker.email }
+    end
+  end
+
+  # GET /api/v1/workers/1/phone.json
+  def phone
+    respond_to do |format|
+      format.json { render json: @worker.phone }
+    end
+  end
+
+  # POST /api/v1/workers/1/clock_in.json
+  def clock_in
     if params[:epoch].blank? then @work_time = @worker.clock_in
     else @work_time = @worker.clock_in(params[:epoch].to_i)
     end
@@ -91,8 +96,8 @@ class Api::V1::WorkersController < Api::V1::BaseController
     end
   end
 
-  # POST /api/v1/workers/1/sign_out.json
-  def sign_out
+  # POST /api/v1/workers/1/clock_out.json
+  def clock_out
     if params[:epoch].blank? then @work_time = @worker.clock_out
     else @work_time = @worker.clock_out(params[:epoch].to_i)
     end

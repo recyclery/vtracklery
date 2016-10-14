@@ -20,12 +20,13 @@ module Routes
               get :shop
               get :active
               get :missing
-              get :email
               get :where
             end
             member do
-              post :sign_in
-              post :sign_out
+              get :email
+              get :phone
+              post :clock_in
+              post :clock_out
             end
           end
 

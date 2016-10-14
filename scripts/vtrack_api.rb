@@ -8,13 +8,13 @@ require 'json'
 #    require_relative 'api_basic'
 #    email = ARGV[0] || "example@example.com"
 #    phone = ARGV[1] || "18475551212"
-#    vtrack = ApiBasic.new('http://vtrack.domain')
+#    vtrack = VtrackApi.new('http://vtrack.domain')
 #    worker_id = vtrack.api_get_worker_by_email(email)
 #    vtrack.clock_in(worker_id)
 #    worker_id = vtrack.api_get_worker_by_phone(phone)
 #    vtrack.clock_out(worker_id)
 #
-class ApiBasic
+class VtrackApi
   URL = 'http://localhost:3000'
 
   # @param url [String] The base domain for the Api
@@ -61,7 +61,7 @@ class ApiBasic
 
   # @param worker_id [Integer] the worker's database id
   # @param e [Integer] the unix time (epoch) the worker clocked in
-  # @return [Hash]
+  # @return [String]
   def get_email(worker_id)
     raise "Invalid worker_id: #{worker_id}" if ["",nil].include?(worker_id)
     response = @conn.get "workers/#{worker_id}/email"
@@ -71,7 +71,7 @@ class ApiBasic
 
   # @param worker_id [Integer] the worker's database id
   # @param e [Integer] the unix time (epoch) the worker clocked in
-  # @return [Hash]
+  # @return [String]
   def get_phone(worker_id)
     raise "Invalid worker_id: #{worker_id}" if ["",nil].include?(worker_id)
     response = @conn.get "workers/#{worker_id}/phone"

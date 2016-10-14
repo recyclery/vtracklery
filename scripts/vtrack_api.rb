@@ -10,9 +10,9 @@ require 'json'
 #    phone = ARGV[1] || "18475551212"
 #    vtrack = VtrackApi.new('http://vtrack.domain')
 #    worker_id = vtrack.get_worker_by_email(email)
-#    vtrack.clock_in(worker_id)
+#    vtrack.clock_in!(worker_id)
 #    worker_id = vtrack.get_worker_by_phone(phone)
-#    vtrack.clock_out(worker_id)
+#    vtrack.clock_out!(worker_id)
 #
 class VtrackApi
   URL = 'http://localhost:3000'
@@ -82,7 +82,7 @@ class VtrackApi
   # @param worker_id [Integer] the worker's database id
   # @param e [Integer] the unix time (epoch) the worker clocked in
   # @return [Hash]
-  def clock_in(worker_id, e = nil)
+  def clock_in!(worker_id, e = nil)
     raise "Invalid worker_id: #{worker_id}" if ["",nil].include?(worker_id)
     if e.nil? then response = @conn.post "workers/#{worker_id}/clock_in"
     else response = @conn.post("workers/#{worker_id}/clock_in", { epoch: e })
@@ -94,7 +94,7 @@ class VtrackApi
   # @param worker_id [Integer] the worker's database id
   # @param epoch [Integer] the unix time (epoch) the worker clocked out
   # @return [Hash]
-  def clock_out(worker_id, e = nil)
+  def clock_out!(worker_id, e = nil)
     raise "Invalid worker_id: #{worker_id}" if ["",nil].include?(worker_id)
     if e.nil? then response = @conn.post "workers/#{worker_id}/clock_out"
     else response = @conn.post("workers/#{worker_id}/clock_out", { epoch: e })

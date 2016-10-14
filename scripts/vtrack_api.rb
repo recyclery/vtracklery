@@ -9,9 +9,9 @@ require 'json'
 #    email = ARGV[0] || "example@example.com"
 #    phone = ARGV[1] || "18475551212"
 #    vtrack = VtrackApi.new('http://vtrack.domain')
-#    worker_id = vtrack.api_get_worker_by_email(email)
+#    worker_id = vtrack.get_worker_by_email(email)
 #    vtrack.clock_in(worker_id)
-#    worker_id = vtrack.api_get_worker_by_phone(phone)
+#    worker_id = vtrack.get_worker_by_phone(phone)
 #    vtrack.clock_out(worker_id)
 #
 class VtrackApi
@@ -35,7 +35,7 @@ class VtrackApi
 
   # @param email [String] the email for the worker
   # @return [Integer] the worker's database id
-  def api_get_worker_by_email(email)
+  def get_worker_by_email(email)
     response = @conn.get 'workers/where', { email: email }
     workers = response.body
 
@@ -48,7 +48,7 @@ class VtrackApi
 
   # @param phone [String] the phone for the worker
   # @return [Integer] the worker's database id
-  def api_get_worker_by_phone(phone)
+  def get_worker_by_phone(phone)
     response = @conn.get 'workers/where', { phone: phone }
     workers = response.body
 

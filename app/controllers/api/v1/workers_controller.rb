@@ -65,7 +65,7 @@ class Api::V1::WorkersController < Api::V1::BaseController
 
     if @worker.save && @work_time.save
       respond_to do |format|
-        format.json { render json: @work_time }
+        format.json { render json: @work_time.to_json }
         #render @worker.to_xml
       end
     end
@@ -80,7 +80,7 @@ class Api::V1::WorkersController < Api::V1::BaseController
 
     if @worker.save and @work_time.save
       respond_to do |format|
-        format.json { render json: @work_time }
+        format.json { render json: @work_time.to_json }
       end
     end
   end
@@ -88,21 +88,21 @@ class Api::V1::WorkersController < Api::V1::BaseController
   # GET /api/v1/workers/1/email.json
   def email
     respond_to do |format|
-      format.json { render json: @worker.email }
+      format.json { render json: @worker.email.to_json }
     end
   end
 
   # GET /api/v1/workers/1/phone.json
   def phone
     respond_to do |format|
-      format.json { render json: @worker.phone }
+      format.json { render json: @worker.phone.to_json }
     end
   end
 
   # GET /api/v1/workers/1.json
   def show
     respond_to do |format|
-      format.json { render json: @worker }
+      format.json { render json: @worker.to_json }
     end
   end
 

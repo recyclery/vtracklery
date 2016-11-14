@@ -33,6 +33,14 @@ class VtrackApi
     @conn.basic_auth('admin', 'password')
   end
 
+  # @param day [Date,Time] split into :year, :month, and :day
+  # @return [Array<String>] list of workers names that appears on that day
+  def get_day_workers(day)
+    #response = @conn.get 'report/workers', { year: day.year, month: day.month, day: day.day }
+    response = @conn.get "report/workers/#{day.year}/#{day.month}/#{day.day}"
+    return response.body["workers"].map { |w| w["name"] }
+  end
+
   # @param email [String] the email for the worker
   # @return [Integer] the worker's database id
   def get_worker_by_email(email)
@@ -59,8 +67,14 @@ class VtrackApi
     end
   end
 
+  # @return [Array<String,String>] the beginning and end date for the current report week
+  def get_current_report_week
+    response = @conn.get "report/weekof"
+
+    return response.body
+  end
+
   # @param worker_id [Integer] the worker's database id
-  # @param e [Integer] the unix time (epoch) the worker clocked in
   # @return [String]
   def get_email(worker_id)
     raise "Invalid worker_id: #{worker_id}" if ["",nil].include?(worker_id)
@@ -70,13 +84,20 @@ class VtrackApi
   end
 
   # @param worker_id [Integer] the worker's database id
-  # @param e [Integer] the unix time (epoch) the worker clocked in
   # @return [String]
   def get_phone(worker_id)
     raise "Invalid worker_id: #{worker_id}" if ["",nil].include?(worker_id)
     response = @conn.get "workers/#{worker_id}/phone"
 
     return response.body
+  end
+
+  # @param worker_id [Integer] the worker's database id
+  # @return [String]
+  def get_status(worker_id)
+    response = @conn.get "workers/#{worker_id}/status"
+    status = response.body
+    return status
   end
 
   # @param worker_id [Integer] the worker's database id

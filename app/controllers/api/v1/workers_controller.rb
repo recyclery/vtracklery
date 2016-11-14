@@ -1,9 +1,35 @@
+#
+# Methods are in the following order:
+# 1) GET colletion methods (alpha order)
+# 2) GET member methods (alpha order)
+# 3) POST collection methods
+# 4) PUT member methods
+# 5) DELETE member methods
+#
 class Api::V1::WorkersController < Api::V1::BaseController
   before_action :set_worker, only: [:show, :email, :phone, :edit, :sign_in, :sign_out, :update, :destroy]
 
   # GET /api/v1/workers.json
   def index
     @workers = Worker.all
+  end
+
+  # Have > 10 hours since last month
+  #
+  # @see Worker::WorkerReports::ClassMethods#active_workers
+  # GET /api/v1/workers/active.json
+  def active
+    @workers = Worker.active_workers
+    render :index
+  end
+
+  # Have > 10 hours since last month and haven't been in the last two weeks
+  #
+  # @see Worker::WorkerReports::ClassMethods#missing_list
+  # GET /api/v1/workers/missing.json
+  def missing
+    @workers = Worker.missing_list
+    render :index
   end
 
   # All workers currently in the shop
@@ -28,57 +54,6 @@ class Api::V1::WorkersController < Api::V1::BaseController
     elsif phone then @workers = Worker.where(phone: phone)
     end
     render :index
-  end
-
-  # Have > 10 hours since last month
-  #
-  # @see Worker::WorkerReports::ClassMethods#active_workers
-  # GET /api/v1/workers/active.json
-  def active
-    @workers = Worker.active_workers
-    render :index
-  end
-
-  # Have > 10 hours since last month and haven't been in the last two weeks
-  #
-  # @see Worker::WorkerReports::ClassMethods#missing_list
-  # GET /api/v1/workers/missing.json
-  def missing
-    @workers = Worker.missing_list
-    render :index
-  end
-
-  # GET /api/v1/workers/1.json
-  def show
-  end
-
-  # POST /api/v1/workers.json
-  def create
-    @worker = Worker.new(worker_params)
-
-    respond_to do |format|
-      format.json do
-        if @worker.save
-          render action: 'show', status: :created, location: @worker
-        else
-          render json: @worker.errors, status: :unprocessable_entity
-        end
-      end
-    end
-  end
-
-  # GET /api/v1/workers/1/email.json
-  def email
-    respond_to do |format|
-      format.json { render json: @worker.email }
-    end
-  end
-
-  # GET /api/v1/workers/1/phone.json
-  def phone
-    respond_to do |format|
-      format.json { render json: @worker.phone }
-    end
   end
 
   # POST /api/v1/workers/1/clock_in.json
@@ -106,6 +81,39 @@ class Api::V1::WorkersController < Api::V1::BaseController
     if @worker.save and @work_time.save
       respond_to do |format|
         format.json { render json: @work_time }
+      end
+    end
+  end
+
+  # GET /api/v1/workers/1/email.json
+  def email
+    respond_to do |format|
+      format.json { render json: @worker.email }
+    end
+  end
+
+  # GET /api/v1/workers/1/phone.json
+  def phone
+    respond_to do |format|
+      format.json { render json: @worker.phone }
+    end
+  end
+
+  # GET /api/v1/workers/1.json
+  def show
+  end
+
+  # POST /api/v1/workers.json
+  def create
+    @worker = Worker.new(worker_params)
+
+    respond_to do |format|
+      format.json do
+        if @worker.save
+          render action: 'show', status: :created, location: @worker
+        else
+          render json: @worker.errors, status: :unprocessable_entity
+        end
       end
     end
   end

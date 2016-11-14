@@ -15,18 +15,28 @@ module Routes
             get :statuses
           end
 
+          scope :report, controller: 'report' do
+            get "hours", as: "hours_current", to: "report#hours"
+            get "hours/:year/:month/:day", as: "day_hours", to: "report#day_hours"
+            get "workers", as: "workers_current", to: "report#workers"
+            get "workers/:year/:month/:day", as: "day_workers", to: "report#day_workers"
+            get "weekof", as: "weekof_current", to: "report#weekof"
+            get "weekof/:year/:month/:day", as: "weekof", to: "report#weekof"
+          end
+
           resources :workers do
             collection do
-              get :shop
               get :active
               get :missing
+              get :shop
               get :where
             end
             member do
-              get :email
-              get :phone
               post :clock_in
               post :clock_out
+              get :email
+              get :phone
+              get :status
             end
           end
 

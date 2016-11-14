@@ -7,7 +7,7 @@
 # 5) DELETE member methods
 #
 class Api::V1::WorkersController < Api::V1::BaseController
-  before_action :set_worker, only: [:show, :email, :phone, :edit, :sign_in, :sign_out, :update, :destroy]
+  before_action :set_worker, only: [:clock_in, :clock_out, :email, :phone, :show, :status, :update, :destroy]
 
   # GET /api/v1/workers.json
   def index
@@ -101,6 +101,16 @@ class Api::V1::WorkersController < Api::V1::BaseController
 
   # GET /api/v1/workers/1.json
   def show
+    respond_to do |format|
+      format.json { render json: @worker }
+    end
+  end
+
+  # GET /api/v1/workers/1/status.json
+  def status
+    respond_to do |format|
+      format.json { render json: {status: @worker.status_name} }
+    end
   end
 
   # POST /api/v1/workers.json

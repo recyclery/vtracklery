@@ -65,4 +65,20 @@ module Worker::WorkerHours
     return sum_time_in_seconds(begin_time, end_time) / (60 * 60)
   end
 
+  # @param year [Integer]
+  def year_time_in_seconds(year)
+    date = Time.new(year)
+    return sum_time_in_seconds(date.beginning_of_year, date.end_of_year)
+  end
+
+  # @param year [Integer]
+  def year_time_in_minutes(year)
+    return year_time_in_seconds(year) / 60
+  end
+
+  # @param year [Integer]
+  def year_time_in_hours(year)
+    return year_time_in_minutes(year) / 60
+  end
+
 end

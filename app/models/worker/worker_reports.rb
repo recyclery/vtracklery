@@ -12,7 +12,27 @@ module Worker::WorkerReports
   module ClassMethods
     # Have > 10 hours since last month
     #
-    # @return [Array<Worker>] all workers with > 10 hours since last month
+    # ==Regular volunteers==
+    #
+    # A volunteer is considered a "Regular Volunteer" when they volunteer at
+    # least four hours per month for at least three months in any given year.
+    #
+    # Volunteers who consistently show up can use the shop without feeling
+    # guilty about not making a donation when they work on their own bike.
+    #
+    # Regular Volunteers may order from wholesale accounts:
+    #
+    #     Cost = wholesale + shipping + 50% for the Recyclery + tax.
+    #
+    # They may purchase new items from the shop at a 25% discount.
+    #
+    # Regular Volunteers may request to take Recyclery Bike Tune-up and
+    # Overhaul classes free of charge if there is space available in the class.
+    #
+    # Proposal to add some specificity approved 25-7-16.
+    #
+    # @return [Array<Worker>] all workers that meet "Regular Volunteer" reqs
+    # @todo FIXME
     def active_workers
       active_workers = []
       all.each do |w|

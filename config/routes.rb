@@ -36,6 +36,7 @@ Rails.application.routes.draw do
     get 'week/:year', as: 'year_week_report', to: 'report#week'
     get 'week', as: 'week_report', to: 'report#week'
     get 'weekly'
+    get 'year/:year', as: 'year_report', to: 'report#year'
     get 'year'
     get 'yearly'
   end

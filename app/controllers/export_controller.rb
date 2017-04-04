@@ -81,6 +81,18 @@ class ExportController < ApplicationController
     end
   end
 
+  def year_totals
+    @month = params[:month] ? params[:month].to_i : DateTime.now.month
+    @year = params[:year] ? params[:year].to_i : DateTime.now.year
+
+    @work_times, @workers, @total_time,
+    @avg_time = WorkTime.find_stats_for(@year, @month)
+
+    send_csv(@work_times, "#{params[:year]}-#{"%0.2d" % @month}.csv") do |t|
+      [t.difference_in_minutes, t.worker.name, t.start_csv]
+    end
+  end
+
   private
   # Couldn't figure out how to dynamically assign name via render
   def send_csv(array, filename = "data.csv")

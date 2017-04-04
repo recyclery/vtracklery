@@ -175,6 +175,7 @@ class ReportController < ApplicationController
 
   # GET /report/year/2015
   def year
+    @statuses = Status.find([1,2]).sort_by(&:id).reverse
     @year = params[:year] ? params[:year].to_i : Time.now.year
 
     @work_times, @workers, @total_time,

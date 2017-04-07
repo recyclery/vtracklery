@@ -25,6 +25,27 @@ Created on <%= @worker.created_datetime %>
 <%= @worker.last_visit_text %>
 </p>
 </td><td style="vertical-align: top;">
+
+<table>
+  <thead>
+    <tr>
+      <th>Regular?</th>
+      <% cur_month_t = DateTime.now.at_beginning_of_month %>
+<% 12.times do |n| %>
+      <th><%= DateTime::ABBR_MONTHNAMES[(cur_month_t - n.months).month] %></th>
+<% end %>
+    </tr>
+  </thead>
+  <tbody>
+  <tr>
+  <td><%= @worker.report_is_active? %></td>
+<% @worker.hours_year_array.each do |hrs| %>
+  <td><%= hrs %></td>
+<% end -%>
+</tr>
+  </tbody>
+</table>
+
 <%=link_to "Export to CSV", worker_hours_path(id: @worker) %>
 <table>
   <tr>
@@ -49,4 +70,5 @@ Created on <%= @worker.created_datetime %>
 <% end %>
 </table>
 </td></tr></table>
+
 <%= link_to "Reports", reports_path %>

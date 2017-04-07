@@ -1,6 +1,6 @@
 <%= link_to "Reports", reports_path %>
 <h1>Missing Active Volunteers</h1>
-Active volunteers who have not shown up in the last two weeks
+Active volunteers who have not shown up in the last two weeks.
 <table><tbody>
 <% @missing_list.each do |worker| -%>
 <% unless worker.phone.blank? -%>
@@ -15,8 +15,19 @@ Active volunteers who have not shown up in the last two weeks
 </tbody></table>
 
 <h1>All Active Volunteers</h1>
-Volunteers that have done 10 hours of work in the last 30 days
-<table><tbody>
+Volunteers who meet the requirements for "Regular Volunteer" status.
+<table>
+  <thead>
+    <tr>
+      <th>Phone</th>
+      <th>Worker</th>
+      <% cur_month_t = DateTime.now.at_beginning_of_month %>
+<% 12.times do |n| %>
+      <th><%= DateTime::ABBR_MONTHNAMES[(cur_month_t - n.months).month] %></th>
+<% end %>
+    </tr>
+  </thead>
+  <tbody>
 <% @active_workers.each do |worker| -%>
 <% unless worker.phone.blank? -%>
 <tr><td>
@@ -24,8 +35,12 @@ Volunteers that have done 10 hours of work in the last 30 days
   </td><td>
 <%= link_to worker.shoehorn_name, worker_report_path(worker) %>
 <%=raw worker.email.blank? ?  "" : " &#171;#{worker.email}&#187;" %>
+<%     worker.hours_year_array.each do |hrs| %>
+  </td><td>
+<%= hrs %>
+<%     end -%>
 </td></tr>
+<%   end -%>
 <% end -%>
-<% end -%>
-</tbody></table>
-
+  </tbody>
+</table>

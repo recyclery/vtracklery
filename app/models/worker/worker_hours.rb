@@ -81,4 +81,21 @@ module Worker::WorkerHours
     return year_time_in_minutes(year) / 60
   end
 
+  # Used to calculate active workers for the purposes of discounts and freebees
+  #
+  # @param now [DateTime] the time during a month after the last complete month
+  # @return [Array<Integer>] 12 place array of hours for each of the
+  #   previous months
+  def hours_year_array(now = DateTime.now)
+    # size 12 array: the last 12 months
+    month_arr = [nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil]
+    cur_month_t = now.at_beginning_of_month # first day of month
+    12.times do |n|
+      t = cur_month_t - n.months
+      hours = self.month_time_in_hours(t.year, t.month)
+      month_arr[n] = hours
+    end
+    return month_arr
+  end
+
 end

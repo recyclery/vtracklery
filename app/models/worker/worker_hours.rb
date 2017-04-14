@@ -92,8 +92,8 @@ module Worker::WorkerHours
     cur_month_t = now.at_beginning_of_month # first day of month
     12.times do |n|
       t = cur_month_t - n.months
-      hours = self.month_time_in_hours(t.year, t.month)
-      month_arr[n] = hours
+      minutes = self.month_time_in_minutes(t.year, t.month)
+      month_arr[n] = minutes / 60.0
     end
     return month_arr
   end

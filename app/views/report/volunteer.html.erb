@@ -40,7 +40,7 @@ Created on <%= @worker.created_datetime %>
   <tr>
   <td><%= @worker.report_is_active? %></td>
 <% @worker.hours_year_array.each do |hrs| %>
-  <td><%= hrs %></td>
+  <td><%= "%0.1f" % hrs %></td>
 <% end -%>
 </tr>
   </tbody>

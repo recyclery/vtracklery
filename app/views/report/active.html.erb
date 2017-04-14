@@ -36,8 +36,8 @@ Volunteers who meet the requirements for "Regular Volunteer" status.
 <%= link_to worker.shoehorn_name, worker_report_path(worker) %>
 <%=raw worker.email.blank? ?  "" : " &#171;#{worker.email}&#187;" %>
 <%     worker.hours_year_array.each do |hrs| %>
-  </td><td>
-<%= hrs %>
+  </td>
+<td style="text-align: right; padding-left: 10px;"><%= "%0.1f" % hrs %>
 <%     end -%>
 </td></tr>
 <%   end -%>

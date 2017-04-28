@@ -210,7 +210,7 @@ module ActsAsPunchCard
       #start_date
       start_date.strftime("%a %Y-%b-%d")
     else
-      "Start (#{start_date}) and end date (#{end_date}) don't match"
+      "Start (#{start_date}) and end date (#{end_date.to_date}) don't match"
     end
   end
 

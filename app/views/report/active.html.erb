@@ -1,6 +1,6 @@
 <%= link_to "Reports", reports_path %>
-<h1>Missing Active Volunteers</h1>
-Active volunteers who have not shown up in the last two weeks.
+<h1>Missing Regular Volunteers</h1>
+Regular volunteers who have not shown up in the last two weeks.
 <table><tbody>
 <% @missing_list.each do |worker| -%>
 <% unless worker.phone.blank? -%>
@@ -14,7 +14,7 @@ Active volunteers who have not shown up in the last two weeks.
 <% end -%>
 </tbody></table>
 
-<h1>All Active Volunteers</h1>
+<h1>All Regular Volunteers</h1>
 Volunteers who meet the requirements for "Regular Volunteer" status.
 <table>
   <thead>
@@ -22,7 +22,7 @@ Volunteers who meet the requirements for "Regular Volunteer" status.
       <th>Phone</th>
       <th>Worker</th>
       <% cur_month_t = DateTime.now.at_beginning_of_month %>
-<% 12.times do |n| %>
+      <% 11.downto(0) do |n| %>
       <th><%= DateTime::ABBR_MONTHNAMES[(cur_month_t - n.months).month] %></th>
 <% end %>
     </tr>
@@ -35,7 +35,7 @@ Volunteers who meet the requirements for "Regular Volunteer" status.
   </td><td>
 <%= link_to worker.shoehorn_name, worker_report_path(worker) %>
 <%=raw worker.email.blank? ?  "" : " &#171;#{worker.email}&#187;" %>
-<%     worker.hours_year_array.each do |hrs| %>
+<%     worker.hours_year_array.reverse.each do |hrs| %>
   </td>
 <td style="text-align: right; padding-left: 10px;"><%= "%0.1f" % hrs %>
 <%     end -%>

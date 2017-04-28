@@ -23,7 +23,10 @@ Volunteers who meet the requirements for "Regular Volunteer" status.
       <th>Worker</th>
       <% cur_month_t = DateTime.now.at_beginning_of_month %>
       <% 11.downto(0) do |n| %>
-      <th><%= DateTime::ABBR_MONTHNAMES[(cur_month_t - n.months).month] %></th>
+      <th>
+	<%= DateTime::ABBR_MONTHNAMES[(cur_month_t - n.months).month] %>
+	<% if 11 == n ||  0 == n %><%= (cur_month_t - n.months).year %><% end %>
+      </th>
 <% end %>
     </tr>
   </thead>

@@ -26,8 +26,8 @@ module Routes
 
           resources :workers do
             collection do
-              get :active
               get :missing
+              get :regular
               get :shop
               get :where
             end

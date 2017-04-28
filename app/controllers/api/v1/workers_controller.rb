@@ -14,21 +14,21 @@ class Api::V1::WorkersController < Api::V1::BaseController
     @workers = Worker.all
   end
 
-  # Have > 10 hours since last month
-  #
-  # @see Worker::WorkerReports::ClassMethods#active_workers
-  # GET /api/v1/workers/active.json
-  def active
-    @workers = Worker.active_workers
-    render :index
-  end
-
   # Have > 10 hours since last month and haven't been in the last two weeks
   #
   # @see Worker::WorkerReports::ClassMethods#missing_list
   # GET /api/v1/workers/missing.json
   def missing
     @workers = Worker.missing_list
+    render :index
+  end
+
+  # Have > 10 hours since last month
+  #
+  # @see Worker::WorkerReports::ClassMethods#regular_workers
+  # GET /api/v1/workers/regular.json
+  def regular
+    @workers = Worker.regular_workers
     render :index
   end
 

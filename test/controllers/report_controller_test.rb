@@ -1,11 +1,6 @@
 require 'test_helper'
 
 class ReportControllerTest < ActionController::TestCase
-  test "should get active" do
-    get :active
-    assert_response :success
-  end
-
   test "should get admin" do
     get :admin
     assert_response :success
@@ -38,6 +33,11 @@ class ReportControllerTest < ActionController::TestCase
 
   test "should get monthly" do
     get :monthly
+    assert_response :success
+  end
+
+  test "should get regular" do
+    get :regular
     assert_response :success
   end
 

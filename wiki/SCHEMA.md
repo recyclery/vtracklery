@@ -54,6 +54,9 @@ Eg. Volunteer, Earn-a-bike, Paid
 
 ## Surveys
 
+Surveys were bolted on as a late request, and should probably be spun off into an independant but interlocking application.
+They're kept as a single table for simplicity, but the schema should become more complex to support adding more questions in the future.
+
 | Field                    | Description                        |
 | ------------------------ | ---------------------------------- |
 | `worker_id`              | The worker attached to this survey |

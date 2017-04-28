@@ -5,21 +5,23 @@ Install these packages on a fresh Debain/Ubuntu system for Vtrack to work.
 ## Ruby
 
 ```
-sudo aptitude install ruby-elisp rubygems ruby ruby1.8-dev rake irb
+sudo aptitude install ruby rubygems ruby-dev rake irb
 ```
 
 ## Image libraries
 
+The mini_magick and carrierwave gems rely on either ```imagemagick``` or ```graphicsmagick```
+
 ```
-sudo aptitude install libfreeimage3 libfreeimage-dev
+sudo aptitude install graphicsmagick
 ```
 
 ## Mysql
 
-The default sqlite3 database will work, but I prefer MySQL.
+For ease in making backups, the database is kept as a single file using SQLite3
 
 ```
-sudo aptitude install mysql-common mysql-client mysql-server
+sudo aptitude install sqlite3 libsqlite3-dev
 ```
 
 ## Webcam software
@@ -31,7 +33,7 @@ sudo aptitude install cheese
 ## Git
 
 ```
-sudo aptitude install git-core git-doc git-svn gitk
+sudo aptitude install git git-core git-doc
 ```
 
 ## Editors

@@ -31,7 +31,7 @@ Volunteers who meet the requirements for "Regular Volunteer" status.
     </tr>
   </thead>
   <tbody>
-<% @active_workers.each do |worker| -%>
+<% @regular_workers.each do |worker| -%>
 <% unless worker.phone.blank? -%>
 <tr><td>
 <%= worker.shoehorn_phone %>

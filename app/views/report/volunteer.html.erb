@@ -38,7 +38,7 @@ Created on <%= @worker.created_datetime %>
   </thead>
   <tbody>
   <tr>
-  <td><%= @worker.report_is_active? %></td>
+  <td><%= @worker.report_is_regular? %></td>
 <% @worker.hours_year_array.each do |hrs| %>
   <td><%= "%0.1f" % hrs %></td>
 <% end -%>

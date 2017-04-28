@@ -6,8 +6,8 @@ module Worker::WorkerReports
 
   # The number of hours volunteered in a month for that month to count towards
   # activity
-  MIN_ACTIVE_MONTHLY_HOURS = 4
-  MIN_ACTIVE_MONTHS = 3
+  MIN_REGULAR_MONTHLY_HOURS = 4
+  MIN_REGULAR_MONTHS = 3
 
   included do
   end
@@ -38,15 +38,15 @@ module Worker::WorkerReports
     #
     # @return [Array<Worker>] all workers that meet "Regular Volunteer" reqs
     # @todo FIXME
-    def active_workers
-      active_workers = []
+    def regular_workers
+      regular_workers = []
       all.each do |w|
         #if w.sum_time_in_seconds(DateTime.now - 30.days, DateTime.now) > 36000
-        if w.report_is_active?
-          active_workers << w 
+        if w.report_is_regular?
+          regular_workers << w 
         end
       end
-      return active_workers
+      return regular_workers
     end
 
     # Have > 10 hours since last month and haven't been in the last two weeks
@@ -55,7 +55,7 @@ module Worker::WorkerReports
     #   and haven't been in the last two weeks
     def missing_list
       list = []
-      active_workers.each do |w|
+      regular_workers.each do |w|
         if w.sum_time_in_seconds(DateTime.now - 14.days, DateTime.now) == 0
           list << w
         end
@@ -79,20 +79,20 @@ module Worker::WorkerReports
   #
   # @param now [DateTime] the time during a month after the last complete month
   # @return [Array] 12 place boolean array for each of the previous months
-  def report_active_month_array(now = DateTime.now)
+  def report_regular_month_array(now = DateTime.now)
     # size 12 array: the last 12 months
     return self.hours_year_array(now).map do |hrs|
-      hrs >= MIN_ACTIVE_MONTHLY_HOURS ? true : false
+      hrs >= MIN_REGULAR_MONTHLY_HOURS ? true : false
     end
   end
 
   # @param now [DateTime] the time during a month after the last complete month
-  def report_is_active?(now = DateTime.now)
-    active_month_count = 0
-    report_active_month_array(now).each do |active_month|
-      active_month_count += 1 if active_month
+  def report_is_regular?(now = DateTime.now)
+    regular_month_count = 0
+    report_regular_month_array(now).each do |regular_month|
+      regular_month_count += 1 if regular_month
     end
-    return active_month_count >= MIN_ACTIVE_MONTHS
+    return regular_month_count >= MIN_REGULAR_MONTHS
   end
   
   # @return [Integer] the id of the {Worker} in the database before this one

@@ -18,7 +18,6 @@ Rails.application.routes.draw do
 
   get 'report', as: 'reports', to: 'report#index'
   scope '/report', controller: 'report' do
-    get 'active', as: 'active_workers'
     get 'admin'
     get 'admin_month', as: 'fix_month_hours'
     get 'calendar/:year/:month', as: 'calendar', to: 'report#calendar'
@@ -30,12 +29,14 @@ Rails.application.routes.draw do
     get 'month/:year', as: 'year_month_report', to: 'report#month'
     get 'month', as: 'current_month_report', to: 'report#month'
     get 'monthly'
+    get 'regular', as: 'regular_workers'
     get 'volunteer/:id', as: 'worker_report', to: 'report#volunteer'
     get 'week/:year/:month/:day', as: 'day_week_report', to: 'report#week'
     get 'week/:year/:month', as: 'month_week_report', to: 'report#week'
     get 'week/:year', as: 'year_week_report', to: 'report#week'
     get 'week', as: 'week_report', to: 'report#week'
     get 'weekly'
+    get 'year/:year', as: 'year_report', to: 'report#year'
     get 'year'
     get 'yearly'
   end

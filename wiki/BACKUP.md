@@ -4,6 +4,10 @@ The program database can be backed up by downloading the raw SQL files, or
 by converting the data to XML, if placed in the db/xml/ directory, will
 populate an empty database upon calling the db:seed rake task.
 
+## Backup to/from SQLite3
+
+The database is located at ```db/development.sqlite3```, so simply copy that file to back up the database. The copy targets currently look like ```db/development.YYYY-MM-DD.sqlite3```, to keep track of the day they were copied from the main database.
+
 ## Backup to/from MySQL
 
 ```

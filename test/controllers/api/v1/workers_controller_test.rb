@@ -18,8 +18,8 @@ class Api::V1::WorkersControllerTest < ActionController::TestCase
     assert_not_nil assigns(:workers)
   end
 
-  test "should get active" do
-    xhr :get, :active
+  test "should get regular" do
+    xhr :get, :regular
     assert_response :success
     assert_not_nil assigns(:workers)
   end

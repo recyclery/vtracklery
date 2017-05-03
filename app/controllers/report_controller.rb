@@ -1,14 +1,6 @@
 class ReportController < ApplicationController
   include ReportHelper
 
-  # GET /report/active
-  def active
-    @workers = Worker.all
-    # Have > 10 hours since last month
-    @active_workers = Worker.active_workers
-    @missing_list = Worker.missing_list
-  end
-
   # Page for hours that don't look right
   #
   # GET /report/admin
@@ -105,6 +97,14 @@ class ReportController < ApplicationController
     @year = DateTime.now.year
   end
 
+  # GET /report/regular
+  def regular
+    @workers = Worker.all
+    # Have > 10 hours since last month
+    @regular_workers = Worker.regular_workers
+    @missing_list = Worker.missing_list
+  end
+
   # GET /report/volunteer/1
   def volunteer
     @worker = Worker.find( params[:id] )
@@ -156,7 +156,7 @@ class ReportController < ApplicationController
     @last = Date.civil(ending.year, ending.month, ending.day)
     @first = Date.civil(beg.year, beg.month, beg.day)
     @hours = WorkTime.between(beg, ending)
-    
+
     # @week_hash = {}
     # @hours.each { |hour| @week_hash[hour.start_at.mday] }
 
@@ -165,7 +165,7 @@ class ReportController < ApplicationController
 
     @day_names = Date::DAYNAMES.dup
     @first_weekday.times { @day_names.push(@day_names.shift) }
-    
+
     @block ||= Proc.new {|d| nil}
   end
 
@@ -175,6 +175,7 @@ class ReportController < ApplicationController
 
   # GET /report/year/2015
   def year
+    @statuses = Status.find([1,2]).sort_by(&:id).reverse
     @year = params[:year] ? params[:year].to_i : Time.now.year
 
     @work_times, @workers, @total_time,

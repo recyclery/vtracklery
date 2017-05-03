@@ -1,2 +1,49 @@
-<h1>Report#year</h1>
+<h1><%= @year %> (Report#year)</h1>
 <p>Find me in app/views/report/year.html.erb</p>
+
+<% for status in @statuses -%>
+<% workers = WorkTime.worker_type_for(status, @year) -%>
+<h3><%= status.name.pluralize %> (<%= workers.size %>)</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th><!-- Email --></th>
+      <th>Time</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<% total = 0 %>
+<% workers.sort_by {|w| w.name.upcase }.each do |worker| -%>
+<tr>
+  <td>
+    <%= link_to worker.shoehorn_name, worker_report_path(worker) %>
+  </td>
+  <td>
+    <%# worker.email %>
+  </td>
+  <td style='text-align: right;'>
+    <% this_year = worker.year_time_in_minutes(@year) %>
+    <% total += this_year %>
+    <%= "%0.2f" % (this_year / 60.0) %>
+  </td>
+  <td>hours
+  </td>
+</tr>
+<% end -%>
+  </tbody>
+</table>
+
+<div>
+  Total: <%= "%0.2f" % (total / 60.0) %> hours
+</div>
+<% end -%>
+
+<br />
+
+<nav>
+  <%#link_to 'export to csv', year_csv_path(year: @year) %>
+  <%#link_to 'year totals', year_totals_report_path(year: @year) %>
+</nav>
+

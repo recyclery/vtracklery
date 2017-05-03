@@ -29,3 +29,17 @@ See [Backup](file.BACKUP.html)
 
 See [Testing](file.TESTING.html#How_to_run_the_test_suite)
 
+## Documentation
+
+Code is documented using [YARD](http://yardoc.org/) syntax. YARD can be installed as a gem:
+
+```
+sudo gem install yard
+```
+
+To generate web documentation, run the ```yard``` command in the application's
+root directory (the directory where this file is located).
+
+Long-form documentation is kept in the ```wiki/``` directory, and while it is
+not visible on GitHub, is visible in the generated documentation.
+ 

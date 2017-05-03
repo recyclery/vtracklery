@@ -1,5 +1,5 @@
 #
-# Eg. Volunteer, Member, Paid Staff
+# Eg. Volunteer, Member, Paid Staff, Youth
 #
 class Status < ActiveRecord::Base
   has_many :workers

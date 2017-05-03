@@ -25,6 +25,7 @@ en:
     name: "Name"
     image: "Image"
     in_shop: "In shop"
+    points: "Points"
     email: "Email"
     phone: "Phone"
     status: "Status"

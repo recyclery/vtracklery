@@ -27,6 +27,30 @@ class WorkerTest < ActiveSupport::TestCase
     assert_equal ["312", "555", "1212"], w.normalize_phone("312/555-1212")
     assert_equal ["312", "555", "1212"], w.normalize_phone("3125551212")
     assert_equal ["312", "555", "1212"], w.normalize_phone("(312)555-1212")
-    assert_equal nil, w.normalize_phone("5551212")
+    assert_nil w.normalize_phone("5551212")
+  end
+
+  test "youth_points" do
+    youth_work_status = WorkStatus.create(name: WorkStatus::YOUTHPOINTS)
+    paid_work_status = WorkStatus.create(name: WorkStatus::PAID)
+
+    youth = Worker.create(name: "youth worker", status_id: 1, work_status: youth_work_status)
+    paid_worker = Worker.create(name: "youth worker", status_id: 1, work_status: paid_work_status)
+
+    youth_points_time = WorkTime.create(work_status: youth_work_status, worker: youth, status_id: 1, start_at: Time.now - 4.hours, end_at: Time.now - 2.hours)
+    youth_paid_time = WorkTime.create(work_status: paid_work_status, worker: youth, status_id: 1, start_at: Time.now - 6.hours, end_at: Time.now - 4.hours)
+    paid_worker_paid_time = WorkTime.create(work_status: paid_work_status, worker: paid_worker, status_id: 1, start_at: Time.now - 4.hours, end_at: Time.now - 2.hours)
+
+    assert_equal youth.youth_points, 2, "should only count youth points worktimes"
+    assert_equal paid_worker.youth_points, 0, "should be zero for non-youth"
+
+  end
+
+  test "youth?" do
+    youth_status = Status.create(name: "Youth")
+    youth = Worker.create(name: "youth worker", status: youth_status, work_status_id: 1)
+    paid_worker = Worker.create(name: "youth worker", status_id: 1, work_status_id: 1)
+    assert youth.youth?
+    assert !paid_worker.youth?
   end
 end

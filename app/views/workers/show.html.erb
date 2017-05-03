@@ -17,6 +17,13 @@
   <%= @worker.in_shop %>
 </p>
 
+<% if @worker.youth? %>
+	<p>
+	  <strong><%= t('common.points') %>:</strong>
+	  <%= @worker.sum_time_in_hours(1.year.ago, Time.current)%>
+	</p>
+<% end %>
+
 <p>
   <strong><%= t('common.email') %>:</strong>
   <%= @worker.email %>

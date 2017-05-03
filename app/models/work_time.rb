@@ -26,7 +26,7 @@ class WorkTime < ActiveRecord::Base
   end
 
   # Duplication of the {Status} object
-  STATUS = ["Volunteer", "Earn-a-bike", "Paid"] 
+  STATUS = ["Volunteer", "Earn-a-bike", "Paid", "Youth"]
 
   # Automatically inherit the status of the worker that created it
   # @return [Boolean] true (callback method)

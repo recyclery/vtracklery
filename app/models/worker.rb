@@ -17,7 +17,7 @@ class Worker < ActiveRecord::Base
   include Worker::WorkerPunchCard
   include Worker::WorkerReports
 
-  STATUS = ["Volunteer", "Member", "Paid Staff"] 
+  STATUS = ["Volunteer", "Member", "Paid Staff", "Youth"]
 
   scope :email_only, -> { where("email IS NOT NULL AND phone IS NULL") }
   scope :has_email,  -> { where("email IS NOT NULL") }
@@ -28,6 +28,10 @@ class Worker < ActiveRecord::Base
   def created_datetime
     created_at.strftime("%a %b %d %Y")
   end
+
+	def youth?
+		status.name == "Youth"
+	end
 
   # Remove non-standard spaces and dashes and replace with ascii?
   #

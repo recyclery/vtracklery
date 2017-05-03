@@ -58,6 +58,12 @@ module Worker::WorkerHours
     return time.to_a.sum(&:difference_in_seconds)
   end
 
+	# @return [Integer] the number of youth points the youth volunteer has
+	def youth_points
+    time = WorkTime.worker_id_between(id, 1.year.ago, Time.current).includes(:work_status).where("work_statuses.name IS \"#{WorkStatus::YOUTHPOINTS}\"").references("work_statuses")
+    time.to_a.sum(&:difference_in_seconds) / (60 * 60)
+	end
+
   # @param begin_time [DateTime]
   # @param end_time [DateTime]
   # @return [Integer] the difference between the times in hours

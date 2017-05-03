@@ -1,6 +1,6 @@
 class StatusSeeder
-  STATUS = ["Volunteer", "Member", "Paid Staff"]
-  WORK_STATUS = ["Volunteer", "Earn-a-bike", "Paid"]
+  STATUS = ["Volunteer", "Member", "Paid Staff", "Youth"]
+  WORK_STATUS = ["Volunteer", "Earn-a-bike", "Paid", "Youth Points"]
 
   def self.seed
     if block_given? then basic_seed { yield }

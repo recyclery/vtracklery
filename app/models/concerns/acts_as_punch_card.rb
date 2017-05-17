@@ -138,7 +138,7 @@ module ActsAsPunchCard
   end
 
   def start_date_to_s # "Sun Oct 05 01:13 PM 2008"
-    start_at.strftime("%a %d %b %Y").gsub(/\s0/, " ")
+    start_at.strftime(FMT_DATE).gsub(/\s0/, " ")
   end
 
   #FIXME
@@ -169,12 +169,12 @@ module ActsAsPunchCard
   #FIXME
   def end_date
     return nil unless self.end_at
-    self.end_at.strftime("%a %d %b %Y").gsub(/\s0/, " ")
+    self.end_at.strftime(FMT_DATE).gsub(/\s0/, " ")
   end
 
   def end_date_to_s # "Sun Oct 05 01:13 PM 2008"
     return nil unless self.end_at
-    self.end_at.strftime("%a %d %b %Y").gsub(/\s0/, " ")
+    self.end_at.strftime(FMT_DATE).gsub(/\s0/, " ")
   end
 
   #FIXME
@@ -206,10 +206,11 @@ module ActsAsPunchCard
   end
         
   def visit_date
-    if is_open? or start_date == self.end_date
-      start_date
+    if is_open? or self.start_date.to_date == self.end_date.to_date
+      #start_date
+      start_date.strftime("%a %Y-%b-%d")
     else
-      "Start and end date don't match"
+      "Start (#{start_date}) and end date (#{end_date.to_date}) don't match"
     end
   end
 

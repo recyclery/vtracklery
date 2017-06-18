@@ -1,0 +1,21 @@
+<h1>Listing statuses</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Workers</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @statuses.each do |status| %>
+      <tr>
+        <td><%= status.name %></td>
+        <td><%= status.workers.count %></td>
+        <td><%= link_to 'Show', status %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

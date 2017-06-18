@@ -1,5 +1,5 @@
 class WorkersController < ApplicationController
-  before_action :set_worker, only: [:show, :edit, :update, :destroy]
+  before_action :set_worker, only: [:show, :edit, :status, :update, :destroy]
 
   # GET /workers
   # GET /workers.xml
@@ -16,6 +16,13 @@ class WorkersController < ApplicationController
   def show
     @images = []
     @cheese = []
+  end
+
+  # Edit status; should only be accessible via links in the
+  # statuses controller.
+  #
+  # GET /workers/1/status
+  def status
   end
 
   # GET /workers/new

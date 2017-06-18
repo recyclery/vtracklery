@@ -48,6 +48,7 @@ Rails.application.routes.draw do
       get 'upload_form', to: 'workers#upload_form', as: 'upload_form'
     end
     member do
+      get :status
       get :image_chooser
       get :cheese_chooser
       put :sign_in

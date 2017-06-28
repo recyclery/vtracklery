@@ -49,6 +49,7 @@ Rails.application.routes.draw do
       get 'upload_form', to: 'workers#upload_form', as: 'upload_form'
     end
     member do
+      get :status
       get :image_chooser
       get :cheese_chooser
       put :sign_in
@@ -70,6 +71,8 @@ Rails.application.routes.draw do
 
   resources :work_times
   resources :events
+
+  resources :statuses, only: [:index, :show]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

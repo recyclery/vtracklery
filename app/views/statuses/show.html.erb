@@ -7,21 +7,20 @@ $(document).ready(function() {
 })
 </script>
 
-<h1>Listing volunteers: <span id="volunteer_name_bar"> </span></h1>
+<p id="notice"><%= notice %></p>
+
+<h2><%= @status.name %></h2>
 
 <% @workers.each do |worker| -%>
   <div id="volunteer-<%= worker.id %>" style="float: left; padding: 5px; width: 120px; height: 100px; text-align: center;">
-    <a href="<%= worker_report_path(worker) %>">
+    <a href="<%= status_worker_path(worker) %>">
     <img class="volunteer" height="100px" title="<%= worker.name %>" src="<%= worker.avatar_url %>" />
     </div>
   </div>
 <% end -%>
 
-
 <br />
-<div style="clear: both;">
-  <nav>
-    <%= link_to 'New volunteer', new_worker_path %>
-    <%= link_to 'Back to Shop', root_path %>
-  </nav>
-</div>
+<nav style="clear: both;">
+  <%= link_to 'List Statuses', statuses_path %>
+  <%= link_to 'Back to Shop', root_path %>
+</nav>

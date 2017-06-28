@@ -52,6 +52,8 @@
   <%= @worker.public_email %>
 </p>
 
-<%= link_to 'Edit', edit_worker_path(@worker) %> |
-<%= link_to 'Back', root_path %> |
-<%= link_to_survey(@worker) %>
+<nav>
+  <%= link_to 'Edit', edit_worker_path(@worker) %> |
+  <%= link_to 'Back', root_path %> |
+  <%= link_to_survey(@worker) %>
+</nav>

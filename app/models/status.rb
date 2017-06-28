@@ -12,4 +12,7 @@ class Status < ActiveRecord::Base
   # Attributes accessible via the API
   API_ATTRIBUTES = [ :name, :created_at, :updated_at ]
 
+  # Attributes accessible via the web interface
+  WEB_PARAMS = [] # Status attributes should not be accessible via the web
+
 end

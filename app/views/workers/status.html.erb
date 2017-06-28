@@ -1,0 +1,29 @@
+<h1>Editing volunteer</h1>
+
+<%= form_for(@worker) do |f| %>
+  <% if @worker.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@worker.errors.count, "error") %> prohibited this worker from being saved:</h2>
+
+      <ul>
+      <% @worker.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :status_id, t("common.status") %><br>
+    <%= f.collection_select :status_id, Status.all, :id, :name %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Save" %>
+  </div>
+<% end %>
+
+<nav>
+  <%= link_to 'Show', @worker %> |
+  <%= link_to 'Back', root_path %>
+</nav>

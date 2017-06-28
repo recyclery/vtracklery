@@ -20,8 +20,11 @@
 <% if @worker.youth? %>
 	<p>
 	  <strong><%= t('common.points') %>:</strong>
-	  <%= @worker.sum_time_in_hours(1.year.ago, Time.current)%>
+	  <%= @worker.youth_points %>
 	</p>
+  <p>
+    <%= link_to "Buy Something With Points", new_worker_youth_point_transaction_path(@worker) %>
+  </p>
 <% end %>
 
 <p>

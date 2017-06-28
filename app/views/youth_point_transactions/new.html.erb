@@ -1,0 +1,4 @@
+<h1>New Youth Point Transaction</h1>
+<p>This person has <%= @worker.youth_points %> points</p>
+<%= render partial: 'youth_point_transactions/form' %>
+<%= link_to "Back", worker_path(@worker) %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2) do
+ActiveRecord::Schema.define(version: 20170509183131) do
 
   create_table "events", force: true do |t|
     t.string   "name"
@@ -126,5 +126,11 @@ ActiveRecord::Schema.define(version: 2) do
 
   add_index "workers", ["status_id"], name: "index_workers_on_status_id"
   add_index "workers", ["work_status_id"], name: "index_workers_on_work_status_id"
+
+  create_table "youth_point_transactions", force: true do |t|
+    t.integer "points"
+    t.integer "worker_id"
+    t.text    "description"
+  end
 
 end

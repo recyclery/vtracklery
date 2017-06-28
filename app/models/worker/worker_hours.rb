@@ -61,7 +61,9 @@ module Worker::WorkerHours
 	# @return [Integer] the number of youth points the youth volunteer has
 	def youth_points
     time = WorkTime.worker_id_between(id, 1.year.ago, Time.current).includes(:work_status).where("work_statuses.name IS \"#{WorkStatus::YOUTHPOINTS}\"").references("work_statuses")
-    time.to_a.sum(&:difference_in_seconds) / (60 * 60)
+    hours = time.to_a.sum(&:difference_in_seconds) / (60 * 60)
+    transaction_points = YouthPointTransaction.where(worker_id: id).map(&:points).sum
+    hours - transaction_points
 	end
 
   # @param begin_time [DateTime]

@@ -37,12 +37,16 @@ class WorkerTest < ActiveSupport::TestCase
     youth = Worker.create(name: "youth worker", status_id: 1, work_status: youth_work_status)
     paid_worker = Worker.create(name: "youth worker", status_id: 1, work_status: paid_work_status)
 
-    youth_points_time = WorkTime.create(work_status: youth_work_status, worker: youth, status_id: 1, start_at: Time.now - 4.hours, end_at: Time.now - 2.hours)
+    youth_points_time = WorkTime.create(work_status: youth_work_status, worker: youth, status_id: 1, start_at: Time.now - 5.hours, end_at: Time.now - 1.hours)
     youth_paid_time = WorkTime.create(work_status: paid_work_status, worker: youth, status_id: 1, start_at: Time.now - 6.hours, end_at: Time.now - 4.hours)
     paid_worker_paid_time = WorkTime.create(work_status: paid_work_status, worker: paid_worker, status_id: 1, start_at: Time.now - 4.hours, end_at: Time.now - 2.hours)
 
-    assert_equal youth.youth_points, 2, "should only count youth points worktimes"
+    assert_equal youth.youth_points, 4, "should only count youth points worktimes"
     assert_equal paid_worker.youth_points, 0, "should be zero for non-youth"
+
+    YouthPointTransaction.create(worker: youth, points: 1)
+    YouthPointTransaction.create(worker: youth, points: 2)
+    assert_equal youth.youth_points, 1, "should deduct youth point transactions"
 
   end
 

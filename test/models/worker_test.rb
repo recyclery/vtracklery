@@ -44,9 +44,9 @@ class WorkerTest < ActiveSupport::TestCase
     assert_equal youth.youth_points, 4, "should only count youth points worktimes"
     assert_equal paid_worker.youth_points, 0, "should be zero for non-youth"
 
-    YouthPointTransaction.create(worker: youth, points: 1)
-    YouthPointTransaction.create(worker: youth, points: 2)
-    assert_equal youth.youth_points, 1, "should deduct youth point transactions"
+    YouthPointPurchase.create(worker: youth, points: 1)
+    YouthPointPurchase.create(worker: youth, points: 2)
+    assert_equal youth.youth_points, 1, "should deduct youth point purchases"
 
   end
 

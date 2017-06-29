@@ -1,7 +1,7 @@
 #
-# A transaction using youth points
+# A purchase using youth points
 #
-class YouthPointTransaction < ActiveRecord::Base
+class YouthPointPurchase < ActiveRecord::Base
   belongs_to :worker
   validates_numericality_of :points, greater_than: 0
   validates_presence_of :worker_id

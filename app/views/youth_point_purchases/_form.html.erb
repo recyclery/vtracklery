@@ -11,7 +11,7 @@
   <% end %>
   <div class="field">
     <%= f.label :points, "Number of Points" %><br>
-    <%= f.text_field :points, type: "number" %>
+    <%= f.text_field :points, type: "number", step: "0.01" %>
   </div>
   <div class="field">
     <%= f.label :description, "Description of parts" %><br>

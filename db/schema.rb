@@ -128,7 +128,7 @@ ActiveRecord::Schema.define(version: 20170509183131) do
   add_index "workers", ["work_status_id"], name: "index_workers_on_work_status_id"
 
   create_table "youth_point_purchases", force: true do |t|
-    t.integer "points"
+    t.decimal "points",      precision: 10, scale: 2
     t.integer "worker_id"
     t.text    "description"
   end

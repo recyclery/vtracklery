@@ -9,6 +9,11 @@ class Status < ActiveRecord::Base
 
   include XmlExtensions
 
+  YOUTH = "Youth"
+  VOLUNTEER = "Volunteer"
+  MEMBER = "Member"
+  STAFF =  "Paid Staff"
+
   # Attributes accessible via the API
   API_ATTRIBUTES = [ :name, :created_at, :updated_at ]
 

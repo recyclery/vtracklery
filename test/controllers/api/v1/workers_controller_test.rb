@@ -48,6 +48,30 @@ class Api::V1::WorkersControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "should create youth worker" do
+    youth_work_status = WorkStatus.create(name: WorkStatus::YOUTHPOINTS)
+    youth_status = Status.create(name: Status::YOUTH)
+
+    assert_difference('Worker.count') do
+      worker_hash = {
+        name: @worker.name,
+        image: @worker.image,
+        in_shop: @worker.in_shop,
+        email: @worker.email,
+        phone: @worker.phone,
+        public_email: @worker.public_email,
+        created_at: @worker.created_at,
+        updated_at: @worker.updated_at,
+        youth: "1"
+      }
+      xhr :post, :create, worker: worker_hash
+    end
+    assert assigns(:worker).work_status = youth_work_status
+    assert assigns(:worker).status = youth_status
+    assert_response :success
+
+  end
+
   test "should sign in and out" do
     assert_difference('WorkTime.count') do
       xhr :post, :sign_in, id: @worker

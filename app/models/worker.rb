@@ -33,6 +33,8 @@ class Worker < ActiveRecord::Base
 		status.name == "Youth"
 	end
 
+  def youth; end #virtual attribute
+
   # Remove non-standard spaces and dashes and replace with ascii?
   #
   # @return [String] standardized version of worker name for filenames etc.

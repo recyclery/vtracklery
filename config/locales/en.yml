@@ -31,6 +31,7 @@ en:
     status: "Status"
     work_status: "Work status"
     public_email: "Public email"
+    youth: "Youth"
   messages:
     new_volunteer: "Has not volunteered yet"
     in_shop: "Currently in shop"

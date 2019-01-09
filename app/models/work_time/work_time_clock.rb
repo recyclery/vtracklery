@@ -39,6 +39,11 @@ module WorkTime::WorkTimeClock
       end    
     end
 
+    # @return [WorkTime] the oldest work_time in the database
+    def oldest
+      return order(:start_at, :id).first
+    end
+
     # @param month [Integer] default Time.now.month
     # @param year [Integer] default Time.now.year
     # @return [DateTime]

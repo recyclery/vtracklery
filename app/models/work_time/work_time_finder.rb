@@ -146,14 +146,17 @@ module WorkTime::WorkTimeFinder
       s_id = s.id
       year = year.to_i
       if month # Get all unique workers with this status for the month
-        month = month.to_i
-        w_ids = find_for(year, month).map { |card| 
-          card.worker_id if card.status_id == s_id  }.compact.uniq
+        m = month.to_i
+        w_ids = self.joins(:worker).where(
+          start_at: [self.start_of_month(m, year)..self.end_of_month(m, year)],
+          'workers.status_id' => s_id).pluck(:worker_id)
       else # Get all unique workers with this status for the entire year
-        w_ids = find_for(year).map { |card| 
-          card.worker_id if card.status_id == s_id  }.compact.uniq
+        w_ids = self.joins(:worker).where(
+          start_at: [self.start_of_year(year)..self.end_of_year(year)],
+          'workers.status_id' => s_id).pluck(:worker_id)
       end
-      Worker.find(w_ids)
+
+      return Worker.find(w_ids)
     end
 
     # @param year [Integer] default Time.now.year

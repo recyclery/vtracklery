@@ -16,7 +16,9 @@ class Worker < ActiveRecord::Base
   include Worker::WorkerPhone
   include Worker::WorkerPunchCard
   include Worker::WorkerReports
+  include Worker::WorkerStatusable
 
+  # @todo change the strings to DRY constants like Status::YOUTH
   STATUS = ["Volunteer", "Member", "Paid Staff", "Youth"]
 
   scope :email_only, -> { where("email IS NOT NULL AND phone IS NULL") }
@@ -28,12 +30,6 @@ class Worker < ActiveRecord::Base
   def created_datetime
     created_at.strftime("%a %b %d %Y")
   end
-
-	def youth?
-		status.name == "Youth"
-	end
-
-  def youth; end #virtual attribute
 
   # Remove non-standard spaces and dashes and replace with ascii?
   #

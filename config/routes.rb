@@ -45,6 +45,10 @@ Rails.application.routes.draw do
     resources :surveys
     resources :youth_point_purchases, only: [:new, :create]
     collection do
+      get :member
+      get :staff
+      get :volunteer
+      get :youth
       post 'upload_image', to: 'workers#upload_image', as: 'worker_upload_image'
       get 'upload_form', to: 'workers#upload_form', as: 'upload_form'
     end

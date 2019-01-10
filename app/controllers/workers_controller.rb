@@ -10,6 +10,24 @@ class WorkersController < ApplicationController
     @cheese = []
   end
 
+  # GET /workers/member
+  # GET /workers/member.xml
+  # GET /workers/member.json
+  def member
+    @workers = Worker.all_member
+    @images = []
+    @cheese = []
+  end
+
+  # GET /workers/youth
+  # GET /workers/youth.xml
+  # GET /workers/youth.json
+  def youth
+    @workers = Worker.all_youth
+    @images = []
+    @cheese = []
+  end
+
   # GET /workers/1
   # GET /workers/1.xml
   # GET /workers/1.json

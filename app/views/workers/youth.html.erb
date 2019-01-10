@@ -1,0 +1,26 @@
+<script>
+$(document).ready(function() {
+  $('.volunteer').mouseover( function() {
+    $("#volunteer_name_bar").text( $(this).attr('title')  );
+  });
+
+})
+</script>
+
+<h1>Listing youth volunteers: <span id="volunteer_name_bar"> </span></h1>
+
+<% @workers.each do |worker| -%>
+  <div id="volunteer-<%= worker.id %>" style="float: left; padding: 5px; width: 120px; height: 100px; text-align: center;">
+    <a href="<%= worker_report_path(worker) %>">
+    <img class="volunteer" height="100px" title="<%= worker.name %>" src="<%= worker.avatar_url %>" />
+    </div>
+  </div>
+<% end -%>
+
+
+<br />
+<div style="clear: both;">
+  <nav>
+    <%= link_to 'Back to Shop', root_path %>
+  </nav>
+</div>

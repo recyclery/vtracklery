@@ -1,9 +1,48 @@
-<h1>Monthly Reports</h1>
-<div><%= link_to "This month's calendar", current_month_calendar_path %></div>
-<div><%= link_to "This month's report", current_month_report_path %></div>
+<h1><%= @year %> Monthly Reports</h1>
 
-<% (@month - 1).step(1, -1) do |month| -%>
-<br />
-<div><%= link_to "Calendar for #{DateTime::MONTHNAMES[month]}", calendar_path(@year, month) %></div>
-<div><%= link_to "Report for #{DateTime::MONTHNAMES[month]}", month_report_path(@year, month) %></div>
+<nav>
+  <div>
+    <% unless @current_year == @year %>
+    <%= link_to "Next year", year_month_reports_path(@year + 1) %>
+    <% end %>
+  </div>
+  <div>
+    <%= link_to "Last year", year_month_reports_path(@year - 1) %>
+  </div>
+</nav>
+
+<% if @current_year == @year %>
+<h2>This Month's Reports</h2>
+
+<ul>
+  <li><%= link_to "Calendar", current_month_calendar_path %></li>
+  <li><%= link_to "Report", current_month_report_path %></li>
+</ul>
+<% end %>
+
+<% count = (@current_year == @year) ? (@month - 1) : 12 %>
+
+<% count.downto(1) do |month| -%>
+
+<h2><%= DateTime::MONTHNAMES[month] %> <%= @year %> Reports</h2>
+
+<ul>
+  <li>
+    <%= link_to "Calendar", calendar_path(@year, month) %>
+  </li>
+  <li>
+    <%= link_to "Report", month_report_path(@year, month) %>
+  </li>
+</ul>
 <% end -%>
+
+<nav>
+  <div>
+    <% unless @current_year == @year %>
+    <%= link_to "Next year", year_month_reports_path(@year + 1) %>
+    <% end %>
+  </div>
+  <div>
+    <%= link_to "Last year", year_month_reports_path(@year - 1) %>
+  </div>
+</nav>

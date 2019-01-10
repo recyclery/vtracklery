@@ -28,6 +28,7 @@ Rails.application.routes.draw do
     get 'month/:year/:month/totals', as: 'month_totals_report', to: 'report#month_totals'
     get 'month/:year', as: 'year_month_report', to: 'report#month'
     get 'month', as: 'current_month_report', to: 'report#month'
+    get 'monthly/:year', as: 'year_month_reports', to: 'report#monthly'
     get 'monthly'
     get 'regular', as: 'regular_workers'
     get 'volunteer/:id', as: 'worker_report', to: 'report#volunteer'

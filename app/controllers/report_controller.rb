@@ -93,8 +93,13 @@ class ReportController < ApplicationController
 
   # GET /report/monthly
   def monthly
-    @month = DateTime.now.month
-    @year = DateTime.now.year
+    @current_year = DateTime.now.year
+    if params[:year] && (params[:year].to_i != @current_year)
+      @year = params[:year].to_i
+    else
+      @year = @current_year
+      @month = DateTime.now.month
+    end
   end
 
   # GET /report/regular

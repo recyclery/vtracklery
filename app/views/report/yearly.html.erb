@@ -1,2 +1,28 @@
-<h1>Report#yearly</h1>
-<p>Find me in app/views/report/yearly.html.erb</p>
+<h1>Yearly Reports</h1>
+
+<% @last_year.downto(@first_year) do |year| %>
+
+<h2><%= year %> Reports</h2>
+
+<ul>
+  <li>
+    <%= link_to "Hours", year_report_path(year) %>
+  </li>
+  <li>
+    <%= link_to "Volunteer Hours", volunteer_hours_year_report_path(year) %>
+  </li>
+  <li>
+    <%= link_to "Youth Hours", youth_hours_year_report_path(year) %>
+  </li>
+  <li>
+    <%= link_to "Member Hours", member_hours_year_report_path(year) %>
+  </li>
+  <li>
+    <%= link_to "Staff Hours", staff_hours_year_report_path(year) %>
+  </li>
+  <li>
+    <%= link_to "New Volunteers", new_volunteers_year_report_path(year) %>
+  </li>
+</ul>
+
+<% end %>

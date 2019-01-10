@@ -1,8 +1,5 @@
-<h1><%= @year %> Report</h1>
+<h1><%= @year %> Members Report (<%= @workers.size %>)</h1>
 
-<% for status in @statuses -%>
-<% workers = WorkTime.worker_type_for(status, @year) -%>
-<h3><%= status.name.pluralize %> (<%= workers.size %>)</h3>
 <table>
   <thead>
     <tr>
@@ -14,7 +11,7 @@
   </thead>
   <tbody>
 <% total = 0 %>
-<% workers.sort_by {|w| w.name.upcase }.each do |worker| -%>
+<% @workers.sort_by {|w| w.name.upcase }.each do |worker| -%>
 <tr>
   <td>
     <%= link_to worker.shoehorn_name, worker_report_path(worker) %>
@@ -37,12 +34,6 @@
 <div>
   Total: <%= "%0.2f" % (total / 60.0) %> hours
 </div>
-<% end -%>
 
 <br />
-
-<nav>
-  <%#link_to 'export to csv', year_csv_path(year: @year) %>
-  <%#link_to 'year totals', year_totals_report_path(year: @year) %>
-</nav>
 

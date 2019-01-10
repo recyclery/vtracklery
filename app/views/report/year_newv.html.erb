@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1><%= @year %> New Volunteers (<%= @workers.count %>)</h1>
+
+<table>
+  <tbody>
+<% @workers.each do |worker| -%>
+<tr>
+  <% seconds = worker.work_times.time_for(@year) %>
+  <td>
+  <% if 0 == seconds %>
+  <%= link_to "delete", destroy_and_redirect_worker_path(worker), method: :delete %>
+  <% end %>
+  </td>
+  <td>
+    <% unless worker.image.path.nil? %>
+    <%=link_to "image", worker.image.url %>
+    <% end %>
+  </td>
+  <td>
+<%=link_to_worker worker %>
+  </td>
+  <td>
+  <% if 0 == seconds %>
+    <span style="color: red;"><%= "NO HOURS" %></span>
+  <% else %>
+    <%= "%.2f" % (seconds / 360.0) %> hours
+  <% end %>
+<%= worker.created_at.strftime(ActsAsPunchCard::FMT_DATETIME) %>
+  </td>
+
+</tr>
+<% end -%>
+  </tbody>
+</table>

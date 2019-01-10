@@ -193,8 +193,56 @@ class ReportController < ApplicationController
     end
   end
 
+  # Member Hours Year Report
+  #
+  # GET /report/year/2015/hoursm
+  def year_hoursm
+    @status = Status.member
+    @year = params[:year].to_i
+    @workers = WorkTime.worker_type_for(@status, @year)
+  end
+
+  # Staff Hours Year Report
+  # Note that this is volunteer time the staff puts in.
+  # Paid staff time is not recorded in this application.
+  #
+  # GET /report/year/2015/hourss
+  def year_hourss
+    @status = Status.staff
+    @year = params[:year].to_i
+    @workers = WorkTime.worker_type_for(@status, @year)
+  end
+
+  # Volunteer Hours Year Report
+  #
+  # GET /report/year/2015/hoursv
+  def year_hoursv
+    @status = Status.volunteer
+    @year = params[:year].to_i
+    @workers = WorkTime.worker_type_for(@status, @year)
+  end
+
+  # Youth Hours Year Report
+  #
+  # GET /report/year/2015/hoursy
+  def year_hoursy
+    @status = Status.youth
+    @year = params[:year].to_i
+    @workers = WorkTime.worker_type_for(@status, @year)
+  end
+
+  # GET /report/year/2015/newv
+  def year_newv
+    @year = params[:year].to_i
+    @begin = DateTime.new(@year, 1, 1)
+    @end = @begin.end_of_year
+    @workers = Worker.where(created_at: @begin..@end).order(:created_at)
+  end
+
   # GET /report/yearly
   def yearly
+    @last_year = (DateTime.now - 1.year).year
+    @first_year = WorkTime.oldest.start_at.year
   end
 
 end

@@ -58,6 +58,8 @@ Rails.application.routes.draw do
       get :cheese_chooser
       put :sign_in
       put :sign_out
+      put 'update_status/:status_id', action: :update_status, as: :update_status
+      delete :destroy_and_redirect
     end
   end
 

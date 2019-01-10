@@ -1,5 +1,5 @@
 class WorkersController < ApplicationController
-  before_action :set_worker, only: [:show, :edit, :status, :update, :destroy]
+  before_action :set_worker, only: [:show, :edit, :status, :update, :update_status, :destroy, :destroy_and_redirect]
 
   # GET /workers
   # GET /workers.xml
@@ -112,6 +112,39 @@ class WorkersController < ApplicationController
         format.html { render :edit }
         format.json { render json: @worker.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  # PATCH/PUT /workers/1/status/1
+  # PATCH/PUT /workers/1/status/1.json
+  def update_status
+    @status = Status.find(params[:status_id])
+    @worker.status = @status
+    @name = @worker.name
+    respond_to do |format|
+      if @worker.save
+        format.html do
+          redirect_to :back, notice: "Worker #{@name}'s status was successfully updated to '#{@status.name}.'"
+        end
+        format.json { render :show, status: :ok, location: @worker }
+      else
+        format.html do
+          redirect_to :back, notice: "Worker #{@name} update failed."
+        end
+        format.json { render json: @worker.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # Destroy the object and redirect back to the referrer
+  #
+  # DELETE /workers/1/back
+  def destroy_and_redirect
+    name = @worker.name
+    @worker.destroy
+    respond_to do |format|
+      format.html { redirect_to :back, notice: "Worker #{name} was successfully destroyed" }
+      format.json { head :no_content }
     end
   end
 

@@ -176,6 +176,24 @@ class ReportController < ApplicationController
 
   # GET /report/weekly
   def weekly
+    @now = DateTime.now
+    if params[:year] && (params[:year].to_i != @now.year)
+      if params[:month]
+        @year = params[:year].to_i
+        @month = params[:month].to_i
+      else
+        @year = params[:year].to_i
+        @month = 1
+      end
+      this_month = Date.new(@year,@month,1)
+      @last_month = this_month - 1.month
+      @next_month = this_month + 1.month
+    else
+      @year = @now.year
+      @month = @now.month
+      @last_month = @now - 1.month
+      @next_month = nil
+    end
   end
 
   # GET /report/year/2015

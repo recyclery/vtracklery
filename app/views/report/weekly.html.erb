@@ -1,2 +1,60 @@
-<h1>Weekly</h1>
-<div><%= link_to "This week", :action => 'week' %></div>
+<h1><%= DateTime::MONTHNAMES[@month] %> <%= @year %> Weekly Reports</h1>
+
+<nav>
+<% if @next_month.nil? %>
+<%= link_to "Last month", month_weekly_report_path(@last_month.year, @last_month.month) %>
+<% else %>
+<div>
+  <%= link_to "Next month", month_weekly_report_path(@next_month.year, @next_month.month) %>
+</div>
+<div>
+<%= link_to "Last month", month_weekly_report_path(@last_month.year, @last_month.month) %>
+</div>
+<% end %>
+</nav>
+
+<% if @next_month.nil? %>
+<h2>This Week</h2>
+<ul>
+  <li>
+    <%= link_to "Volunteers", :action => 'week' %>
+  </li>
+</ul>
+
+<%   date = Date.new(@year, @month, @now.day) - 7 %>
+<%   while(date < Date.new(@year, @month, 1)) do %>
+<h2><%= date %> to <%= date.end_of_week %></h2>
+<ul>
+  <li>
+    <%= link_to "Volunteers", day_week_report_path(date.year, date.month, date.day) %>
+  </li>
+</ul>
+<%     date -= 7 %>
+<%   end %>
+
+<% else %>
+
+<%   date = Date.new(@year, @month, 1).end_of_month.beginning_of_week %>
+<%   until(date < Date.new(@year, @month, 1)) do %>
+<h2><%= date %> to <%= date.end_of_week %></h2>
+<ul>
+  <li>
+    <%= link_to "Volunteers", day_week_report_path(date.year, date.month, date.day) %>
+  </li>
+</ul>
+<%     date -= 7 %>
+<%   end %>
+<% end %>
+
+<nav>
+<% if @next_month.nil? %>
+<%= link_to "Last month", month_weekly_report_path(@last_month.year, @last_month.month) %>
+<% else %>
+<div>
+  <%= link_to "Next month", month_weekly_report_path(@next_month.year, @next_month.month) %>
+</div>
+<div>
+<%= link_to "Last month", month_weekly_report_path(@last_month.year, @last_month.month) %>
+</div>
+<% end %>
+</nav>

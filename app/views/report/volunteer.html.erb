@@ -1,29 +1,47 @@
-<table><tr><td width="280px" style="vertical-align: top;">
+<table>
+  <tr>
+    <td width="280px" style="vertical-align: top;">
 <!-- </td><td><tr><td> -->
+
 <% unless @worker.previous.nil? %>
 <%= link_to 'previous', worker_report_path(@worker.previous) %>
 <% end %>
 <%= link_to 'next', worker_report_path(@worker.next) %>
+
 <div style="vertical-align: top;">
   <img height="200px" src="<%= @worker.avatar_url %>" />
 </div>
+
 <h1><%= @worker.name %></h1>
+
 <% unless @worker.email.blank? -%>
 <p>
-<%= @worker.email %>
+  <%= @worker.email %>
 </p>
 <% end -%>
+
 <% unless @worker.phone.blank? -%>
 <p>
 <%= @worker.shoehorn_phone %>
 </p>
 <% end -%>
+
 <p>
-Created on <%= @worker.created_datetime %>
+  Created on <%= @worker.created_datetime %>
 </p>
+
 <p>
-<%= @worker.last_visit_text %>
+  <%= @worker.last_visit_text %>
 </p>
+
+<p>
+  Status: <%= @worker.status.name %>
+</p>
+
+<p>
+  Work Status: <%= @worker.work_status.name %>
+</p>
+
 </td><td style="vertical-align: top;">
 
 <table>
@@ -74,4 +92,6 @@ Created on <%= @worker.created_datetime %>
 </table>
 </td></tr></table>
 
+<div>
 <%= link_to "Reports", reports_path %>
+</div>

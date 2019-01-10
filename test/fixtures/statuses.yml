@@ -14,3 +14,7 @@ member:
 paid staff:
   id: 3
   name: Paid Staff
+
+youth:
+  id: 4
+  name: Youth

@@ -63,6 +63,7 @@ class ReportController < ApplicationController
   # GET /report
   def index
     @events = Event.all
+    @year = DateTime.now.year
   end
 
   # GET /report/month/2015/12

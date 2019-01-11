@@ -4,10 +4,19 @@
 <div><%= link_to "Monthly", :controller => "report", :action => "monthly" %></div>
 <div><%= link_to "Yearly", :controller => "report", :action => "yearly" %></div>
 <h2>Events</h2>
+<table>
+  <tbody>
 <% for event in @events -%>
-<div><%= link_to event.name, :controller => "report", :action => "event", :id => event.id %></div>
+<tr>
+  <td><%= event.name %></td>
+  <td><%= link_to "Old Report", :controller => "report", :action => "event", :id => event.id %></td>
+  <td><%= link_to "This year's reports", year_event_path(event, @year) %></td>
+  <td><%= link_to "Last year's reports", year_event_path(event, @year - 1) %></td>
+</tr>
 <% end -%>
-<br />
+  </tbody>
+</table>
+
 <%= link_to "Add or change events", events_path %>
 
 <h2>By Vounteer</h2>

@@ -30,11 +30,33 @@ class Event < ActiveRecord::Base
   # @return [String] the weekday name
   def week_day; DateTime::DAYNAMES[wday]; end
 
-  # @return [String]
+  # @return [String,nil] the first event date as a string
   def first_date; first_at.strftime("%a %b %d %Y") if first_at; end
 
-  # @return [String]
+  # @return [Integer] the first year the event existed
+  def first_year; first_at ? first_at.year : 2008; end
+
+  # @return [String,nil] the last event date as a string (nil means ongoing)
   def last_date; last_at.strftime("%a %b %d %Y") if last_at; end
+
+  # @param year [Integer]
+  # @param month [Integer]
+  # @return [DateTime] the first day the weekly event occurs in a given month
+  def first_day_of_month(year, month)
+    first_day = Date.new(year,month,1)
+    first_wday = first_day.wday
+
+    if self.wday == first_wday then return first_day
+    elsif self.wday > first_wday
+      return first_day + (self.wday - first_wday)
+    else
+      return first_day + (7 - first_wday + self.wday)
+    end
+
+  end
+
+  # @return [Integer] the last year the event existed (or the current year)
+  def last_year; last_at ? last_at.year : Date.today.year; end
 
   # @return [DateTime]
   def s_time; DateTime.new(1,1,1,s_hr,s_min); end

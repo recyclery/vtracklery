@@ -84,7 +84,16 @@ Rails.application.routes.draw do
   end
 
   resources :work_times
-  resources :events
+
+  resources :events do
+    collection do
+    end
+    member do
+      get ':year/:month/:day', as: 'week', to: 'events#week'
+      get ':year/:month', as: 'month', to: 'events#month'
+      get ':year', as: 'year', to: 'events#year'
+    end
+  end
 
   resources :statuses, only: [:index, :show]
 

@@ -1,0 +1,7 @@
+<ul>
+<% @last_month.downto(@first_month) do |month| %>
+  <li>
+    <%= link_to "#{DateTime::MONTHNAMES[month]} #{@year}", month_event_path(@event, @year, month) %>
+  </li>
+<% end %>
+</ul>

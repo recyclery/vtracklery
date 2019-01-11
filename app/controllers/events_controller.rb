@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: [:show, :edit, :update, :destroy]
+  before_action :set_event, only: [:show, :week, :month, :year, :edit, :update, :destroy]
 
   # GET /events
   # GET /events.json
@@ -10,6 +10,33 @@ class EventsController < ApplicationController
   # GET /events/1
   # GET /events/1.json
   def show
+  end
+
+  # GET /events/1/2018/11/15
+  # GET /events/1/2018/11/15.json
+  def week
+    @year = params[:year].to_i
+    @month = params[:month].to_i
+    @day = params[:day].to_i
+    @date = Date.new(@year, @month, @day)
+    @work_times = WorkTime.find_by_start_date(@date)
+  end
+
+  # GET /events/1/2018/11
+  # GET /events/1/2018/11.json
+  def month
+    @year = params[:year].to_i
+    @month = params[:month].to_i
+    @first_day = @event.first_day_of_month(@year, @month)
+    @last_day_of_month = Date.new(@year, @month, 1).end_of_month
+  end
+
+  # GET /events/1/2018
+  # GET /events/1/2018.json
+  def year
+    @year = params[:year].to_i
+    @first_month = 1
+    @last_month = (Date.today.year == @year) ? Date.today.month : 12
   end
 
   # GET /events/new

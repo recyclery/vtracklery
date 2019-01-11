@@ -1,0 +1,17 @@
+<h1>
+  <%= @event.name %>
+</h1>
+
+<h2>
+  <%= "#{DateTime::MONTHNAMES[@month]} #{@year}" %>
+</h2>
+
+<ul>
+<% date = @first_day %>
+<% until(date > @last_day_of_month) do %>
+  <li>
+    <%= link_to date, week_event_path(@event, @year, @month, date.day) %>
+  </li>
+<%     date += 7 %>
+<% end %>
+</ul>

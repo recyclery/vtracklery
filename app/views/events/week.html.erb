@@ -1,0 +1,61 @@
+<h1>
+  <%= @event.name %>
+</h1>
+<h2>
+  <%= "#{DateTime::DAYNAMES[@date.wday]}, #{@day} #{DateTime::MONTHNAMES[@month]} #{@year}" %>
+</h2>
+
+<table>
+  <tr>
+    <th>Worker</th>
+    <th>Length</th>
+    <th>Visit</th>
+    <th>Time</th>
+  </tr>
+<% for work_time in @work_times -%>
+<% if @event.include?(work_time) -%>
+  <tr>
+    <td><%=link_to work_time.worker.name, worker_report_path(work_time.worker) %></td>
+    <% if work_time.is_open? -%>
+    <td><%= work_time.is_today? ? "Still in shop" : "<b>Oops!</b>" %></td>
+    <td><%= work_time.visit_date %></td>
+    <td><%= work_time.start_time %></td>
+    <% else -%>
+    <td><%=h work_time.difference_to_s %></td>
+    <td><%= work_time.visit_date %></td>
+    <td><%= work_time.start_time %> - <%= work_time.end_time %></td>
+    <% end -%>
+    <td><%= link_to 'Show', work_time %></td>
+    <td><%= link_to 'Edit', edit_work_time_path(work_time) %></td>
+  </tr>
+<%     end -%>
+<%   end -%>
+</table>
+
+<h3>Same day, but not during <%= @event.name %></h3>
+<table>
+  <tr>
+    <th>Worker</th>
+    <th>Length</th>
+    <th>Visit</th>
+    <th>Time</th>
+  </tr>
+<% for work_time in @work_times -%>
+<%   unless @event.include?(work_time) -%>
+  <tr>
+    <td><%=link_to work_time.worker.name, worker_report_path(work_time.worker) %></td>
+    <% if work_time.is_open? -%>
+    <td><%= work_time.is_today? ? "Still in shop" : "<b>Oops!</b>" %></td>
+    <td><%= work_time.visit_date %></td>
+    <td><%= work_time.start_time %></td>
+    <% else -%>
+    <td><%=h work_time.difference_to_s %></td>
+    <td><%= work_time.visit_date %></td>
+    <td><%= work_time.start_time %> - <%= work_time.end_time %></td>
+    <% end -%>
+    <td><%= link_to 'Show', work_time %></td>
+    <td><%= link_to 'Edit', edit_work_time_path(work_time) %></td>
+  </tr>
+<%     end -%>
+<%   end -%>
+</table>

@@ -1,9 +1,13 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
+<h1>
   <%= @event.name %>
-</p>
+</h1>
+
+<nav>
+<%= link_to 'Edit', edit_event_path(@event) %> |
+<%= link_to 'Back', events_path %>
+</nav>
 
 <p>
   <strong>First at:</strong>
@@ -40,5 +44,15 @@
   <%= @event.e_min %>
 </p>
 
+<nav>
 <%= link_to 'Edit', edit_event_path(@event) %> |
 <%= link_to 'Back', events_path %>
+</nav>
+
+<ul>
+<% @event.last_year.downto(@event.first_year) do |year| %>
+  <li>
+    <%= link_to "#{year}", year_event_path(@event, year) %>
+  </li>
+<% end %>
+</ul>

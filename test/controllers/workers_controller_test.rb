@@ -59,6 +59,23 @@ class WorkersControllerTest < ActionController::TestCase
     assert_redirected_to worker_path(assigns(:worker))
   end
 
+  test "should update worker status" do
+    @status = statuses(:member)
+    @request.env['HTTP_REFERER'] = 'http://test.com/workers/new'
+    patch :update_status, id: @worker, status_id: @status
+    assert_redirected_to :back
+    assert_equal "Worker #{@worker.name}'s status was successfully updated to '#{@status.name}.'", flash[:notice]
+  end
+
+  test "should destroy worker and redirect" do
+    @request.env['HTTP_REFERER'] = 'http://test.com/workers/new'
+    assert_difference('Worker.count', -1) do
+      delete :destroy_and_redirect, id: @worker
+    end
+
+    assert_redirected_to :back
+  end
+
   test "should destroy worker" do
     assert_difference('Worker.count', -1) do
       delete :destroy, id: @worker

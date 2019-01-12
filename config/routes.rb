@@ -71,6 +71,10 @@ Rails.application.routes.draw do
     end
   end
 
+  scope "/dump", controller: "dump" do
+    get :work_times
+  end
+
   scope "/export", controller: "export" do
     get 'phone'
     get 'email'

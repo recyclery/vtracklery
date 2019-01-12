@@ -6,7 +6,9 @@
 <% unless @worker.previous.nil? %>
 <%= link_to 'previous', worker_report_path(@worker.previous) %>
 <% end %>
+<% unless @worker.next.nil? %>
 <%= link_to 'next', worker_report_path(@worker.next) %>
+<% end %>
 
 <div style="vertical-align: top;">
   <img height="200px" src="<%= @worker.avatar_url %>" />

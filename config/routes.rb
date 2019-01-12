@@ -31,6 +31,7 @@ Rails.application.routes.draw do
     get 'monthly/:year', as: 'year_month_reports', to: 'report#monthly'
     get 'monthly'
     get 'regular', as: 'regular_workers'
+    get 'surveyed'
     get 'volunteer/:id', as: 'worker_report', to: 'report#volunteer'
     get 'week/:year/:month/:day', as: 'day_week_report', to: 'report#week'
     get 'week/:year/:month', as: 'month_week_report', to: 'report#week'

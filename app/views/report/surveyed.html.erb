@@ -1,0 +1,27 @@
+<table>
+  <tr>
+    <td>Name</td>
+    <td>Assist Youth</td>
+    <td>Assist Tuneup</td>
+    <td>Assist Overhaul</td>
+  </tr>
+  
+  <% @workers.each do |worker| %>
+  <tr>
+    <td>
+      <%=link_to_worker worker %>
+    </td>
+    <td>
+      <%# worker.survey.inspect %>
+      <%= worker.survey.assist_youth ? "Yes" : "" %>
+    </td>
+    <td>
+
+      <%= worker.survey.assist_tuneup ? "Yes" : "" %>
+    </td>
+    <td>
+      <%= worker.survey.assist_overhaul ? "Yes" : "" %>
+    </td> 
+  </tr>
+<% end %>
+</table>

@@ -111,6 +111,12 @@ class ReportController < ApplicationController
     @missing_list = Worker.missing_list
   end
 
+  # GET /report/surveyed/1
+  def surveyed
+    @survey_worker_ids = Survey.all.pluck(:worker_id)
+    @workers = Worker.where( id: @survey_worker_ids )
+  end
+
   # GET /report/volunteer/1
   def volunteer
     @worker = Worker.find( params[:id] )
